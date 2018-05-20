@@ -1,0 +1,15 @@
+#content{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height:auto;
+    margin:20px auto 0;
+}
+#left{
+    border:1px solid #ccc;
+    width:48%;
+}
+#right{
+    border:1px solid #ccc;
+    width:48%;
+}
