@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<!-- IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- 设置 viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 兼容国产浏览器的高速模式 -->
+		<meta name="renderer" content="webkit">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title>编辑设备</title>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		<!-- boots-->
+		<link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/commo.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/Vaildform.css" />
+		<link rel="stylesheet" href="../../lib/zTree/css/metroStyle/metroStyle.css" type="text/css">
+
+		<!--[if lt IE 8]>     
+      <link rel="stylesheet" type="text/css" href="../../lib/lxui/css/lxui-ie6.min.css"/>
+      <script src="../../lib/lxui/js/lxui-ie.min.js" type="text/javascript" charset="utf-8"></script>
+    <![endif]-->
+
+		<link rel="stylesheet" href="css/add-ui.css" />
+	</head>
+
+	<body>
+		<div class="container-fluid mt-15">
+			<div class="container-centent">
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label for="deviceMac" class="col-sm-3 control-label">设备MAC：</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="deviceMac" placeholder="MAC" datatype="s15-18" errormsg="请输入正确的MAC！" readonly="readonly">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="deviceName" class="col-sm-3 control-label">设备名称：（可选）</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="deviceName" placeholder="Name">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="deviceStatus" class="col-sm-3 control-label">设备状态：</label>
+						<div class="col-sm-9">
+							<select class="form-control" id="deviceStatus">
+								<option value="0">正常</option>
+								<option value="1">在线</option>
+								<option value="2">离线</option>
+								<option value="3">故障</option>
+								<option value="4">维修中</option>
+								<option value="5">报废</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="deviceType" class="col-sm-3 control-label">设备类型：</label>
+						<div class="col-sm-9">
+							<select class="form-control" id="deviceType">
+								<option value="0">基站</option>
+								<option value="1">移动</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="longitude" class="col-sm-3 control-label">经度：</label>
+						<div class="col-sm-9">
+							<input type="number" class="form-control" id="longitude" placeholder="经度">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="latitude" class="col-sm-3 control-label">纬度：</label>
+						<div class="col-sm-9">
+							<input type="number" class="form-control" id="latitude" placeholder="纬度">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="locationType" class="col-sm-3 control-label">位置类型：</label>
+						<div class="col-sm-9">
+							<select class="form-control" id="locationType">
+								<option value="0">不设定</option>
+								<option value="1">出口</option>
+								<option value="2">入口</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="antennaPower" class="col-sm-3 control-label">天线功率：</label>
+						<div class="col-sm-9">
+							<select class="form-control" id="antennaPower">
+								<option value="0">2db</option>
+								<option value="1">3db</option>
+								<option value="2">6db</option>
+								<option value="3">9db</option>
+								<option value="4">10db</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="InstallationArea" class="col-sm-3 control-label">安装区域：</label>
+						<div class="col-sm-9">
+							<div class="container-fluid">
+								<!--树状菜单模块sss-->
+								<div class="content_wrap">
+									<div class="zTreeDemoBackground left">
+										<ul id="treeDemo" class="ztree"></ul>
+									</div>
+								</div>
+								<!--树状菜单模块eee-->
+
+								<!--菜单选项展示区域ss-->
+								<div class="">
+									<div>
+										<h5>已选择地区</h5>
+									</div>
+									<div class="showArea row border-2-gray radius">
+
+									</div>
+								</div>
+								<!--菜单选项展示区域ee-->
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="detaiAdd" class="col-sm-3 control-label">详细地址：</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="detaiAdd" placeholder="地址" datatype="s">
+						</div>
+					</div>
+					<div class="text-center">
+						<button type="submit" id="submitBtn" class="btn btn-primary mr-20">提交</button>
+						<button type="cancel" id="cancelBtn" class="btn btn-default">取消</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!--主要框架类库sss-->
+		<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<!--<script src="../../lib/echarts/echarts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/echarts/bmap.min.js" type="text/javascript" charset="utf-8"></script><br />
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8ZEtx5kDGsbBFL80Ppda29D8wjnGil7I"></script>-->
+		<!--主要框架类库eee-->
+
+		<!--公共脚本sss-->
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.diy.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/ztree-area-search.js" type="text/javascript" charset="utf-8"></script>
+		<!--公共脚本eee-->
+
+		<!--常用插件sss-->
+		<script src="../../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.nicescroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/Validform_v5.3.2_min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../../lib/zTree/js/jquery.ztree.core.js"></script>
+		<script type="text/javascript" src="../../lib/zTree/js/jquery.ztree.excheck.js"></script>
+		<script type="text/javascript" src="../../lib/zTree/js/jquery.ztree.exedit.js"></script>
+		<!--常用插件eee-->
+		<script type="text/javascript" src="js/edit-device.js"></script>
+
+	</body>
+
+</html>

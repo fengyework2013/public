@@ -1,0 +1,27 @@
+table.table-data th.purviewName {
+	width: 20%;
+}
+
+table.table-data th.interface {
+	width: 30%;
+}
+
+table.table-data th.interType {
+	width: 10%;
+}
+
+table.table-data th.operation {
+	width: 40%;
+	text-align: center;
+}
+
+table.table-data thead tr th,
+table.table-data tbody tr td {
+	padding-left: 15px !important;
+	vertical-align: middle;
+}
+
+table.table-data tbody tr.power-group{
+	background-color: #f7f7f7;
+}
+

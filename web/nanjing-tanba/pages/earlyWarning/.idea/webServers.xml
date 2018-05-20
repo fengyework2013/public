@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="5fde5f28-dc19-4643-abe6-5fb6cba8fa3c" name="warning" url="http://103.251.36.122">
+        <fileTransfer host="103.251.36.122" port="58679" rootFolder="/home/www/njweb/pages/earlyWarning" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="58679" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

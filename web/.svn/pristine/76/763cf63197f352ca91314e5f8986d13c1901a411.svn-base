@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <!-- IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 设置 viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 兼容国产浏览器的高速模式 -->
+    <meta name="renderer" content="webkit">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>新增资料</title>
+
+    <link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/commo.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/Vaildform.css"/>
+    <link rel="stylesheet" href="../../lib/bootstrap-3.3.7-dist/fileinput/css/fileinput.css" media="all"
+          type="text/css"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../../lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../../lib/respond.min.js"></script>
+    <![endif]-->
+
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../../lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <style>
+        .form-horizontal label {
+            padding-left: 0;
+            padding-right: 0;
+            text-align: right;
+        }
+
+        .fileinput-upload-button {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container-fluid mt-15">
+
+
+    <form id="imgSubmit" class="form-horizontal" name="imgSubmit">
+        <div class="form-group">
+            <div class="col-sm-9">
+                <input type="file" name="image" id="txt_file" class="file"/>
+                <p class="help-block">支持jpg、jpeg、png、gif格式，大小不超过3.0M</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="type-name" class="col-sm-3 col-xs-2 control-label mt-5">名称：</label>
+            <div class="col-sm-9 col-xs-9 pd-0">
+                <input type="text" class="form-control" id="type-name" name="name" placeholder="需要添加的分类名称">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="selectType" class="col-sm-3  col-xs-2 control-label mt-15">类型：</label>
+            <div class="col-sm-9 col-xs-9 pd-0  mt-10">
+                <select class="form-control" name="type_id" id="selectType">
+                    <option value="请选择">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="remarks" class="col-sm-3  col-xs-2 control-label mt-15"> </label>
+            <div class="col-sm-9 col-xs-9 pd-0 mt-10">
+                <textarea class="form-control" name="remarks" id="remarks" placeholder="备注" rows="6"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3  col-xs-2 control-label mt-15"> </label>
+            <div class="col-sm-9 col-xs-9 pd-0 mt-10">
+                <button type="cancel" id="cancelBtn" class="btn btn-default btn-sm">取消</button>
+                <button type="submit" id="submitBtn" class="btn btn-primary btn-sm mr-20">创建</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<!--主要框架类库sss-->
+<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+<script src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="../../lib/bootstrap-3.3.7-dist/fileinput/js/fileinput.min.js"></script>
+<script src="../../lib/bootstrap-3.3.7-dist/fileinput/js/locales/zh.js"></script>
+<script type="text/javascript" src="../../lib/layer/2.4/layer.js"></script>
+
+
+<!--<script src="../js/public.js"></script>-->
+<script src="../../js/laypage-public.js"></script>
+<script src="../../js/config.js"></script>
+
+
+<script type="text/javascript">
+    $(function () {
+        var dataAdd = {
+            T: new CreateTable({}),
+            submit: $("#submitBtn"),
+            select: $("#selectType"),
+            typeid: "",
+            init: function () {
+                this.getPduEvent();
+                this.clickEvent();
+                this.submitEvent();
+            },
+            getPduEvent: function () {
+                var _this = this;
+                var param = {parent_id: 0};
+                this.T.ajaxThree(config.pdutype, param, "get", function (res) {
+                    if (res.message == "获取PDU分类列表成功") {
+                        var data = res.data.data;
+                        $.each(data, function (i, v) {
+                            var options = $(
+                                "<option data-name='" + v.name + "' data-parent-id='" + v.parent_id + "' value=" + v.id + ">" + v.name + "</option>"
+                            );
+                            _this.select.append(options);
+                        });
+                    }
+                });
+            },
+            clickEvent: function () {
+                var _this = this;
+                $("#cancelBtn").on("click", function () {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                });
+                this.select.on("change", function () {
+                    _this.typeid = $(this).val();
+                });
+
+            },
+            submitEvent: function () {
+                var _this = this;
+                this.submit.on("click", function (e) {
+                    e.preventDefault();
+                    if (_this.typeid) {
+                        var form = document.getElementById("imgSubmit");
+                        var fd = new FormData(form);
+                        _this.T.ajaxImg(
+                            config.pduarchivesAdd,
+                            new FormData(form),
+                            "POST",
+                            function (res) {
+                                layer.alert(res.message, {
+                                    yes: function () {
+                                        layer.confirm('是否留在此页？', {
+                                            btn: ['否', '是'] //按钮
+                                        }, function () {
+                                            var index = parent.layer.getFrameIndex(window.name);
+                                            parent.layer.close(index);
+                                        });
+                                    },
+                                    cancel: function () {
+                                        layer.confirm('是否留在此页？', {
+                                            btn: ['否', '是'] //按钮
+                                        }, function () {
+                                            var index = parent.layer.getFrameIndex(window.name);
+                                            parent.layer.close(index);
+                                        });
+                                    }
+                                });
+                            }
+                        );
+
+                    } else {
+                        layer.alert("请选择分类");
+                    }
+                });
+            },
+        }
+        dataAdd.init();
+    });
+
+</script>
+</body>
+
+</html>

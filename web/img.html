@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <style>
+
+        #main {
+            width: 500px;
+            height: 500px;
+            margin: 100px auto;
+            border: 1px dotted black;
+            /*   word-wrap:break-word;
+               word-break:break-all;*/
+        }
+
+        .content {
+            width: 80%;
+        }
+
+        .left, .right {
+            border: 1px solid #ccc;
+        }
+
+        .left {
+            width: 50px;
+            height: 200px;
+            float: left;
+        }
+
+        .right {
+            overflow: hidden;
+            height: 200px;
+        }
+
+        .text {
+            width: 100%;
+            height: 100px;
+            text-align: center;
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+
+
+<div id="main" style="width: 600px;height:400px;">
+
+    <form name="form1" id="form1">
+        <p>name:<input type="text" name="name" /></p>
+        <p>gender:<input type="radio" name="gender" value="1" />male <input type="radio" name="gender" value="2" />female</p>
+        <p>stu-number：<input type="text" name="number" /></p>
+        <p>photo:<input type="file" name="photo" id="photo"></p>
+        <p><input type="button" name="b1" value="submit" onclick="fsubmit()" /></p>
+    </form>
+
+    <div id="result">
+
+    </div>
+
+
+
+
+</div>
+
+
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+<script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="lib/bootstrap-3.3.7-dist/fileinput/js/fileinput.min.js"></script>
+<script src="lib/bootstrap-3.3.7-dist/fileinput/js/locales/zh.js"></script>
+<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+<script>
+
+    function fsubmit() {
+        var form=document.getElementById("form1");
+        var fd =new FormData(form);
+        console.log(fd);
+
+        $.ajax({
+            url: "http://10.10.10.203/pdu/img.php",
+            type: "POST",
+            data: fd,
+            processData: false,  // 告诉jQuery不要去处理发送的数据
+            contentType: false,   // 告诉jQuery不要去设置Content-Type请求头
+            success: function(response,status,xhr){
+                console.log(xhr);
+                // var json=$.parseJSON(response);
+                // var result = '';
+                // result +="个人信息：<br/>name:"+json['name']+"<br/>gender:"+json['gender']+"<br/>number:"+json['number'];
+                // result += '<br/>头像：<img src="' + json['photo'] + '" height="100" style="border-radius: 50%;" />';
+                // $('#result').html(result);
+            }
+        });
+        return false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

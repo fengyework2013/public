@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <!-- IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 设置 viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 兼容国产浏览器的高速模式 -->
+    <meta name="renderer" content="webkit">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>分配权限</title>
+
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="../static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/skin/default/skin.css" id="skin"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <link rel="stylesheet" href="../css/manage/role-allot.css" />
+</head>
+
+<body>
+<div class="container-fluid mt-15">
+    <div class="container-centent">
+        <div class="container">
+            <!--列表展示-->
+        </div>
+        <!-- allot-dl END -->
+        <div class="allot-btn">
+            <button class="btn btn-primary" id="allot-submit">提交</button>
+        </div>
+    </div>
+</div>
+
+<!--主要框架类库sss-->
+<script type="text/javascript" src="../lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+<script src="../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery.myPlugIn_v1.0.js" type="text/javascript" charset="utf-8"></script>
+
+<!--<script src="../js/public.js"></script>-->
+<script src="../js/laypage-public.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/paging.js"></script>
+<script src="../js/manage/role-allou.js"></script>
+
+</body>
+
+</html>

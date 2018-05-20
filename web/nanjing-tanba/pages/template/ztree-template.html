@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<!-- IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- 设置 viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 兼容国产浏览器的高速模式 -->
+		<meta name="renderer" content="webkit">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title>模块配置管理</title>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		<!-- boots-->
+		<link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/commo.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/Vaildform.css" />
+		<link rel="stylesheet" href="../../lib/zTree/css/metroStyle/metroStyle.css" type="text/css">
+
+		<style type="text/css">
+			.ztree li span.button.add {
+				margin-left: 2px;
+				margin-right: -1px;
+				background-position: -144px 0;
+				vertical-align: top;
+				*vertical-align: middle
+			}
+		</style>
+		<!--[if lt IE 8]>     
+      <link rel="stylesheet" type="text/css" href="../../lib/lxui/css/lxui-ie6.min.css"/>
+      <script src="../../lib/lxui/js/lxui-ie.min.js" type="text/javascript" charset="utf-8"></script>
+    <![endif]-->
+
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<!--树状菜单模块sss-->
+			<div class="content_wrap">
+				<div class="zTreeDemoBackground left">
+					<ul id="treeDemo" class="ztree"></ul>
+				</div>
+			</div>
+			<!--树状菜单模块eee-->
+			
+			<!--菜单选项展示区域ss-->
+			<div class="">
+				<div>
+					<h5>已选择地区(多选)</h5>
+				</div>
+				<div class="showArea row border-2-gray radius">
+					
+				</div>
+			</div>
+			<!--菜单选项展示区域ee-->
+			<div class="text-c mt-30 previewBox">
+				<button type="button" class="btn btn-default sure">确定</button>
+			</div>
+		</div>
+		
+		<!--添加、编辑表单-->
+    		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="editForm">
+    				<form class="form-horizontal form">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				       	<h4 class="modal-title addOrEdit">添加节点</h4>
+				      </div>
+				      <div class="modal-body">
+				      
+							<div class="form-group">
+								<label for="modalName" class="col-sm-3 control-label required"> 节点名称：</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="modalName" placeholder="请输入节点名，例如：模块管理" datatype="*2-20" errormsg="节点名称不合法！" nullmsg="不能为空">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="locationFile" class="col-sm-3 control-label required"> 节点对应的路由文件路径：</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="locationFile" placeholder="请输入节点对应的路由文件路径，例如：pages/earlyWarning/earlyWarningCenter.html" datatype="*" nullmsg="不能为空！" errormsg="请输入请输入节点对应的路由文件路径" /> 
+								</div>
+							</div>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default sureSubmit" data-dismiss="modal">确定</button>
+				      </div>
+				    </div><!-- /.modal-content -->
+				  </div><!-- /.modal-dialog -->
+				  </form>
+				</div><!-- /.modal -->
+    	<!--添加、编辑表单-->
+    	
+    	
+    	
+		<!--主要框架类库sss-->
+		<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<!--<script src="../../lib/echarts/echarts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/echarts/bmap.min.js" type="text/javascript" charset="utf-8"></script><br />
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8ZEtx5kDGsbBFL80Ppda29D8wjnGil7I"></script>-->
+		<!--主要框架类库eee-->
+
+		<!--公共脚本sss-->
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.diy.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/localstorage-ie.js" type="text/javascript" charset="utf-8"></script>
+		<!--公共脚本eee-->
+
+		<!--常用插件sss-->
+		<script src="../../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.nicescroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/Validform_v5.3.2_min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../../lib/zTree/js/jquery.ztree.core.js"></script>
+		<script type="text/javascript" src="../../lib/zTree/js/jquery.ztree.excheck.js"></script>
+		<script type="text/javascript" src="../../lib/zTree/js/jquery.ztree.exedit.js"></script>
+		<!--常用插件eee-->
+		<!--<script src="../../js/ztree-area-search.js" type="text/javascript" charset="utf-8"></script>-->
+		<script type="text/javascript">
+//			$("#editForm").modal("show");
+	
+			var setting = {
+				async: {
+					enable: true, //开启异步加载处理  
+					url: url_join("BarTree/queryBarTree"),
+					autoParam: ["id"],
+					dataFilter: filter,		
+			//		contentType: "application/json",		
+					type: "post"
+				},
+				check: {
+					//					enable: true //添加勾选功能
+				},
+				view: {
+					expandSpeed: "",
+					addHoverDom: addHoverDom,
+					removeHoverDom: removeHoverDom,
+					selectedMulti: false
+				},
+				edit: {
+					enable: true
+				},
+				data: {
+					simpleData: {
+						enable: true
+					}
+				},
+				callback: {
+					beforeDrag: beforeDrag, //拖拽之前回调
+					beforeRemove: beforeRemove,
+					beforeRename: beforeRename,
+					beforeCheck: beforeCheck, //勾选的时候的回调
+					onClick: zTreeOnClick, //点击节点回调函数
+				}
+			};
+			
+			//点击节点回调函数
+			function zTreeOnClick(event, treeId, treeNode) {
+				//			    alert(treeNode ? treeNode.tId + ", " + treeNode.name : "isRoot");
+				if(treeNode) {
+					console.log(treeNode);
+					console.log(treeNode.id + "," + treeNode.pId + "," + treeNode.name);
+					var sHtml = $('<div class="hasSelect btn-group" data-id="' + treeNode.id + '" data-pId="' + treeNode.pId + '" data-href="'+treeNode.href+'"><button type="button"class="btn btn-sm btn-primary selectContent">' + treeNode.name + '</button><a href="#"class="closeBtn btn btn-sm btn-danger">X</a></div>');
+					$(".showArea").append(sHtml);
+			
+					//删除标签
+					$("body").delegate(".hasSelect .closeBtn", "click", function(event) {
+						
+						$(this).parent().remove();
+						return false;
+					});
+				}
+			};
+			
+			function beforeDrag() {
+				return false;
+			}
+			
+			function beforeCheck(treeId, treeNode) {
+				console.log(treeNode);
+				return(treeNode.doCheck !== false);
+			} //页面加载获取列表
+			function filter(treeId, parentNode, childNodes) {
+				if(!childNodes)
+					return null;
+				for(var i = 0, l = childNodes.data.length; i < l; i++) {
+//					childNodes.data[i].name = childNodes.data[i].address.replace(/\.n/g, '.');
+					//					childNodes.data[i].isParent = true; //isParent的值为true指的是有子节点，否则则是false
+					if(childNodes.data[i].is_parent == 0) {
+						childNodes.data[i].isParent = false;
+					}
+					if(childNodes.data[i].is_parent == 1) {
+						childNodes.data[i].isParent = true;
+					}
+				}
+				return childNodes.data;
+			}
+			
+			//删除请求
+			function beforeRemove(treeId, treeNode) {
+				
+				console.log(treeNode);
+				if(treeNode.is_parent == 1){
+					layer.alert("父节点不可以删除");
+					return false;
+				}
+				else{
+					layer.confirm("确认删除节点？", 
+						function(index) {
+							fnAjax.method_4(
+								url_join2("BarTree/delBarTree"), {
+									"id": treeNode.id
+								},
+								"post",
+								function(data) {
+									if(data.code == "10111") {
+										layer.msg("操作失败", {
+											icon: 0,
+											time: 1000
+										}, function() {
+											layer.close(index);
+											location.reload();
+										});
+									}
+									if(data.code == 0) {
+										layer.msg("操作成功", {
+											icon: 1,
+											time: 1000
+										}, function() {
+											layer.close(index);
+										});
+									}
+								}
+							);
+						},
+						function(){
+							location.reload();
+						}
+					);
+				}
+				
+				//				
+			}
+			
+			//修改名字
+			function beforeRename(treeId, treeNode, newName) {
+				console.log(treeNode);
+				if(newName.length == 0) {
+					layer.alert("节点名称不能为空.");
+					return false;
+				}
+				fnAjax.method_4(
+					url_join2("BarTree/updateBarTree"), {
+						"pid": treeNode.pId,
+						"id": treeNode.id,
+						"name": newName
+					},
+					"post",
+					function(data) {
+						if(data.message == "SUCCESS") {
+							layer.msg("操作成功", {
+								icon: 1,
+								time: 1000
+							});
+						}
+					}
+				);
+				
+			}
+			
+			//添加节点
+			function addHoverDom(treeId, treeNode) {
+				var sObj = $("#" + treeNode.tId + "_span");
+				if(treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0)
+					return;
+				var addStr = "<span class='button add' id='addBtn_" + treeNode.tId +
+					"' title='add node' onfocus='this.blur();'></span>";
+				sObj.after(addStr);
+				var btn = $("#addBtn_" + treeNode.tId);
+				if(btn) {
+					btn.bind("click", function() {
+						var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+	
+						$("#editForm").modal("show");
+						setTimeout(function(){
+							addOrEdit(treeNode,zTree);
+						},100);
+						
+					});
+				}
+			
+			};
+			
+			function removeHoverDom(treeId, treeNode) {
+				$("#addBtn_" + treeNode.tId).unbind().remove();
+			};
+			$(document).ready(function() {
+				$.fn.zTree.init($("#treeDemo"), setting);
+			
+			});
+			
+			$(".showArea").css("overflow","auto");
+
+			
+			//调用验证之后的请求
+			function addOrEdit(treeNode,zTree){
+				$(".form").Validform({
+					btnSubmit: ".sureSubmit",
+					beforeSubmit: function(curform) {
+						ajaxFn(treeNode,zTree);
+					},
+					callback: function() {
+						return false;
+					}
+				});
+			}
+			
+			//封装添加节点函数
+			function ajaxFn(treeNode,zTree){
+				fnAjax.method_5(
+					url_join('BarTree/addBarTree'),
+//					"http://103.251.36.122:9555/Login/forgetPwd",
+					{
+						"name":$("#modalName").val(),
+						"path":$("#locationFile").val(),
+						"pid":treeNode.id
+					},
+					"post",
+					function(data){
+						console.log(data);
+						var newNodeID = data.data.id;
+						layer.msg("操作成功",{icon:1,time:1500},function(){
+							zTree.addNodes(treeNode, {
+								pId: treeNode.id,
+								name: $("#modalName").val(),
+								href: $("#locationFile").val(),
+								id:newNodeID
+							}, true);
+							$("#editForm").modal("hide");
+						});
+					}
+				);
+			}
+			
+			
+			
+		</script>
+	</body>
+
+</html>

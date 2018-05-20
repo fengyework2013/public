@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>webSocket 示例</title>
+	</head>
+
+	<body>
+		<div>
+			<a href="#" id="wss">运行webSocket</a>
+			<a href="#" id="closeWs">关闭webSocket</a>
+		</div>
+		<div>
+			<textarea name="showDate" rows="10" cols="30" readonly="readonly" id="dataShow"></textarea>
+		</div>
+		
+		<!--websocket断开重连插件-->
+		<!--<script src="reconnecting-websocket.min.js" type="text/javascript" charset="utf-8"></script>-->
+		<script type="text/javascript">
+			document.querySelector("#wss").onclick = function(e) {
+				e.preventDefault();
+				WebSocketTest();
+			}
+			var aData;
+			function WebSocketTest() {
+				aData = [];
+				//探霸地址
+				var wskUrl = "ws://123.58.43.17:9501/";
+				if("WebSocket" in window) {
+					console.log("游览器支持 WebSocket!");
+					var param = {
+						type:"a001"
+					};
+					var ws = new WebSocket(wskUrl);
+					ws.onopen = function() {
+						// Web Socket 已连接上，使用 send() 方法发送数据
+						ws.send(JSON.stringify(param));
+						console.log("数据发送中...");
+					};
+
+					ws.onmessage = function(evt) {
+						var received_msg = evt.data;
+						console.log("数据已接收...");
+						document.querySelector("#dataShow").innerHTML = received_msg;
+//						console.log(JSON.parse(received_msg));
+						aData.push(JSON.parse(received_msg));
+						
+						//限制20条数据，存满20条，1秒后再次清空，再次填充数据
+						if(aData.length >= 20){
+							ws.close();
+							console.log(aData);
+							setTimeout(function(){
+								WebSocketTest();
+							},1000);
+						}
+					};
+
+					ws.onclose = function() {
+						// 关闭 websocket
+						ws.close();
+						console.log("连接已关闭...");
+					};
+
+					//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+					window.onbeforeunload = function() {
+						ws.close();
+					}
+
+					document.querySelector("#closeWs").onclick = function(e) {
+						e.preventDefault();
+						ws.close();
+					}
+
+				} else {
+					console.log("游览器不支持WebSocket!")
+				}
+			}
+		</script>
+	</body>
+
+</html>

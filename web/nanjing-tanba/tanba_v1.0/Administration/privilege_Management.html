@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<title>独尊探霸【独尊科技旗下站】</title>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../css/plug-ins/paging.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/privilege_Management.css" />
+	</head>
+
+	<body>
+		<!--导航栏-->
+		<div class="chart-type-head">
+			<a href="personal_Data.html" id="home">首页</a>
+			<i class="glyphicon glyphicon-menu-right"></i>
+			<span class="chart-type-head-title">权限管理</span>
+		</div>
+		<!--内容区-->
+		<div class="data_Box clearfix">
+			<!--板块标题-->
+			<div class="data_box_bg">
+				<div class="data_box_BigTitle">
+					<span>权限管理</span>
+					<span class="data_box_remark">权限的分配及管理</span>
+				</div>
+			</div>
+			<!--权值设定-->
+			<div class="conShow_box">
+				<div class="conShow_box_title">
+					<span>权值配置</span>
+					<a href="#" class="conShow_box_title_right" id="addPowersA">
+						<i class="glyphicon glyphicon-plus"></i> 新增权限名
+					</a>
+				</div>
+				<div class="conShow_box_inner">
+					<table class="table table-hover" id="conShow-box-inner-table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>权限名</th>
+								<th>绑定状态</th>
+								<th>创建时间</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--<tr>
+								<td>1</td>
+								<td>超级管理员</td>
+								<td>以分配</td>
+								<td>2017-11-01 09:38:29</td>
+								<td>
+									<button class="conShow-table-allotBtn">分配</button>
+									<button class="conShow-table-delBtn">删除</button>
+								</td>
+							</tr>-->
+						</tbody>
+					</table>
+					<div id="pageToolbar"></div>
+					<p class="conShow_box_Prompt">没有以设置权限名</p>
+				</div>
+			</div>
+		</div>
+		<!-- 模态窗：新增权限 -->
+		<div id="modal-Content-box" class="modal-Content-box">
+			<!--蒙板-->
+			<div class="modal-Content-mask"></div>
+			<!--窗口-->
+			<div class="modal-Content-window">
+				<!--标题栏-->
+				<div class="modal-Content-window-title">
+					<span class="modal-Content-window-title-text">新增权限</span>
+					<span class="layui-layer-setwin"><a href="#" id="modal-Content-window-title-closeBtn" class="glyphicon glyphicon-remove"></a></span>
+				</div>
+				<!--内容-->
+				<div class="modal-Content-window-container">
+					<!--新增、修改窗口-->
+					<div class="modal-Content-window-container-form">
+						<label for="powersName">权限名称:</label>
+						<input type="text" id="powersName" class="powersName" placeholder="请输入名称" />
+						<input type="button" id="powersNameSubmit" class="powersNameBtn" value="新增" />
+						<input type="button" id="powersNameChange" class="powersNameBtn" value="修改" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--反馈弹框-->
+		<div class="infoAlertBox">
+			<!--蒙板-->
+			<div class="mask"></div>
+			<!--填写弹窗-->
+			<div class="infoAlert">
+				<div id="infoAlertText">数据加载中...</div>
+				<div class="infoAlertBtn"><button id="infoAlertBtn">确定</button></div>
+			</div>
+		</div>
+
+		<script src="../js/common/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common/query.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common/paging.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/oAjax.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/privilege_Management.js" type="text/javascript" charset="utf-8"></script>
+
+	</body>
+
+</html>

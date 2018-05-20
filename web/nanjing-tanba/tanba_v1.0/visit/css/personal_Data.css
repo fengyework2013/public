@@ -1,0 +1,69 @@
+#giant-screen {
+	min-height: 100px;
+	margin-top: 20px;
+}
+
+#giant-screen .giant-screen-top {
+	height: 100px;
+	background-color: #333;
+	box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.6) inset;
+}
+
+#giant-screen .giant-screen-top-left {
+	float: left;
+	margin-right: 20px;
+	height: 100%;
+}
+
+#giant-screen .giant-screen-top-right {
+	float: left;
+	color: #fff;
+	height: 100%;
+}
+
+#giant-screen .giant-screen-top-right-top {
+	margin-top: 38px;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+#giant-screen .giant-screen-top-left i {
+	display: inline-block;
+	font-size: 80px;
+	margin-top: 20px;
+	margin-left: 25px;
+	color: rgba(255, 255, 255, 0.1);
+}
+
+#giant-screen .giant-screen-bottom {
+	padding: 10px 0;
+	background-color: #111;
+}
+
+.giant-screen-bottom .ipsPos_ul {
+	list-style: none;
+	margin: 0;
+	color: #fff;
+}
+
+.ipsPos_ul li {
+	float: left;
+	margin-right: 20px;
+	padding-right: 20px;
+	border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ipsPos_ul li p {
+	margin: 0;
+	margin-bottom: 5px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.ipsPos_ul li time .i-icon {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: #249168;
+}

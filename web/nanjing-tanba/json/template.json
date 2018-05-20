@@ -1,0 +1,169 @@
+[{
+	"navTitle" : "消息中心",
+	"href" : "pages/msgCenter/msgCenter.html",
+	"children":[]
+},
+{
+	"navTitle" : "查询中心",
+	"href" : "pages/searchCenter/searchCenter.html",
+	"children":[
+	            {
+	            	"navTitle" : "目标查询",
+	            	"href" : "pages/searchCenter/search-queryTarget.html",
+	            	"children":[ {
+    	            	"navTitle" : "目标详情",
+    	            	"href" : "pages/searchCenter/search-queryTarget-details.html",
+    	            	"children":[]
+    	            }]
+	            },
+	            {
+	            	"navTitle" : "实时监控",
+	            	"href" : "pages/searchCenter/search-rTimeMonitoring.html",
+	            	"children":[]
+	            },
+	            {
+	            	"navTitle" : "目标进出统计",
+	            	"href" : "pages/searchCenter/search-comeAndGo.html",
+	            	"children":[ {
+    	            	"navTitle" : "目标详情",
+    	            	"href" : "pages/searchCenter/search-queryTarget-details.html",
+    	            	"children":[]
+    	            }]
+	            },
+	            {
+	            	"navTitle" : "碰撞分析",
+	            	"href" : "pages/searchCenter/search-crashAnalyze.html",
+	            	"children":[ {
+    	            	"navTitle" : "目标详情",
+    	            	"href" : "pages/searchCenter/search-queryTarget-details.html",
+    	            	"children":[]
+    	            }]
+	            },
+	            {
+	            	"navTitle" : "专属设备查询",
+	            	"href" : "pages/searchCenter/search-exclusiveEq.html",
+	            	"children":[ {
+    	            	"navTitle" : "专属设备目标详情",
+    	            	"href" : "pages/searchCenter/search-exclusiveEq-detialis.html",
+    	            	"children":[]
+    	            }]
+	            },
+	            {
+	            	"navTitle" : "查询记录",
+	            	"href" : "pages/searchCenter/search-log.html",
+	            	"children":[]
+	            }
+	           ]
+},
+{
+	"navTitle" : "关注统计",
+	"href" : "pages/focusOnTheGoal/focusOnTheGoalCenter.html",
+	"children":[
+	            {
+	            	"navTitle" : "关注目标",
+	            	"href" : "pages/focusOnTheGoal/focusOnTheGoal.html",
+	            	"children":[]
+	            },
+	            {
+	            	"navTitle" : "人流量统计",
+	            	"href" : "pages/focusOnTheGoal/peopleFlow.html",
+	            	"children":[]
+	            },
+	            {
+	            	"navTitle" : "流量监控",
+	            	"href" : "pages/focusOnTheGoal/peopleMonitor.html",
+	            	"children":[]
+	            },
+	            {
+	            	"navTitle" : "目标人群统计",
+	            	"href" : "pages/focusOnTheGoal/targetPopulation.html",
+	            	"children":[]
+	            },
+	            {
+	            	"navTitle" : "归属地统计",
+	            	"href" : "pages/focusOnTheGoal/PlaceOfBelonging.html",
+	            	"children":[]
+	            },
+	            {
+	            	"navTitle" : "进出统计",
+	            	"href" : "pages/searchCenter/search-comeAndGo.html",
+	            	"children":[]
+	            }
+	           ]
+},{
+	"navTitle" : "布控预警",
+	"href" : "pages/earlyWarning/earlyWarningCenter.html",
+	"children":[
+	            {
+	            	"navTitle" : "动态预警",
+	            	"href" : "pages/earlyWarning/dynamicEarlyWarning.html",
+	            	"children":[]
+	            },
+	            {
+	            	"navTitle" : "集结预警",
+	            	"href" : "pages/earlyWarning/aggregation.html",
+	            	"children":[]
+	            },
+	            {
+	            	"navTitle" : "首现预警",
+	            	"href" : "pages/earlyWarning/firstWaring.html",
+	            	"children":[]
+	            },
+	            {
+	            	"navTitle" : "动态预警日志",
+	            	"href" : "pages/earlyWarning/dynamicEarlyWarninglog.html",
+	            	"children":[]
+	            },
+	            {
+	            	"navTitle" : "集结预警日志",
+	            	"href" : "pages/earlyWarning/aggregationLog.html",
+	            	"children":[]
+	            },
+	            {
+	            	"navTitle" : "首现预警日志",
+	            	"href" : "pages/earlyWarning/firstLog.html",
+	            	"children":[]
+	            }
+	           ]
+},{
+	"navTitle" : "设备管理",
+	"href" : "pages/deviceManage/deviceManage.html",
+	"children":[]
+},
+{
+	"navTitle" : "专属设备管理",
+	"href" : "pages/RFManage/rfManage.html",
+	"children":[]
+},
+{
+	"navTitle" : "系统管理",
+	"href" : "pages/system/systemManage.html",
+	"children":[
+	            {
+	            	"navTitle" : "用户管理",
+	            	"href" : "pages/system/use-manage.html",
+	            	"children":[]
+	            },
+	            {
+	            	"navTitle" : "角色管理",
+	            	"href" : "pages/system/role-manage.html",
+	            	"children":[]
+	            },
+	            {
+	            	"navTitle" : "权限管理",
+	            	"href" : "pages/system/permiss-manage.html",
+	            	"children":[]
+	            },
+	            {
+	            	"navTitle" : "区域管理",
+	            	"href" : "pages/system/ztree-area-search.html",
+	            	"children":[]
+	            },
+	            {
+	            	"navTitle" : "人员管理",
+	            	"href" : "pages/system/people-manage.html",
+	            	"children":[]
+	            }
+	           ]
+}
+]

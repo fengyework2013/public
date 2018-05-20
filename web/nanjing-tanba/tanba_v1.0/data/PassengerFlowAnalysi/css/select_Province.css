@@ -1,0 +1,8 @@
+.conShow_box .chart {
+	text-align: center;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	color: #666;
+	box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3) inset;
+	margin: 5px auto 10px;
+}

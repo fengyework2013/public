@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<title>独尊探霸【独尊科技旗下站】</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/login.css" />
+	</head>
+
+	<body>
+		<div id="main" class="clearfix">
+			<!--顶部导航条-->
+			<nav class="navbar navbar-fixed-top navbar-bg clearfix">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" class="navbar-toggle collapsed">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+						<a class="navbar-brand" href="#">DUZUNTECH</a>
+					</div>
+
+					<div class="collapse navbar-collapse" id="navbar-collapse">
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="#">
+									<i class="glyphicon glyphicon-question-sign"></i>
+									<span>关于</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<i class="glyphicon glyphicon-user"></i>
+									<span class="text_small">注册</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<span>EN</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<!--主体内容-->
+			<section class="description">
+				<div class="main_title">
+					<img src="img/TIMLOGO_w2.png" />
+				</div>
+				<div class="main_panel">
+					<div class="panel_block">
+						<p><i class="glyphicon glyphicon-comment"></i> 账户 :</p>
+						<input type="text" id="userInp" placeholder="User ID" />
+					</div>
+					<div class="panel_block">
+						<p><i class="glyphicon glyphicon-lock"></i> 密码 :</p>
+						<input type="password" id="passInp" placeholder="Password" />
+					</div>
+					<div class="clearfix">
+						<a href="#" class="forgotPwd">忘记密码?</a>
+						<a href="#" class="visitorLogin">游客登陆</a>
+						<button class="panel_btn" id="loginBtn"><i class="glyphicon glyphicon-arrow-right"></i></button>
+					</div>
+				</div>
+			</section>
+			<!--底部内容-->
+			<footer class="navbar navbar-fixed-bottom">
+				<!--科技-->
+				<div class="main_copy">
+					<p class="title">深圳市独尊科技开发有限公司</p>
+					<p>Copyright© 2017-2020</p>
+				</div>
+			</footer>
+			<!--单页面查询入口-->
+			<div id="select_box" class="clearfix">
+				<div class="footer_right">
+					<input type="text" placeholder="Device ID..." id="deviceInput"/>
+					<a href="#" id="deviceBtn" class="glyphicon glyphicon-search"></a>
+				</div>
+				<div class="footer_right_icon">
+					<i class="glyphicon glyphicon-hdd"></i>
+				</div>
+			</div>
+		</div>
+		<!--反馈弹框-->
+		<div class="infoAlertBox">
+			<!--蒙板-->
+			<div class="mask"></div>
+			<!--填写弹窗-->
+			<div class="infoAlert">
+				<div id="infoAlertText">数据加载中...</div>
+				<div class="infoAlertBtn"><button id="infoAlertBtn">确定</button></div>
+			</div>
+		</div>
+
+		<script src="js/common/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/common/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/login.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/oAjax.js" type="text/javascript" charset="utf-8"></script>
+
+	</body>
+
+</html>

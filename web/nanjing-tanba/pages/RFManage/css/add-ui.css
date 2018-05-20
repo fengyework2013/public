@@ -1,0 +1,13 @@
+.container-centent {
+	width: 100%;
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+.ztree li span.button.add {
+	margin-left: 2px;
+	margin-right: -1px;
+	background-position: -144px 0;
+	vertical-align: top;
+	*vertical-align: middle
+}

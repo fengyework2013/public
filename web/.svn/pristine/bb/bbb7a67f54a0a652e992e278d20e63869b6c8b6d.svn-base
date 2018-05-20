@@ -1,0 +1,157 @@
+var T = new CreateTable({});
+$(function () {
+    var typeManage = {
+        T: new CreateTable({}),
+        submit: $("#submitBtn"),
+        init: function () {
+            this.T.saveUserData("parentInfo",{
+                name: undefined,
+                'parent_id': undefined,
+            });
+
+
+            this.clickEvent();
+            this.getPduEvent();
+        },
+        clickEvent: function () {
+            var _this = this;
+            // $("#cancelBtn").on("click", function () {
+            //     var index = parent.layer.getFrameIndex(window.name);
+            //     parent.layer.close(index);
+            // });
+
+            // 添加分类
+            $(".btn-add").on("click", function () {
+                layer.open({
+                    type: 2,
+                    title: '添加分类',
+                    area: ['500px', '500px'],
+                    content: "type-add.html",
+                    end: function () {
+                        window.location.reload();
+                    }
+                });
+            });
+
+            // 选择的请求事件
+            $("#selectType").on("change", function () {
+                var id = $(this).val();
+                var name = $(this).find("option:selected").text();
+                _this.T.saveUserData("parentInfo",{
+                    name: name,
+                    'parent_id': id,
+                });
+
+                _this.pduChange(id);
+                /*
+                paging({
+                    text: "获取角色列表成功",
+                    num: 10,
+                    pagination: 1,
+                    value: $("#keywords").val(),
+                    tableEle: $('.table'),
+                    // pagingUrl: config.roleList,
+                    pagingUrl: config.basicData,
+                    delUrl: config.delRole,
+                    createTable: function (container, data) {
+                        container.children("tbody").html("");
+                        $.each(data.data, function (i, v) {
+                            var sTr = '<tr class="text-c"  data-id="' + v.id + '">' +
+                                '<td class="num">' + (data.from + i) + '</td>' +
+                                '<td class="roleName" >' + v.typename + '</td>' +
+                                '<td class="bindState" data-state="' + v.user + '">' + v.user + '</td>' +
+                                '<td>审核中</td>' +
+                                '<td class="createTime">' + v.createtime + '</td>' +
+                                '<td class="bak">最最基础的部件</td>' +
+                                '<td class="option f-14">' +
+                                '<a title="编辑" href="javascript:void(0);"  class="ml-5 btn-edit">编辑</a>' +
+                                '<a title="删除" href="javascript:void(0);"  class="ml-5 btn-del">删除</a>' +
+                                '</td>' +
+                                '</tr>';
+                            container.children("tbody").append($(sTr));
+                        });
+
+
+                        // 编辑角色
+                        $(".btn-edit").on("click", function () {
+
+                            var dataId = $(this).parents("tr").attr("data-id");
+                            sessionStorage.roleId = dataId;
+                            layer.open({
+                                type: 2,
+                                title: '编辑角色',
+                                area: ['500px', '260px'],
+                                content: "type-edit.html",
+                                end: function () {
+                                    window.location.reload();
+                                }
+                            });
+
+                        });
+
+                        //删除数据
+                        $('.table tbody').on("click", ".btn-del", function () {
+                            var nId = $(this).parents("tr").attr("data-id");
+                            layer.confirm("是否删除当前数据", function () {
+                                T.ajaxFour(
+                                    config.delRole,
+                                    {id: nId},
+                                    "post",
+                                    function (data) {
+                                        layer.msg(data.message, {time: 1500}, function () {
+                                            window.location.reload();
+                                        });
+                                    }
+                                );
+
+                            });
+                        });
+
+                    }
+                });
+                */
+            });
+
+        },
+        getPduEvent: function () {
+            var param = {parent_id: 0};
+            this.T.ajaxThree(config.pdutype, param, "get", function (res) {
+                if (res.message == "获取PDU分类列表成功") {
+                    var $select = $("#selectType");
+                    var data = res.data.data;
+                    $.each(data, function (i, v) {
+                        var options = $(
+                            "<option data-name='" + v.name + "' data-parent-id='" + v.parent_id + "' value=" + v.id + ">" + v.name + "</option>"
+                        );
+                        $select.append(options);
+                    });
+                }
+            });
+        },
+        pduChange: function (id) {
+            this.T.ajaxThree(config.pdutype, {parent_id: id}, "get", function (res) {
+                if (res.message == "获取PDU分类列表成功") {
+                    var $selects = $("#selects");
+                    var data = res.data.data;
+                    console.log(res.data);
+                    // $.each(data,function (i,v){
+                    //     var options = $(
+                    //         "<option data-parent-id='"+v.parent_id+"' value="+v.id+">"+v.name+"</option>"
+                    //     );
+                    //     $select.append(options);
+                    // });
+                }
+            });
+
+            // <span data-flag="0" class="select-box">
+            //         <select id="selectType" class="select" size="1" name="demo1">
+            //         <option value="" selected>请选择分类</option>
+            //     </select>
+            //     </span>
+
+        }
+    }
+    typeManage.init();
+
+
+});

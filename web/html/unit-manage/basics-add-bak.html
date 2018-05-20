@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <!-- IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 设置 viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 兼容国产浏览器的高速模式 -->
+    <meta name="renderer" content="webkit">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>新增角色</title>
+
+    <link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/commo.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/Vaildform.css"/>
+    <link rel="stylesheet" href="../../lib/bootstrap-3.3.7-dist/fileinput/css/fileinput.css" media="all" type="text/css"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../../lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../../lib/respond.min.js"></script>
+    <![endif]-->
+
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../../lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <style>
+        .form-horizontal label {
+            padding-left: 0;
+            padding-right: 0;
+            text-align: right;
+        }
+
+        .fileinput-upload-button {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container-fluid mt-15">
+
+
+
+
+    <form id="imgSubmit" class="form-horizontal" name="imgSubmit">
+        <div class="form-group">
+            <div class="col-sm-9">
+                <input type="file" name="image" id="txt_file" class="file"/>
+                <p class="help-block">支持jpg、jpeg、png、gif格式，大小不超过3.0M</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="type-name" class="col-sm-3 col-xs-2 control-label mt-5">名称：</label>
+            <div class="col-sm-9 col-xs-9 pd-0">
+                <input type="text" class="form-control" id="type-name" name="name" placeholder="需要添加的分类名称" >
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="selectType" class="col-sm-3  col-xs-2 control-label mt-15">类型：</label>
+            <div class="col-sm-9 col-xs-9 pd-0  mt-10">
+                <select class="form-control" name="parent_id" id="selectType">
+                    <option value="请选择">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="remarks" class="col-sm-3  col-xs-2 control-label mt-15"> </label>
+            <div class="col-sm-9 col-xs-9 pd-0 mt-10">
+                <textarea class="form-control" name="remarks" id="remarks" placeholder="备注" rows="6"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3  col-xs-2 control-label mt-15"> </label>
+            <div class="col-sm-9 col-xs-9 pd-0 mt-10">
+                <button type="cancel" id="cancelBtn" class="btn btn-default btn-sm">取消</button>
+                <!--<button type="submit" id="submitBtn" class="btn btn-primary btn-sm mr-20">创建</button>-->
+                <p><input type="button" name="b1" value="submit" onclick="fsubmit()" /></p>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<!--主要框架类库sss-->
+<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+<script src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<!--<script src="../lib/bootstrap-3.3.7-dist/fileinput/js/fileinput.min.js"></script>-->
+<!--<script src="../lib/bootstrap-3.3.7-dist/fileinput/js/locales/zh.js"></script>-->
+<script type="text/javascript" src="../../lib/layer/2.4/layer.js"></script>
+
+
+<!--<script src="../js/public.js"></script>-->
+<script src="../../js/laypage-public.js"></script>
+<script src="../../js/config.js"></script>
+<script src="../../js/unit/basics-add.js"></script>
+
+<script type="text/javascript">
+    function fsubmit() {
+        var form=document.getElementById("imgSubmit");
+        var fd =new FormData(form);
+        console.log(fd);
+
+        $.ajax({
+            url: config.pduarchivesAdd,
+            type: "POST",
+            data: fd,
+            processData: false,  // 告诉jQuery不要去处理发送的数据
+            contentType: false,   // 告诉jQuery不要去设置Content-Type请求头
+            success: function(response,status,xhr){
+                console.log(xhr);
+                // var json=$.parseJSON(response);
+                // var result = '';
+                // result +="个人信息：<br/>name:"+json['name']+"<br/>gender:"+json['gender']+"<br/>number:"+json['number'];
+                // result += '<br/>头像：<img src="' + json['photo'] + '" height="100" style="border-radius: 50%;" />';
+                // $('#result').html(result);
+            }
+        });
+        return false;
+    }
+</script>
+</body>
+
+</html>

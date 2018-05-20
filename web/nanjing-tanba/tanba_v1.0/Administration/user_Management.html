@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<link rel="stylesheet" href="../css/plug-ins/paging.css" />
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/user_Management.css" />
+	</head>
+
+	<body>
+		<!--导航栏-->
+		<div class="chart-type-head">
+			<a href="personal_Data.html" id="home">首页</a>
+			<i class="glyphicon glyphicon-menu-right"></i>
+			<span class="chart-type-head-title">用户管理</span>
+		</div>
+		<!--内容区-->
+		<div class="data_Box clearfix">
+			<!--板块标题-->
+			<!--<div class="data_box_bg">
+				<div class="data_box_BigTitle">
+					<span>用户管理</span>
+					<span class="data_box_remark">用户的权限分配及信息管理</span>
+				</div>
+			</div>-->
+			<!--权限分配及管理-->
+			<div class="conShow_title">
+				<span class="conShow_title_lf">权限分配及管理</span>
+			</div>
+			<!--权值设定-->
+			<div class="conShow_box">
+				<div class="conShow_box_title">
+					<span>用户管理</span>
+					<a href="#" class="conShow_box_title_right" id="addUserA">
+						<i class="glyphicon glyphicon-plus"></i> 新增用户
+					</a>
+				</div>
+				<div class="conShow_box_inner">
+					<table class="table table-hover" id="conShow-box-inner-table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>用户名</th>
+								<th>权限</th>
+								<th>创建时间</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+					<div id="pageToolbar"></div>
+					<p class="conShow_box_Prompt">没有以创建的用户</p>
+				</div>
+			</div>
+		</div>
+		<!-- 模态窗：新增权限 -->
+		<div id="modal-Content-box" class="modal-Content-box">
+			<!--蒙板-->
+			<div class="modal-Content-mask"></div>
+			<!--窗口-->
+			<div class="modal-Content-window">
+				<!--标题栏-->
+				<div class="modal-Content-window-title">
+					<span class="modal-Content-window-title-text">新增用户</span>
+					<span class="layui-layer-setwin"><a href="#" id="modal-Content-window-title-closeBtn" class="glyphicon glyphicon-remove"></a></span>
+				</div>
+				<!--内容-->
+				<div class="modal-Content-window-container">
+					<!--新增、修改窗口-->
+					<div class="modal-Content-window-container-form">
+						<p>
+							<label for="userName">用户名称:</label>
+							<input type="text" id="userName" class="userName" placeholder="请输入名称" />
+						</p>
+						<p>
+							<label for="userName">账号密码:</label>
+							<input type="password" id="userPwd" class="userPwd" placeholder="请输入密码" />
+						</p>
+						<p>
+							<label for="userName">确认密码:</label>
+							<input type="password" id="againUserPwd" class="againUserPwd" placeholder="请再次输入密码" />
+						</p>
+						<p>
+							<label for="userPower">账号权限:</label>
+							<select name="userPower" id="userPowerSelect" class="userPowerSelect">
+								<option value="-1">请选择</option>
+							</select>
+						</p>
+						<input type="button" id="userNameSubmit" class="userNameBtn" value="新增" />
+						<input type="button" id="userNameChange" class="userNameBtn" value="修改" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../js/common/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common/query.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common/paging.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/oAjax.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/user_Management.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

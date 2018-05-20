@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<!-- IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- 设置 viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 兼容国产浏览器的高速模式 -->
+		<meta name="renderer" content="webkit">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title>用户管理</title>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		<!-- boots-->
+		<link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/commo.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/Vaildform.css" />
+		<!--[if lt IE 8]>     
+      <link rel="stylesheet" type="text/css" href="../../lib/lxui/css/lxui-ie6.min.css"/>
+      <script src="../../lib/lxui/js/lxui-ie.min.js" type="text/javascript" charset="utf-8"></script>
+    <![endif]-->
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<!--查询条件sss-->
+			<form class="form">
+				<div class="row mt-20">
+					<div class="form-group col-sm-3 col-xs-12">
+						<label for="keyWord" class="required">用户关键字</label>
+						<input type="text" class="form-control" id="keyWord" placeholder="请填写用户关键字" datatype="*" nullmsg="不能为空" />
+					</div>
+					<!--<div class="form-group col-sm-3 col-xs-12">
+						<label for="logmin" class="required">采集开始时间</label>
+						<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="form-control Wdate" datatype="*" nullmsg="不能为空" />
+					</div>
+					<div class="form-group col-sm-3 col-xs-12">
+						<label for="logmax" class="required">采集结束时间</label>
+						<input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="form-control Wdate" datatype="*" nullmsg="不能为空" />
+					</div>-->
+
+					
+
+					<div class="col-sm-3 col-xs-12 mt-25">
+						<button type="button" class="btn btn-default queryTarget" id="queryBtn">查询</button>
+					</div>
+
+				</div>
+
+			</form>
+			<!--查询条件eee-->
+			<div>
+				<button type="button" class="btn btn-default addUserBtn">添加用户</button>
+			</div>
+			
+			
+			<div class="row content mt-15">
+				<!--地图sss-->
+				<!--<div id="main" class="mapStyle"></div>-->
+				<!--地图sss-->
+
+				<!--表格面板sss-->
+				<div class="tableBox">
+					<!--表格面板头部sss-->
+					<!--<div class="table-header parentClear text-c ">
+						<a href="#" class="cutBtn "><i class="glyphicon glyphicon-menu-right c-white"></i></a>
+						<span class="header-title c-white">查询结果</span>
+						<a href="#" class="attention btn btn-primary-outline c-white ">加入关注</a>
+					</div>-->
+					<!--表格面板头部eee-->
+
+					<!--表格面板中间部分sss-->
+					<div class="table-content bg-white">
+						<table class="table table-condensed table-hover table-striped table-responsive table-data">
+							<thead class="bg-gray">
+								<tr class="text-c">
+									<th><input type="checkbox" name="" id="" value="" /></th>
+									<th>序号</th>
+									<th>用户名</th>
+									<th>角色</th>
+									<th>创建时间</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="text-c" data-id="1">
+									<td><input type="checkbox" name="" id="" value="" /></td>
+									<td>1</td>
+									<td>张小凡</td>
+									<td>管理员</td>
+									<td>2017-11-11</td>									
+									<td class="td-option">
+										<a class="searchDetails" href="#">查看</a>
+										<a class="editBtn" href="#">编辑</a>
+										<a class="delBtn" href="#">删除</a>
+									</td>
+								</tr>
+								
+								<tr class="text-c" data-id="2">
+									<td><input type="checkbox" name="" id="" value="" /></td>
+									<td>2</td>
+									<td>张大凡</td>
+									<td>管理员</td>
+									<td>2017-11-11</td>									
+									<td class="td-option">
+										<a class="searchDetails" href="#">查看</a>
+										<a class="editBtn" href="#">编辑</a>
+										<a class="delBtn" href="#">删除</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!--表格面板中间部分eee-->
+
+					<!--表格面板底部工具栏sss-->
+					<div class="bg-gray table-footer parentClear text-c posi-r">
+						<div class="data-statistics">
+							<span>共</span>
+							<b class="pageNum">0</b>
+							<span>页</span> &nbsp;
+							<span>记录</span>
+							<b class="dataNum">0</b>
+							<span>条</span>
+						</div>
+
+						<div class="pageOption">
+							<div id="pageTool"></div>
+						</div>
+
+						<div class="reLoadBox">
+							<a href="#" class="reLoadBtn"><i class="glyphicon glyphicon-repeat"></i></a>
+							<a href="#" class="exlBtn"><i class="glyphicon glyphicon-download-alt"></i></a>
+						</div>
+					</div>
+					<!--表格面板底部工具栏eee-->
+
+				</div>
+
+				<!--表格面板eee-->
+			</div>
+		</div>
+
+		<!--主要框架类库sss-->
+		<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<!--<script src="../../lib/echarts/echarts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/echarts/bmap.min.js" type="text/javascript" charset="utf-8"></script><br />
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8ZEtx5kDGsbBFL80Ppda29D8wjnGil7I"></script>-->
+		<!--主要框架类库eee-->
+
+		<!--公共脚本sss-->
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.diy.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<!--公共脚本eee-->
+
+		<!--常用插件sss-->
+		<script src="../../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.nicescroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/Validform_v5.3.2_min.js" type="text/javascript" charset="utf-8"></script>
+		<!--常用插件eee-->
+		<!--导出exl-->
+		<script type="text/javascript" src="../../lib/exl/assets/js/third-party/exporter/jquery.base64-zhongwen.js"></script>
+		<script type="text/javascript" src="../../lib/exl/assets/js/kidd.stickytable.min.js"></script>
+		<!--导出exl-->
+		
+		<script src="js/user-manage.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

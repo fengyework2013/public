@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<title>独尊探霸【独尊科技旗下站】</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+	</head>
+
+	<body>
+		<!--顶部导航条-->
+		<nav class="navbar navbar-fixed-top navbar-bg clearfix">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" class="navbar-toggle collapsed">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">DUZUNTECH</a>
+				</div>
+
+				<div class="collapse navbar-collapse" id="navbar-collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="#">
+								<i class="glyphicon glyphicon-question-sign"></i>
+								<span>关于</span>
+							</a>
+						</li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+								<i class="glyphicon glyphicon-user"></i>
+								<div class="text_small"><span id="loginName">登录</span> <i class="caret"></i></div>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#" class="exitBtn">退出账户</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="#">
+								<span>EN</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!--左侧菜单条-->
+		<aside class="left-chart-nav">
+			<ul id="left-ui">
+				<li>
+					<div href="#" data-src="userManual" class="aTitle">
+						<i class="glyphicon glyphicon-th-list"></i>
+						<span>独尊用户手册</span>
+					</div>
+				</li>
+				<li>
+					<div href="#" data-src="dataChart" class="aTitle">
+						<i class="glyphicon glyphicon-menu-hamburger"></i>
+						<span>游览</span>
+						<i class="caret"></i>
+					</div>
+					<a href="#" data-src="dataChart" class="left_ul_li_a2">数据图表</a>
+					<a href="#" data-src="rankingAnalysis" class="left_ul_li_a2">排行分析</a>
+					<a href="#" data-src="myData" class="left_ul_li_a2">数据信息</a>
+					<a href="#" data-src="myDevice" class="left_ul_li_a2">设备信息</a>
+					<a href="#" data-src="personalData" id="homePage" class="left_ul_li_a2 active">账户资料</a>
+				</li>
+				<li id="admin">
+					<div href="#" data-src="" class="aTitle">
+						<i class="glyphicon glyphicon-list-alt"></i>
+						<span>管理</span>
+						<i class="caret"></i>
+					</div>
+					<!--<a href="#" data-src="weightManagement" class="left_ul_li_a2">权限管理</a>
+					<a href="#" data-src="nodeManagement" class="left_ul_li_a2">节点管理</a>
+					<a href="#" data-src="userManagement" class="left_ul_li_a2">用户管理</a>
+					<a href="#" data-src="" class="left_ul_li_a2">设备管理</a>-->
+				</li>
+				<li>
+					<div href="#" data-src="purchase" class="aTitle">
+						<i class="glyphicon glyphicon-shopping-cart"></i>
+						<span>商店</span>
+						<i class="caret"></i>
+					</div>
+					<a href="#" data-src="purchase" class="left_ul_li_a2">购买</a>
+					<a href="#" data-src="orderForm" class="left_ul_li_a2">订单</a>
+				</li>
+				<li>
+					<div href="#" data-src="tool" class="aTitle">
+						<i class="glyphicon glyphicon-wrench"></i>
+						<span>工具</span>
+					</div>
+				</li>
+				<li>
+					<div href="#" data-src="setUp" class="aTitle">
+						<i class="glyphicon glyphicon-cog"></i>
+						<span>设置</span>
+					</div>
+				</li>
+			</ul>
+		</aside>
+		<!--内容主体-->
+		<article class="explore-container">
+			<div class="chart-list-panel">
+				<button id="menuBtn" class="menuBtn">菜单</button>
+				<iframe src="visit/personal_Data.html" id="myiframe" scrolling="auto"  frameborder="0"></iframe>
+			</div>
+		</article>
+
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/common/bootstrap.min.js"  charset="utf-8"></script>
+		<script type="text/javascript" src="js/common/layer/layer.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/oAjax.js"></script>
+		<script type="text/javascript" src="js/list.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/index.js" charset="utf-8"></script>
+	</body>
+
+</html>

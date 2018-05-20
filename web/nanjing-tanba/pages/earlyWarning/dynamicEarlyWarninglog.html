@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <!-- IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 设置 viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 兼容国产浏览器的高速模式 -->
+    <meta name="renderer" content="webkit">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>布控预警日志</title>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- 良心ui-->
+    <link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/commo.css"/>
+
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" type="text/css" href="../../lib/lxui/css/lxui-ie6.min.css"/>
+    <script src="../../lib/lxui/js/lxui-ie.min.js" type="text/javascript" charset="utf-8"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="container-fluid">
+    <!--查询条件sss-->
+    <form class="form">
+        <div class="row mt-20">
+
+            <div class="form-group col-sm-2 col-xs-12">
+                <label class="required">选择任务名：</label>
+                <select class="form-control" id="taskName" title="选择任务名">
+                    <option>--请选择--</option>
+                </select>
+            </div>
+
+            <div class="form-group col-sm-4 col-xs-12 condition">
+                <label class="required">选择热点：</label>
+                <div class="areaInputBox parentClear" style="display: -webkit-flex;display: flex;">
+                    <input type="text"  class="form-control lf" id="area" readonly="readonly"/>
+                    <button type="button" class="btn btn-default chooseAdress lf" data="1"
+                            id="chooseAdress">选择地点
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="form-group col-sm-2 col-xs-12">
+                <label for="logmin" class="required">开始时间：</label>
+                <input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin"
+                       class="form-control Wdate"/>
+            </div>
+            <div class="form-group col-sm-2 col-xs-12">
+                <label for="logmax" class="required">结束时间：</label>
+                <input type="text" onfocus="WdatePicker({minDate:'%y-%M-#{%d+1}'})" id="logmax"
+                       class="form-control Wdate"/>
+            </div>
+
+            <div class="form-group col-sm-2 col-xs-12">
+                <button type="button" class="btn btn-default queryTarget mt-25" id="search">查看</button>
+            </div>
+
+        </div>
+
+    </form>
+    <!--查询条件eee-->
+
+    <div class="row content">
+        <!--表格面板sss-->
+        <div class="tableBox">
+
+
+            <!--表格面板中间部分sss-->
+            <div class="table-content bg-white">
+                <table class="table table-condensed table-hover table-striped table-responsive table-data">
+                    <tbody>
+                    <tr class="text-c"></tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--表格面板中间部分eee-->
+
+            <!--表格面板底部工具栏sss-->
+            <div class="bg-gray table-footer parentClear text-c posi-r">
+                <div class="data-statistics">
+                    <span>共</span>
+                    <b class="pageNum">0</b>
+                    <span>页</span>
+                    &nbsp;
+                    <span>记录</span>
+                    <b class="dataNum">0</b>
+                    <span>条</span>
+                </div>
+
+                <div class="pageOption">
+                    <div id="pageTool"></div>
+                </div>
+
+                <div class="reLoadBox">
+                    <a href="#" class="reLoadBtn"><i class="glyphicon glyphicon-repeat"></i></a>
+                    <a href="#" class="exlBtn"><i class="glyphicon glyphicon-download-alt"></i></a>
+                </div>
+            </div>
+            <!--表格面板底部工具栏eee-->
+
+        </div>
+
+        <!--表格面板eee-->
+    </div>
+
+</div>
+
+<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery.diy.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="../../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery.nicescroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../lib/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="js/dynamicEarlyWarninglog.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+
+
+    //优化滚动条
+    $(function () {
+        $("html,body").niceScroll({
+            cursorcolor: "#424242", // 改变滚动条颜色，使用16进制颜色值
+            cursoropacitymin: 0, // 当滚动条是隐藏状态时改变透明度, 值范围 1 到 0
+            cursoropacitymax: 1, // 当滚动条是显示状态时改变透明度, 值范围 1 到 0
+            cursorwidth: "10px", // 滚动条的宽度，单位：便素
+        });
+    });
+</script>
+</body>
+</html>

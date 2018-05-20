@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="93bb3391-8061-40cc-841e-8681beadb72a" name="关注统计" url="http://103.251.36.122/login.html">
+        <fileTransfer host="103.251.36.122" port="58679" rootFolder="/home/www/njweb/pages/focusOnTheGoal" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="58679" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

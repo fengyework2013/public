@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<!-- IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- 设置 viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 兼容国产浏览器的高速模式 -->
+		<meta name="renderer" content="webkit">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title>权限管理</title>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		<!-- boots-->
+		<link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/commo.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/Vaildform.css" />
+		<!--[if lt IE 8]>     
+      <link rel="stylesheet" type="text/css" href="../../lib/lxui/css/lxui-ie6.min.css"/>
+      <script src="../../lib/lxui/js/lxui-ie.min.js" type="text/javascript" charset="utf-8"></script>
+    <![endif]-->
+		<link rel="stylesheet" href="css/permiss-manage.css" />
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<!--查询条件sss-->
+			<form class="form">
+				<div class="row mt-20">
+					<div class="form-group col-sm-3 col-xs-12">
+						<label for="keyWord" class="required">权限关键字</label>
+						<input type="text" class="form-control" id="keyWord" placeholder="请填写权限关键字" datatype="*" nullmsg="不能为空" />
+					</div>
+					<div class="col-sm-3 col-xs-12 mt-25">
+						<button type="button" class="btn btn-default queryTarget">查询</button>
+					</div>
+				</div>
+			</form>
+			<!--查询条件eee-->
+			<div>
+				<button type="button" class="btn btn-default addPowerBtn">新增权限</button>
+			</div>
+		</div>
+		<div class="row content mt-15">
+			<div class="tableBox">
+				<!--表格面板中间部分sss-->
+				<div class="table-content bg-white">
+					<table class="table table-condensed table-responsive table-data">
+						<thead class="bg-gray">
+							<tr>
+								<th class="purviewName">权限名</th>
+								<th class="interface">接口</th>
+								<th class="interType"></th>
+								<th class="operation">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--<tr data-id="1" class="power-group">
+								<td>
+									<i class="glyphicon glyphicon-th"></i>
+									<span>角色管理</span>
+								</td>
+								<td>
+									<span>role</span>
+								</td>
+								<td class="text-c">
+									<a href="#" class="btn btn-default">删除权限组</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<i class="glyphicon glyphicon-minus pl-15"></i>
+									<span>添加角色</span>
+								</td>
+								<td>
+									<span>role/addUser</span>
+								</td>
+								<td class="text-c">
+									<a href="#" class="btn btn-default delBtn">删除</a>
+									<a href="#" class="btn btn-default editBtn">编辑</a>
+								</td>
+							</tr>-->
+						</tbody>
+					</table>
+				</div>
+				<!--表格面板中间部分eee-->
+
+				<!--表格面板底部工具栏sss-->
+				<div class="bg-gray table-footer parentClear text-c posi-r">
+					<div class="data-statistics">
+						<span>共</span>
+						<b class="pageNum">0</b>
+						<span>页</span> &nbsp;
+						<span>记录</span>
+						<b class="dataNum">0</b>
+						<span>条</span>
+					</div>
+
+					<div class="pageOption">
+						<div id="pageTool"></div>
+					</div>
+
+					<div class="reLoadBox">
+						<a href="#" class="reLoadBtn"><i class="glyphicon glyphicon-repeat"></i></a>
+						<a href="#" class="exlBtn"><i class="glyphicon glyphicon-download-alt"></i></a>
+					</div>
+				</div>
+				<!--表格面板底部工具栏eee-->
+
+			</div>
+
+			<!--表格面板eee-->
+		</div>
+		</div>
+
+		<!--主要框架类库sss-->
+		<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<!--<script src="../../lib/echarts/echarts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/echarts/bmap.min.js" type="text/javascript" charset="utf-8"></script><br />
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8ZEtx5kDGsbBFL80Ppda29D8wjnGil7I"></script>-->
+		<!--主要框架类库eee-->
+
+		<!--公共脚本sss-->
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.diy.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<!--公共脚本eee-->
+
+		<!--常用插件sss-->
+		<script src="../../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.nicescroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/Validform_v5.3.2_min.js" type="text/javascript" charset="utf-8"></script>
+		<!--常用插件eee-->
+		<script src="js/permiss-manage.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

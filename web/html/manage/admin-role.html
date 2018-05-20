@@ -1,0 +1,181 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <title>角色列表</title>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../../lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../../lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="../../static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../../lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/h-ui.admin/skin/default/skin.css" id="skin"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../../lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+</head>
+
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span
+        class="c-gray en">&gt;</span> 角色列表
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+       href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<div class="page-container">
+    <div class="text-c">
+        <input type="text" class="input-text" style="width:250px" placeholder="输入关键词" id="keywords" name="">
+        <button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜角色</button>
+    </div>
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l">
+                    <a class="btn btn-primary radius btn-add" href="javascript:void(0);">
+						<i class="Hui-iconfont">&#xe600;</i> 添加角色
+					</a>
+
+				</span>
+        <span class="r">共有数据：<strong class="nTotal">0</strong> 条</span>
+    </div>
+    <table class="table table-border table-bordered table-hover table-bg">
+        <thead>
+
+        <tr class="text-c">
+            <th width="50"><input type="checkbox" value="" name=""></th>
+            <th width="70">编号</th>
+            <th width="250">角色名</th>
+            <th>绑定状态</th>
+            <th width="300">创建时间</th>
+            <th width="200">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <div id="paging-bar" style="text-align:center;margin-top: 15px;"></div>
+</div>
+
+<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../lib/layer/2.4/layer.js"></script>
+<script src="../../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery.myPlugIn_v1.0.js" type="text/javascript" charset="utf-8"></script>
+
+<!--<script src="../js/public.js"></script>-->
+<script src="../../js/laypage-public.js"></script>
+<script src="../../js/config.js"></script>
+<script src="../../js/paging.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        var T = new CreateTable({});
+        paging({
+            text: "获取角色列表成功",
+            num: 10,
+            pagination: 1,
+            value: $("#keywords").val(),
+            tableEle: $('.table'),
+            pagingUrl: config.roleList,
+            delUrl: config.delRole,
+            createTable: function (container, data) {
+                container.children("tbody").html("");
+                $.each(data.data, function (i, v) {
+                    var sTr = '<tr class="text-c"  data-id="' + v.id + '">' +
+                        '<td><input type="checkbox" value="" name=""></td>' +
+                        '<td class="num">' + (data.from + i) + '</td>' +
+                        '<td class="roleName" >' + v.display_name + '</td>' +
+                        '<td class="bindState" data-state="' + v.bind + '">' + (v.bind == 0 ? "未绑定" : "绑定") + '</td>' +
+                        '<td class="createTime">' + v.createtime + '</td>' +
+                        '<td class="option f-14">' +
+                        '<a title="分配权限" href="javascript:void(0);" class="btn-allot">权限</a>' +
+                        '<a title="编辑" href="javascript:void(0);"  class="ml-5 btn-edit">编辑</a>' +
+                        '<a title="删除" href="javascript:void(0);"  class="ml-5 btn-del">删除</a>' +
+                        '</td>' +
+                        '</tr>';
+                    container.children("tbody").append($(sTr));
+                });
+
+
+
+                // 权限分配
+                $(".btn-allot").on("click",function (){
+                    var dataId = $(this).parents("tr").attr("data-id");
+                    sessionStorage.dataId = dataId;
+                    layer.open({
+                        type: 2,
+                        title: '分配权限',
+                        area: ['530px', '400px'],
+                        content: "role-allou.html",
+                        end: function() {
+                            window.location.reload();
+                        }
+                    });
+
+                });
+
+
+
+                // 编辑角色
+                $(".btn-edit").on("click",function (){
+
+                    var dataId = $(this).parents("tr").attr("data-id");
+                    sessionStorage.roleId = dataId;
+                    layer.open({
+                        type: 2,
+                        title: '编辑角色',
+                        area: ['500px', '260px'],
+                        content: "role-edit.html",
+                        end: function() {
+                            window.location.reload();
+                        }
+                    });
+
+                });
+
+                //删除数据
+                $('.table tbody').on("click", ".btn-del", function () {
+                    var nId = $(this).parents("tr").attr("data-id");
+                    layer.confirm("是否删除当前数据", function () {
+                        T.ajaxFour(
+                            config.delRole,
+                            {id: nId},
+                            "post",
+                            function (data) {
+                                layer.msg(data.message, {time: 1500}, function () {
+                                    window.location.reload();
+                                });
+                            }
+                        );
+
+                    });
+                });
+
+            }
+        });
+
+        // 添加角色
+        $(".btn-add").on("click",function (){
+            layer.open({
+                type: 2,
+                title: '添加角色',
+                area: ['500px', '260px'],
+                content: "role-add.html",
+                end: function() {
+                    window.location.reload();
+                }
+            });
+        });
+
+    });
+
+
+</script>
+</body>
+
+</html>

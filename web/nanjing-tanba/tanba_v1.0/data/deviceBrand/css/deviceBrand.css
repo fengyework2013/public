@@ -1,0 +1,11 @@
+.table_Box .echarts_box {
+    height: 500px;
+    margin-bottom: 5px;
+}
+
+.table_Box_echarts_content .table_Box_echarts_content_text .smallTitle{
+	position: absolute;
+	left: 10%;
+	top: 30%;
+	color: #aaa;
+}

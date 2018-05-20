@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+     <!-- IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <!-- 设置 viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 兼容国产浏览器的高速模式 -->
+    <meta name="renderer" content="webkit">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>布控预警</title>
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		<!-- boots3-->
+		<link rel="stylesheet" type="text/css"  href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/commo.css"/>
+    <style type="text/css">
+    	html,body{
+    		overflow: hidden;
+    		/*height: 100%;*/
+    	}
+    </style>
+    
+    <!--[if lt IE 8]>     
+      <link rel="stylesheet" type="text/css" href="../../lib/lxui/css/lxui-ie6.min.css"/>
+      <script src="../../lib/lxui/js/lxui-ie.min.js" type="text/javascript" charset="utf-8"></script>
+    <![endif]-->
+  </head>
+  <body>
+  	<div class="container-fluid">
+  		<div class="title">
+  			<h3 class="mainTitle">布控预警</h3>
+  		</div>
+  		<div class="">
+  			<span class="c-gray secondTitle">布控预警</span>
+  			<span class="glyphicon glyphicon-triangle-right c-gray2" aria-hidden="true"></span>
+  			<span class="c-black targerPage">动态预警</span>
+  		</div>
+  		
+  		<!--tab选项卡导航切换-->
+    	<div class="mt-10 targerBox">    		
+    		<ul class="nav nav-tabs tab-ul">
+    			<li class="tab-li1 active" data-href="dynamicEarlyWarning.html"><a href="#page1" data-toggle="tab">动态预警</a></li>
+    			<li class="tab-li2" data-href="aggregation.html"><a href="#page2" data-toggle="tab">集结预警</a></li>
+    			<li class="tab-li3" data-href="firstWaring.html"><a href="#page3" data-toggle="tab">首现预警</a></li>
+    			<li class="tab-li4" data-href="dynamicEarlyWarninglog.html"><a href="#page4" data-toggle="tab">动态预警日志</a></li>
+    			<li class="tab-li5" data-href="aggregationLog.html"><a href="#page5" data-toggle="tab">集结预警日志</a></li>
+    			<li class="tab-li6" data-href="firstLog.html"><a href="#page6" data-toggle="tab">首现预警日志</a></li>
+    		</ul>
+    		
+    		<div class="tab-content">
+    			<div class="active tab-pane" id="page1">
+    				<iframe src="dynamicEarlyWarning.html" width="100%"  class="no-border childPage" ></iframe>
+    			</div>
+    			<div id="page2" class="tab-pane"></div>
+    			<div id="page3" class="tab-pane"></div>
+    			<div id="page4" class="tab-pane"></div>
+    			<div id="page5" class="tab-pane"></div>
+    			<div id="page6" class="tab-pane"></div>
+    		</div>
+    	</div>
+  	</div>
+    	
+  	 <!--jquery插件-->
+		<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script> 
+		<script src="../../js/jquery.nicescroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.diy.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+    <!--bootstrap3.js插件-->
+		<script type="text/javascript" src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script> 
+		
+    <script type="text/javascript">
+    	//判断预警日志类型
+//  	$('.tab-li4').click(function(){
+//					$.cookie('lookId',4);
+//
+//  	})
+//  	$('.tab-li5').click(function(){
+//					$.cookie('lookId',5);
+//
+//  	})
+//  	$('.tab-li6').click(function(){
+//					$.cookie('lookId',3);
+//
+//  	})
+    	
+			//优化滚动条
+			$(function(){
+				$("html,body").niceScroll({
+					  cursorcolor: "#424242", // 改变滚动条颜色，使用16进制颜色值
+		        cursoropacitymin: 0, // 当滚动条是隐藏状态时改变透明度, 值范围 1 到 0
+		        cursoropacitymax: 1, // 当滚动条是显示状态时改变透明度, 值范围 1 到 0
+		        cursorwidth: "10px", // 滚动条的宽度，单位：便素
+				});
+			});
+    </script>
+  </body>
+</html>

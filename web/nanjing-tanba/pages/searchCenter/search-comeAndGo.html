@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<!-- IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- 设置 viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 兼容国产浏览器的高速模式 -->
+		<meta name="renderer" content="webkit">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title>目标进出统计</title>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		<!-- 良心ui-->
+		<link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/commo.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/Vaildform.css" />
+
+		<!--[if lt IE 8]>     
+      <link rel="stylesheet" type="text/css" href="../../lib/lxui/css/lxui-ie6.min.css"/>
+      <script src="../../lib/lxui/js/lxui-ie.min.js" type="text/javascript" charset="utf-8"></script>
+    <![endif]-->
+    <style type="text/css">
+    	.areaInputBox input{
+    		width: 50%;
+    		/*display: inline-block;*/
+    	}
+    	/*高度自适应方法1 sss*/
+			html,
+			body {
+				height: 100%;
+				padding: 0;
+				margin: 0;
+				overflow:hidden;
+			}			
+			div.container-fluid {
+				height: 100%;
+				padding: 100px 0 0;
+				box-sizing: border-box;
+			}
+			form{
+				margin: -100px 0 0;
+			}
+			/*#form>div:first-child{
+				margin-top:0 ;
+			}*/
+			div.content {
+				height: 97%;
+			}
+			/*高度自适应方法1 eee*/
+    </style>
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<!--查询条件sss-->
+			<form class="form">
+				<div class="row mt-20">
+					<div class="form-group col-sm-3 col-xs-12">
+						<label for="deviceCode" class="required">目标电子设备码</label>
+						<input type="text" class="form-control" id="deviceCode" placeholder="请填写MAC/IMSI/手机号" datatype="/^([0-9a-fA-F]{2})(([0-9a-fA-F]{2}){5})|(\(\d{3,4}\)|\d{3,4}-)?\d{7,8}|(01|03)(\d{2})(\w{1})(\w{1})(\d{3})(\d{6})(\w{1})$/" nullmsg="不能为空" errormsg="请输入正确的设备码" value="24df6af9023e">
+					</div>
+					<div class="form-group col-sm-3 col-xs-12">
+						<label for="logmin" class="required">采集开始时间</label>
+						<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="form-control Wdate" datatype="*" nullmsg="不能为空" />
+					</div>
+					<div class="form-group col-sm-3 col-xs-12">
+						<label for="logmax" class="required">采集结束时间</label>
+						<input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="form-control Wdate" datatype="*" nullmsg="不能为空" />
+					</div>
+					 <div class="form-group col-sm-3 col-xs-12 condition">
+					    <label for="address_1" class="required">采集地点</label>
+							<div class="areaInputBox parentClear">
+								<input type="text" class="form-control lf" id="address_1" placeholder="采集地点" datatype="*" nullmsg="不能为空" errormsg="请输入正确的格式" readonly="readonly" />
+								<button type="button" class="btn btn-default chooseAdress lf" data="1" id="chooseAdress-1">选择地点</button>
+							</div>
+					  </div>
+					
+					<!--<div class="form-group col-sm-3 col-xs-12">
+						<label for="location" class="required">伴随区域范围</label>
+						<select class="form-control" id="accompanyScope">
+							<option value="100" selected="selected">100m</option>
+							<option value="500">500m</option>
+						</select>
+					</div>
+					
+					<div class="form-group col-sm-3 col-xs-12">
+						<label for="location" class="required">伴随时长</label>
+						<select class="form-control" id="accompanyTime">
+							<option value="1800000" selected="selected">30分钟</option>
+							<option value="3600000">1小时</option>
+						</select>
+					</div>-->
+					
+					<div class="col-sm-3 col-xs-12 ">
+						<button type="button" class="btn btn-default queryTarget" data="查询">查询</button>
+						<button type="button" class="btn btn-default accompanyTarget" data="伴随">伴随</button>
+					</div>
+
+				</div>
+
+			</form>
+			<!--查询条件eee-->
+
+			<div class="row content">
+				<!--地图sss-->
+				<!--<div id="main" class="mapStyle"></div>-->
+				<!--地图sss-->
+
+				<!--表格面板sss-->
+				<div class="tableBox">
+					<!--表格面板头部sss-->
+					<!--<div class="table-header parentClear text-c ">
+						<a href="#" class="cutBtn "><i class="glyphicon glyphicon-menu-right c-white"></i></a>
+						<span class="header-title c-white">查询结果</span>
+						<a href="#" class="attention btn btn-primary-outline c-white ">加入关注</a>
+					</div>-->
+					<!--表格面板头部eee-->
+					<div>
+						<h5 class="table-title" data-state="2">伴随数据列表</h5>
+					</div>
+					<!--表格面板中间部分sss-->
+					<div class="table-content bg-white">
+						<table class="table table-condensed table-hover table-striped table-responsive table-data">
+							<thead class="bg-gray">
+								<tr class="text-c">
+									<th><input type="checkbox" name="" id="" value="" /></th>
+									<th class="sortTd">序号</th>
+									<th>出现位置</th>
+									<th>出现时间</th>
+									<th>出现情况</th>
+									<th class="tanbaOrMac">设备识别码</th>
+									<th>电话</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="text-c">
+									<td><input type="checkbox" name="" id="" value="" /></td>
+									<td class="sortTd">1</td>
+									<td>清镇市北门</td>
+									<td>2017-12-09 20:14:14</td>
+									<td>出</td>
+									<td class="mac">54561232</td>
+									<td>13255654124</td>
+									<td>
+										<a class="searchDetails">查看</a>
+									</td>
+								</tr>
+								<tr class="text-c">
+									<td><input type="checkbox" name="" id="" value="" /></td>
+									<td class="sortTd">2</td>
+									<td>清镇市南门</td>
+									<td>2017-12-09 21:14:14</td>
+									<td>出</td>
+									<td class="mac">54501232</td>
+									<td>13255654122</td>
+									<td>
+										<a class="searchDetails">查看</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!--表格面板中间部分eee-->
+
+					<!--表格面板底部工具栏sss-->
+					<div class="bg-gray table-footer parentClear text-c posi-r">
+						<div class="data-statistics">
+							<span>共</span>
+							<b class="pageNum">1</b>
+							<span>页</span> &nbsp;
+							<span>记录</span>
+							<b class="dataNum">2</b>
+							<span>条</span>
+						</div>
+
+						<div class="pageOption">
+							<div id="pageTool"></div>
+						</div>
+
+						<div class="reLoadBox">
+							<a href="#" class="reLoadBtn"><i class="glyphicon glyphicon-repeat"></i></a>
+							<a href="#" class="exlBtn"><i class="glyphicon glyphicon-download-alt"></i></a>
+						</div>
+					</div>
+					<!--表格面板底部工具栏eee-->
+
+				</div>
+
+				<!--表格面板eee-->
+			</div>
+
+		</div>
+
+		<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.diy.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+
+		<script src="../../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.nicescroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/Validform_v5.3.2_min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/search-comeAndGo.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

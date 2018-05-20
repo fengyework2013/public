@@ -1,0 +1,412 @@
+/*
+    1 tableUrl: 请求表格的数据url / 也是分页的url  ,
+    2 tableEle : 表格id或class
+    3 tbody: id 或 class
+    4 editTitle: 编辑时的 title
+    5 openUrl: 编辑的文件地址
+    6 full: true/false 编辑页面全屏
+    7 delUrl : 删除的提交接口
+    8 needPageNum : 分页时每页多少数据
+    9 pagingBar:  分页的标签 id*/
+
+function CreateTable(options) {
+    var _this = this;
+    this.results = null;
+    this.opt = options ? $.extend({}, this.DEFAULTS, options) : this.opt = this.DEFAULTS;
+
+    //获取表格数据   参数: 1 url可单独传, 2 请求的数据  3 是否创建表头:"th" / false
+    this.getTableData = function (tableUrl, data) {
+        this.tableUrl = tableUrl ? tableUrl : opt.tableUrl;
+        this.th = arguments[arguments.length - 1] == "th" ? true : false; // 是否创建表头
+        this.ajaxFour(url_join(this.tableUrl), data, "post", function (res) {
+            _this.results = res;
+            if (res.count > 0) {
+                _this.th ? _this.createTableTh() : "";
+                _this.createTableContent();// 创建表格
+                _this.paging(); //分页
+                return res;
+            } else if (res.count == 0) {
+                _this.th ? _this.createTableTh() : "";
+                $("#noData").remove();
+                $(opt.tableEle).after($("<div id='noData' class='text-c mt-15'>没有相关数据!</div>")).find("tbody").html("");
+            } else if (res.ResultCode == "ERROR") {
+                layer.msg("请求的数据不存在,请检查服务器!", {icon: 15, time: 2000});
+            }
+        });
+    }
+    //创建表头
+    this.createTableTh = function () {
+        var title = this.results.data.title;
+        var $tr = $(opt.tableEle).find("thead").find("tr");
+        $.each(title, function (k, v) {
+            $("<th>" + v + "</th>").appendTo($tr);
+        });
+        opt.openUrl ? $("<th>操作</th>").appendTo($tr) : "";
+    }
+
+    //创建表格: 每个项目不一样, 不能封装,只能做为参考
+    this.createTableContent = function (data, serialNumber) {
+        // var _this = this;
+        // $(this.opt.tbody).find("tr").remove();
+        // $.each(data, function (k, v) {
+        //     var $tr = $('<tr data-cid = "' + k + '" class="text-c" ></tr>');
+        //     $.each(v, function (item, ele) {
+        //         var td = $("<td>" + ele + "</td>");
+        //         $tr.append(td);
+        //
+        //         //  1 有的有附件,有的没有附件, 没附件的,编辑和删除也要在最后一列
+        //         //  2 没有附件, 数据: /data/LoanLater/9435_1516256582.
+        //         if (/^\//.test(ele) && ele.indexOf(".") != -1) {
+        //             var download_td = _this.adjunct(ele);
+        //             $tr.append(download_td);
+        //         } else {//普通数据
+        //             var td = $("<td>" + ele + "</td>");
+        //             $tr.append(td);
+        //         }
+        //
+        //     });
+        //     var btn = _this.operation();// 编辑 和 删除
+        //     $tr.append(btn);
+        //     $tr.appendTo($(_this.opt.tableEle).find(_this.opt.tbody ? _this.opt.tbody : "tbody"));
+        // });
+
+
+        // container.children("tbody").html("");
+        // $.each(data.data, function (i, v) {
+        //     var sTr = '<tr class="text-c" data-role-id="' + v.roleid + '" data-id="' + v.id + '">' +
+        //         '<td><input type="checkbox" value="" name=""></td>' +
+        //         '<td class="num">' + (data.from + i) + '</td>' +
+        //         '<td class="roleName" >' + v.rolename + '</td>' +
+        //         '<td class="userName">' + v.username + '</td>' +
+        //         '<td class="createTime">' + v.createtime + '</td>' +
+        //         '<td class="option f-14">' +
+        //         '<a title="编辑" href="javascript:;"  style="text-decoration:none" class="btn-edit"><i class="Hui-iconfont">&#xe6df;</i></a>' +
+        //         '<a title="删除" href="javascript:;"  class="ml-5 btn-del" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>' +
+        //         '</td>' +
+        //         '</tr>';
+        //     container.children("tbody").append($(sTr));
+        // });
+
+    }//创建表格内容
+    //附件处理
+    this.adjunct = function (ele) {
+        var download_td;
+        if (/\.$/.test(ele)) {
+            download_td = $("<td>无</td>");
+        } else {
+            download_td = $("<td data-url=" + ele + "></td>");
+            download_td
+            .html($('<button type="button" class="btn btn-primary radius size-S">下载</button>'))
+            .on("click", function (e) {
+                e.preventDefault();
+                window.open(url_join("UserLoanLater/downloadFile?file=" + ele));
+                // return false;
+            });
+        }
+        return download_td;
+    }// 创建附件的下载
+    //操作: 编辑和删除
+    this.operation = function () {
+        var _this = this;
+        var ptd = $("<td></td>");
+        var edit = $("<button class='btn btn-primary radius size-S'>编辑</button>").css("cursor", "pointer");
+        var del = $("<button class='btn btn-primary radius size-S'>删除</button>").css("cursor", "pointer");
+        // 编辑按钮的功能
+        edit.on("click", function () {
+            var fid = $(_this.opt.tableEle).attr("data-fid"); //fid 存在表格容器里
+            var cid = $(this).parent().parent().attr("data-cid");
+            var data = $(this).parent().siblings(); // 获取兄弟对象的数据
+            var temData = [];
+            $.each(data, function (k, v) {
+                if ($(v).text() == "下载") {
+                    var url = $(v).attr("data-url");
+                    temData.push(url);
+                } else {
+                    temData.push($(v).text());
+                }
+            });
+            _this.saveUserData("editData", {fid: fid, cid: cid, data: temData});//保存到本地,给编辑页面
+            //打开新页面
+            var index = layer.open({
+                title: _this.opt.title ? _this.opt.title : "编辑",
+                type: _this.opt.type ? _this.opt.type : 2,
+                area: [_this.opt.w ? _this.opt.w : "100%", _this.opt.h ? _this.opt.h : "100%"],
+                content: [_this.opt.openUrl, 'no']
+            });
+            _this.opt.full ? layer.full(index) : "";
+        }).css("marginRight", "5px");
+        // 删除按钮的功能
+        del.on("click", function () {
+            var that = $(this);
+            var cid = that.parent().parent().attr("data-cid");
+            fnAjax.method_4(url_join(opt.delUrl), {id: cid}, "post", function (data) {
+                if (data.state == 1) {
+                    that.parent().parent().remove();
+                }
+            });
+        });
+        return ptd.append(edit, del);
+    }
+    // 表格分页
+    this.paging = function (options, callback) {
+        laypage({
+            cont: _this.opt.pagingBar,//控制分页容器，
+            pages: options.pageSum,//总页数
+            skip: true, //是否开启跳页
+            groups: options.groups || 5, //连续显示分页数
+            first: '首页', //若不显示，设置false即可
+            last: '尾页', //若不显示，设置false即可
+            prev: '<', //若不显示，设置false即可
+            next: '>', //若不显示，设置false即可
+            hash: true, //开启hash
+            jump: function (obj, first) {
+                if (!first || first == undefined) { //点击跳页触发函数自身，并传递当前页：obj.curr
+                    callback(obj); // 将当前的页数传给外面
+
+                    // 参考
+                    /*
+                    T.ajaxFive(config.userIp,
+                        {
+                            page: 1,//页码
+                            keyword: $("#keywords").val(),//关键词
+                            itemNum: 10,//一页显示的条数
+                        },
+                        'post',
+                        // 这里是callback
+                        function (res) {
+                            if (res.message == "获取用户列表成功") {
+                                var page = parseInt(res.data.current_page);
+                                createTable(tableEle, res.data);// 创建表格
+                                T.paging(
+                                    {
+                                        pageSum: res.data.last_page, // 总页数
+                                    },
+                                    function (obj) {
+                                        var data = {
+                                            page: obj.curr,//页码
+                                            keyword: $("#keywords").val(),// 关键词
+                                            itemNum: 10,//一页显示的条数
+                                        }
+                                        T.ajaxFive(config.userIp, data, "post", function (res) {
+                                            if (parseInt(res.data.total)) {
+                                                page = parseInt(res.data.current_page);
+                                                createTable(tableEle, res.data);// 创建表格
+                                            }
+                                            else if (parseInt(res.data.total) == 0) {
+                                                $(tableEle).find("tbody").html("").after($("<div>没有相关数据!</div>"));
+                                            }
+                                        });
+                                    }
+                                ); //分页
+                            }
+                        }
+                    );
+                    */
+
+                }
+            }
+        });
+    }
+    //  分页时序号算法
+    this.count = function () {
+
+        // 数据条数 * 页数 = 当前页的最大数 ( 不用 )
+
+
+        // 分页的总页数 =  Math.ceil  (所有数据的长度 /  每页显示条数 )      例:  data.count/5
+        //
+        // 每页数据条数  *  (当前页-1)+1 = 当前页开始数      (注意: 每页数据条数, 不等于 data.length )
+        // $.each(data, function (i, v) {
+        // <td>' + ( pageNum * (obj.curr - 1) + 1 + i) + '</td>
+        // });
+
+    }
+    // 模糊查询: 要使用fid 和创建表格,放到了一起
+    /* 参数 1 单击按钮选择器  2 searchUrl: 搜索的提交 */
+    this.searchData = function (select, searchUrl) {
+        this.searchText = {
+            "datemin": $("#datemin").val(),
+            "datemax": $("#datamax").val(),
+            "itemNum": this.needPageNum,
+            'fid': _this.fid,
+            // 'cid': opt.cid,
+        }
+        $(select).on("click", function () {
+            _this.getTableData(searchUrl, _this.searchText);
+        });
+
+    }
+}
+
+// 新增表单
+/*
+btnSelect: 按钮选择器
+fileSrc: 引入的文件地址
+addUrl: 请求的表单模型
+data: {id: _this.fid}
+submitUrl: 表单提交的url
+*/
+function AddData(opt) {
+    var _this = this;
+    _this.opt = opt;
+    $(opt.btnSelect).on("click", function () {
+        var index = layer.open({
+            title: "新增表单",
+            type: 2,
+            area: ["100%", "100%"],
+            content: [_this.opt.fileSrc, 'no'],
+        });
+        layer.full(index);
+    });
+    // add 页面使用,data是一个对象,取值须注意
+    CreateTable.prototype.saveUserData("addFormData", {addUrl: opt.addUrl, data: opt.data, submitUrl: opt.submitUrl});
+}
+
+CreateTable.prototype = {
+    DEFAULTS: {
+        tableEle: "table",
+        tbody: "tbody",
+        pagingBar: "paging-bar",
+        needPageNum: 10, // 分页时每页多少数据
+    },
+    ajaxFour: function (murl, mdata, method, successFn) {
+        var _this = this;
+        $.ajax({
+            type: method,
+            url: murl,
+            dataType: "json",
+            data: mdata,
+            async: true,
+            timeout: 12000,
+            beforeSend: function () {
+                layerLoad = layer.load(3);
+            },
+            error: function (data) {
+                layer.close(layerLoad);
+                layer.alert("请求失败，请检查服务器端！", {icon: 5});
+            },
+            success: function (data) {
+                layer.close(layerLoad);
+                if (data.ResultCode == "ERROR" && data.state == "0") {
+                    layer.alert("请求失败," + data.message + ",请联系管理员！", {icon: 5});
+                }
+                if (data.state == "overtime") {//登录超时状态提示字符串
+                    _this.toLoginPage();
+                }
+                else if (data.state == "hasLogin") {//账号在其他ip浏览器上被登录的字符串提示
+                    layer.alert("注意：该用户在ip为http://" + data.ip + "的电脑上被登录了!", {icon: 0});
+                }
+                else {
+                    successFn(data);
+                }
+            }
+        });
+    },
+    ajaxFive: function (murl, mdata, method, successFn) {
+        var _this = this;
+        $.ajax({
+            type: method,
+            url: murl,
+            dataType: "json",
+            data: mdata,
+            timeout: 10000,
+            async: true,
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            beforeSend: function () {
+                layerLoad = layer.load(3);
+            },
+            error: function (data) {
+                layer.close(layerLoad);
+                // console.log(data);
+                layer.alert("请求失败，请检查服务器端！", {
+                    icon: 5
+                });
+            },
+            success: function (data) {
+                layer.close(layerLoad);
+                if (data.code == 3) { //登录超时状态提示字符串
+                    layer.confirm(data.message + "。是否重新登录？", function () {
+                        $.toNewPage("login.html");
+                    });
+                } else if (data.code == 2) { //账号在其他ip浏览器上被登录或者超时
+                    layer.confirm(data.message + "。是否重新登录？", function () {
+                        $.toNewPage("login.html");
+                    });
+                } else if (data.code == 1) {
+                    layer.confirm(data.message + "。是否重新登录？", function () {
+                        $.toNewPage("login.html");
+                    });
+                } else if (data.code == 0) {
+                    successFn(data);
+                } else {
+                    layer.alert(data.message);
+                }
+            }
+        });
+    },
+    toLoginPage: function () {
+        layer.confirm("登录超时，是否重新登录？", function () {
+            if (window.parent.parent.parent.parent) {
+                parent.parent.parent.parent.location.href = "login.html";
+            }
+            if (window.parent.parent.parent) {
+                parent.parent.parent.location.href = "login.html";
+            }
+            if (window.parent.parent) {
+                parent.parent.location.href = "login.html";
+            }
+            else if (window.parent) {
+                parent.location.href = "login.html";
+            }
+            else {
+                window.location.href = "login.html";
+            }
+        });
+
+    },
+    // 参数: name-存取的名字  opt 是一个对象
+    saveUserData: function (name, opt) {
+        var strOpt = JSON.stringify(opt);
+        if (window.sessionStorage) {
+            sessionStorage.setItem(name, strOpt);
+        } else if ($.cookie) {
+            $.cookie(name, strOpt, {
+                path: "/", expires: 1
+            });
+        }
+    },
+    getUserData: function (name) {
+        var data;
+        if (window.sessionStorage) {
+
+            data = JSON.parse(sessionStorage.getItem(name));
+        } else if ($.cookie) {
+            data = JSON.parse($.cookie(name));
+        } else {
+            alert("没有获取到相关数据,如果清除了浏览器记录,需要重新登录!");
+        }
+        return data;
+    },
+    addData: function (opt) {
+        var _this = this;
+        _this.opt = opt;
+        $(opt.btnSelect).on("click", function () {
+            var index = layer.open({
+                title: "新增表单",
+                type: 2,
+                area: ["100%", "100%"],
+                content: [_this.opt.fileSrc, 'no'],
+            });
+            layer.full(index);
+        });
+        // add 页面使用,data是一个对象,取值须注意
+        // CreateTable.prototype.saveUserData("addFormData", {addUrl: opt.addUrl, data: opt.data, submitUrl: opt.submitUrl});
+    }
+}
+Object.defineProperty(CreateTable.prototype, "constructor", {
+    enumerable: false,
+    value: CreateTable
+});

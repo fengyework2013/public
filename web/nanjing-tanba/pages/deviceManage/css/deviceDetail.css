@@ -1,0 +1,34 @@
+.deviceInfo{
+	margin-bottom: 10px;
+}
+
+.deviceInfo div.title {
+	display: inline-block;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.deviceInfo div.cont {
+	display: inline-block;
+	font-size: 12px;
+	color: #007AFF;
+}
+
+.deviceInfo div.btn-title {
+	display: block;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.deviceInfo div.btn-cont {
+	display: inline-block;
+	color: #007AFF;
+	width: 100%;
+	margin-top: 5px;
+}
+.deviceInfo div.btn-cont  button{
+	font-size: 12px;
+	color: #007aff;
+}

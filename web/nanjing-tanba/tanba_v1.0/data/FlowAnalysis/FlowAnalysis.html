@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<title>独尊探霸【独尊科技旗下站】</title>
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/flatpickr.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/FlowAnalysis.css" />
+	</head>
+
+	<body>
+		<!--导航栏-->
+		<div class="chart-type-head">
+			<a href="../../personal_Data.html" id="home">首页</a>
+			<i class="glyphicon glyphicon-menu-right"></i>
+			<a href="../../display_Data.html">数据图表</a>
+			<i class="glyphicon glyphicon-menu-right"></i>
+			<a class="chart-type-head-title" href="#">顾客流量分析</a>
+		</div>
+		<!--内容区                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          kkkkkkkk-->
+		<div class="table_Box">
+			<div class="table_Box_echarts">
+				<div class="table_Box_echarts_title">
+					<span>数据展示</span>
+				</div>
+				<!--选择-->
+				<div class="table_Box_Choice">
+					<!--时间-->
+					<div>查询时间: <span><input type="text" id="mydatepicker" class="table_Box_Choice_input"/></span></div>
+					<div>查询店铺: <span><input type="text" id="selectShop" class="table_Box_Choice_input"/></span></div>
+				</div>
+				<!--图表-->
+				<div class="echarts_box" id="echarts_box"></div>
+			</div>
+		</div>
+		<div class="table_Box_echarts">
+			<div class="table_Box_echarts_title">
+				<span>数据分析</span>
+			</div>
+			<div class="table_Box_echarts_content clearfix">
+				<div class="table_Box_echarts_content_float clearfix">
+					<span class="title">
+						<i class="glyphicon glyphicon-time"></i>
+						新顾客详情：
+					</span>
+				</div>
+				<div class="table_Box_echarts_content_text col-xs-12 col-sm-4">
+					<div class="title">0</div>
+					<p>最小值(人)</p>
+				</div>
+				<div class="table_Box_echarts_content_text col-xs-12 col-sm-4">
+					<div class="title">0</div>
+					<p>平均值(人)</p>
+				</div>
+				<div class="table_Box_echarts_content_text col-xs-12 col-sm-4">
+					<div class="title">0</div>
+					<p>最大值(人)</p>
+				</div>
+			</div>
+			<div class="table_Box_echarts_content clearfix">
+				<div class="table_Box_echarts_content_float clearfix">
+					<span class="title">
+						<i class="glyphicon glyphicon-time"></i>
+						老顾客详情：
+					</span>
+				</div>
+				<div class="table_Box_echarts_content_text col-xs-12 col-sm-4">
+					<div class="title">0</div>
+					<p>最小值(人)</p>
+				</div>
+				<div class="table_Box_echarts_content_text col-xs-12 col-sm-4">
+					<div class="title">0</div>
+					<p>平均值(人)</p>
+				</div>
+				<div class="table_Box_echarts_content_text col-xs-12 col-sm-4">
+					<div class="title">0</div>
+					<p>最大值(人)</p>
+				</div>
+			</div>
+			<div class="table_Box_echarts_content clearfix">
+				<div class="table_Box_echarts_content_float clearfix">
+					<span class="title">
+						<i class="glyphicon glyphicon-time"></i>
+						总顾客详情：
+					</span>
+				</div>
+				<div class="table_Box_echarts_content_text col-xs-12 col-sm-4">
+					<div class="title">0</div>
+					<p>最小值(人)</p>
+				</div>
+				<div class="table_Box_echarts_content_text col-xs-12 col-sm-4">
+					<div class="title">0</div>
+					<p>平均值(人)</p>
+				</div>
+				<div class="table_Box_echarts_content_text col-xs-12 col-sm-4">
+					<div class="title">0</div>
+					<p>最大值(人)</p>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../js/common/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/echarts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/flatpickr.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/FlowAnalysis.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

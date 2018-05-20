@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>人群归属地</title>
+    <!-- 引入 echarts.js -->
+    <link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #main1 {
+            width: 100vw;
+            height: 80vh;
+            z-index: 0;
+            /*top: 5vh;*/
+            right: 1vw;
+        }
+
+        input {
+            line-height: 20px;
+            height: 20px;
+            border: none;
+            background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+            margin: 4px;
+            overflow: hidden;
+            padding-left: 5px;
+            color: rgb(57, 154, 215);
+            z-index: 1000;
+        }
+
+        .button {
+            float: left;
+            margin-top: 3px;
+            margin-left: 8px;
+        }
+
+        .text {
+            float: left;
+            margin-top: 10px;
+        }
+
+        .date {
+            display: inline-block;
+            margin: 15px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="imgBox">
+    <div id="main1" class="mt-20"></div>
+</div>
+
+<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="../../lib/echarts/echarts.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../lib/echarts/bmap.min.js" type="text/javascript" charset="utf-8"></script>
+<br/>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8ZEtx5kDGsbBFL80Ppda29D8wjnGil7I"></script>
+<!--主要框架类库eee-->
+
+<!--公共脚本sss-->
+<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery.diy.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+<!--公共脚本eee-->
+
+<!--常用插件sss-->
+<script src="../../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../lib/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery.nicescroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main1'));
+
+    var data = genData(50);
+
+    option = {
+        title: {
+            text: '归属地统计',
+            subtext: '',
+            x: 'center'
+        },
+        tooltip: {
+            trigger: 'item'
+//				        formatter: "{a} <br/>{b} : {c} ({d}%)"   //百分比显示
+        },
+        legend: {
+            type: 'scroll',
+            orient: 'vertical',
+            right: 10,
+            top: 20,
+            bottom: 20,
+            data: data.legendData
+        },
+        series: [
+            {
+                name: '归属地',
+                type: 'pie',
+                radius: '55%',
+                center: ['40%', '50%'],
+                data: data.seriesData,
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+    function genData(count) {
+        var legendData = [];
+        var seriesData = [];
+        fnAjax.method_4(url_join3("belongsArea"), '', "get", function (data) {
+            $.each(data.data.data, function (e, i) {
+                legendData.push(i.ouname);
+                seriesData.push({
+                    name: i.ouname,
+                    value: i.tcount
+                });
+            });
+
+            setTimeout(function () {
+                myChart.setOption(option);
+            }, 100);
+        })
+        return {
+            legendData: legendData,
+            seriesData: seriesData
+        };
+
+    }
+    myChart.setOption(option);
+</script>
+</body>
+
+</html>

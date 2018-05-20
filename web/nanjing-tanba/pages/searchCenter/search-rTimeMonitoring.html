@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta http-equiv="content-type" charset="utf-8">
+     <!-- IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+   
+     <!-- 设置 viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"><!---->
+    <meta http-equiv="X-UA-Compatible" content="IE=4"><!--ie5 model-->
+    <meta http-equiv="X-UA-Compatible" content="IE=7.5"><!--ie7 model-->
+    <meta http-equiv="X-UA-Compatible" content="IE=100"><!--ie8 model-->
+    <meta http-equiv="X-UA-Compatible" content="IE=a"><!--ie5 model-->
+    <!-- 兼容国产浏览器的高速模式 -->
+    <meta name="renderer" content="webkit">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>实时监控</title>
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		<!-- 良心ui-->
+		<link rel="stylesheet" type="text/css"  href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/commo.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/Vaildform.css"/>
+    
+    <!--[if lt IE 8]>     
+      <link rel="stylesheet" type="text/css" href="../../lib/lxui/css/lxui-ie6.min.css"/>
+      <script src="../../lib/lxui/js/lxui-ie.min.js" type="text/javascript" charset="utf-8"></script>
+    <![endif]-->
+   <style type="text/css">
+   	@media (min-width: 768px){
+   		.modal-dialog {
+			    width: 800px !important;
+			    margin: 30px auto;
+			}
+   	}
+			
+			/*高度自适应方法1 sss*/
+			html,
+			body {
+				height: 100%;
+				padding: 0;
+				margin: 0;
+			}			
+			div.container-fluid {
+				height: 100%;
+				padding: 100px 0 0;
+				box-sizing: border-box;
+			}
+			form{
+				margin: -100px 0 0;
+			}
+			/*#form>div:first-child{
+				margin-top:0 ;
+			}*/
+			div.content {
+				height: 97%;
+			}
+			/*高度自适应方法1 eee*/
+   </style>
+  </head>
+  <body>
+  	<div class="container-fluid">
+  		<!--查询条件sss-->
+  		<form class="form">
+  			<div class="row mt-20">
+  					<div class="form-group col-sm-3 col-xs-12">
+							<label for="location" class="required">查询目标设备类型</label>
+							<select class="form-control" id="delType" name="type">
+								<option value="0">普通设备</option>
+								<option value="1">专属设备</option>
+							</select>
+						</div>
+  				 	<div class="form-group col-sm-3 col-xs-12">
+					    <label for="deviceCode" class="required">目标电子设备码</label>
+					    <input type="text" value="120000000044" class="form-control" id="deviceCode" placeholder="请填写MAC/IMSI/手机号" datatype="/^([0-9a-fA-F]{2})(([0-9a-fA-F]{2}){5})|(\(\d{3,4}\)|\d{3,4}-)?\d{7,8}|(01|03)(\d{2})(\w{1})(\w{1})(\d{3})(\d{6})(\w{1})$/" nullmsg="不能为空" errormsg="请输入正确的设备码" />
+					  </div>
+					  <!--<div class="form-group col-sm-3 col-xs-12">
+					    <label for="logmin" class="required">采集开始时间</label>
+					    <input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="form-control Wdate" />
+					  </div>
+					  <div class="form-group col-sm-3 col-xs-12">
+					    <label for="logmax" class="required">采集结束时间</label>
+					   <input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="form-control Wdate" />
+					  </div>-->
+						<div class="col-sm-3 col-xs-12 mt-25">							
+							 <button type="button" class="btn btn-default rTimeMonitoring" >实时监控</button>
+							 <button type="button" class="btn btn-default closeBtn" disabled="disabled">关闭监控</button>
+							 <button type="button" class="btn btn-default showView" data-target="#TableView">可视化数据表格</button>
+						</div>
+					 
+  			</div>
+			 
+			</form>
+			<!--查询条件eee-->
+				<div class="row content">
+					<!--地图sss-->
+					<div id="main" class="mapStyle"></div>
+					<!--地图sss-->
+				</div>
+  	</div>
+    	
+    	<!--可视化数据表格-->
+    		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="TableView">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title">实时数据表格</h4>
+				      </div>
+				      <div class="modal-body">
+				       <table class="table table-hover table-striped table-border table-data table-responsive">
+				       		<thead >
+										<tr class="text-c">
+											<th>目标ID</th>
+											<th>出现地址</th>
+											<th>出现时间</th>
+											<th>经纬度</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="text-c">
+										
+											<td class="macId">622</td>
+											<td class="address">深圳市独尊科技开发有限公司</td>
+											<td>"2018-01-05 14:24:59"</td>
+											<td>113.476906，22.2746275</td>
+											
+										</tr>
+										
+									</tbody>							
+				       </table>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				      </div>
+				    </div><!-- /.modal-content -->
+				  </div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+    	<!--可视化数据表格-->
+    	
+  	<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script> 
+  	<script type="text/javascript" src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script> 
+  	<!--<script src="../../lib/echarts/echarts.js" type="text/javascript" charset="utf-8"></script>-->
+		<!--<script src="../../lib/echarts/bmap.min.js" type="text/javascript" charset="utf-8"></script>-->
+		
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8ZEtx5kDGsbBFL80Ppda29D8wjnGil7I"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/library/LuShu/1.2/src/LuShu_min.js"></script>
+		
+		
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.diy.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/localstorage-ie.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="../../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.nicescroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/Validform_v5.3.2_min.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="js/search-rTimeMonitoring.js" type="text/javascript" charset="utf-8"></script>
+		<!--ws断开重连-->
+		<script src="../../js/reconnecting-websocket.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--ws断开重连-->
+		
+		
+		
+    <script type="text/javascript">
+			$(function(){
+				//显示数据可视化表格
+				$(".showView").click(function(){
+					$("#TableView").modal("show");
+				});
+			});
+
+    </script>
+  </body>
+</html>

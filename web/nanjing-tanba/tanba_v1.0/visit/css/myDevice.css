@@ -1,0 +1,139 @@
+#deviceSelect {
+	height: 60px;
+	line-height: 60px;
+	padding-left: 45px;
+}
+
+#deviceSelect .title {
+	color: #666;
+	font-weight: bold;
+}
+
+#deviceSelect .title i {
+	margin-right: 5px;
+}
+
+#deviceSelect .queryCriteriaInput {
+	display: inline-block;
+	width: 30%;
+	max-width: 250px;
+	height: 25px;
+	line-height: 25px;
+	border: 0;
+	border-bottom: 1px solid #ccc;
+	outline: none;
+	background-color: transparent;
+	margin-left: 5px;
+	margin-right: 10px;
+	padding: 0 10px;
+	color: #666;
+}
+
+#deviceSelect .queryCriteriaBtn {
+	display: inline-block;
+	padding: 0 25px;
+	height: 24px;
+	line-height: 0px;
+	outline: none;
+	font-size: 12px;
+	font-weight: bold;
+	color: #666;
+	background-color: transparent;
+	border: 1px solid #aaa;
+	border-radius: 22px;
+}
+
+.conShow_box_title_urrentNumber {
+	position: absolute;
+	right: 120px;
+	top: 0;
+	color: #666;
+	line-height: 42px;
+	font-size: 12px;
+}
+
+.urrentNumber {
+	color: #a00;
+}
+
+.device_dataUl {
+	min-height: 200px;
+	max-height: 500px;
+	overflow: auto;
+}
+
+.device_dataUl table {
+	width: 100%;
+	color: #666;
+	font-size: 12px;
+	text-align: center;
+	display: none;
+}
+
+.device_dataUl table thead th {
+	border: 1px solid #ccc;
+	text-align: center;
+}
+
+.device_dataUl table thead th.DeviceId {
+	width: 15%;
+	min-width: 170px;
+}
+
+.device_dataUl table thead th.Online {
+	width: 5%;
+	min-width: 80px;
+}
+
+.device_dataUl table thead th.Update {
+	width: 15%;
+	min-width: 180px;
+}
+
+.device_dataUl table thead th.DServer,
+.device_dataUl table thead th.CServer {
+	width: 10%;
+	min-width: 150px;
+}
+
+.device_dataUl table thead th.Latitude,
+.device_dataUl table thead th.Longitude {
+	width: 15%;
+	min-width: 100px;
+}
+
+.device_dataUl table thead th.Operate {
+	width: 15%;
+	min-width: 200px;
+}
+
+.device_dataUl table tbody tr {
+	height: 45px;
+	border-bottom: 1px solid #eee;
+}
+
+.device_dataUl table tbody td.onlineTd i{
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background-color: #0a0;
+	margin-right: 5px;
+}
+
+.device_dataUl table tbody td.onlineTd i.error{
+	background-color: #a00;
+}
+
+.device_dataUl table tbody td button{
+	border: 1px solid #ccc;
+	outline: none;
+	background: transparent;
+	width: 60px;
+	height: 22px;
+	border-radius: 11px;
+}
+
+.device_dataUl table tbody td button.Restart{
+	margin-right: 10%;
+}

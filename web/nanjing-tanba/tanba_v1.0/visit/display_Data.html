@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<title>独尊探霸【独尊科技旗下站】</title>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/display_Data.css" />
+	</head>
+
+	<body>
+		<!--导航栏-->
+		<div class="chart-type-head">
+			<a href="personal_Data.html" id="home">首页</a>
+			<i class="glyphicon glyphicon-menu-right"></i>
+			<span class="chart-type-head-title">数据图表</span>
+		</div>
+		<!--内容区-->
+		<div class="data_Box clearfix">
+			<!--板块标题-->
+			<div class="data_box_bg">
+				<div class="data_box_BigTitle clearfix">
+					<span>数据图表</span>
+					<span class="data_box_remark">数据图表及详情展示</span>
+				</div>
+			</div>
+			<!--数据展示区1-->
+			<div class="data_box_modular">
+				<!--区块标题-->
+				<div class="data_box_title">
+					<ul class="data_box_ul clearfix">
+						<li class="active">
+							<a href="#bought" aria-controls="bought" role="tab" data-toggle="tab">已购买</a>
+						</li>
+						<li class="">
+							<a href="#used" aria-controls="used" role="tab" data-toggle="tab">常用</a>
+						</li>
+						<li class="">
+							<a href="#notBought" aria-controls="notBought" role="tab" data-toggle="tab">未购买</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="tab-content">
+					<!--已购买内容-->
+					<div role="tabpanel" class="tab-pane active" id="bought">
+						<div class="data_box_container">
+							<div class="data_Showbox row">
+								<!--列表-->
+								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+									<div class="newChart">
+										<a href="managed_Purchasenew.html" class="newChart_text">
+											<i class="glyphicon glyphicon-plus"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--常用内容-->
+					<div role="tabpanel" class="tab-pane" id="used">
+						<div class="data_box_container">
+							<div class="data_Showbox row">
+								<!--列表-->
+								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+									<div class="newChart">
+										<a href="config_Page.html" class="newChart_text">
+											<i class="glyphicon glyphicon-plus"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--未购买-->
+					<div role="tabpanel" class="tab-pane" id="notBought">
+						<div class="data_box_container">
+							<div class="data_Showbox row">
+								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+									<div class="chart">
+										<a href="data/FlowAnalysis/FlowAnalysis.html" class="chart-link">
+											<p class="chart-title">顾客流量分析</p>
+											<img src="img/dataImg/03.png" class="chart-area" />
+										</a>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+									<div class="chart">
+										<a href="data/EopleOnline/eopleOnline.html" class="chart-link">
+											<p class="chart-title">在线人数监控</p>
+											<img src="img/dataImg/02.png" class="chart-area" />
+										</a>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+									<div class="chart">
+										<a href="data/deviceBrand/deviceBrand.html" class="chart-link">
+											<p class="chart-title">品牌分布详情</p>
+											<img src="img/dataImg/01.png" class="chart-area" />
+										</a>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+									<div class="chart">
+										<a href="data/PassengerFlowAnalysi/select_Province.html" class="chart-link">
+											<p class="chart-title">实时客流分析</p>
+											<img src="img/dataImg/geo-lines.png" class="chart-area" />
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/common/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/common/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

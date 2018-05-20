@@ -1,0 +1,15 @@
+var config = {
+    ip:"http://123.58.43.16:9555/",
+    userIp:'http://123.58.43.16:9555/'+'AdminUser/queryUser', // 用户列表
+    addUser:'http://123.58.43.16:9555/'+'AdminUser/queryRole',
+    editUser:'empty',
+    delUser:'http://123.58.43.16:9555/'+'AdminUser/delUser',
+
+    roleList:'http://10.10.10.20/hpxin/php/public/role', // 角色列表
+    roleInfo:'http://10.10.10.20/hpxin/php/public/role/get',
+    addRole:'http://10.10.10.20/hpxin/php/public/role/add',
+    editRole:'http://10.10.10.20/hpxin/php/public/role/update',
+    delRole:'http://10.10.10.20/hpxin/php/public/role/delete',
+
+    authority:'http://123.58.43.16:9555/Role/getRoleNode', // 权限分配
+}

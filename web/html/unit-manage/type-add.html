@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <!-- IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 设置 viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 兼容国产浏览器的高速模式 -->
+    <meta name="renderer" content="webkit">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>新增分类</title>
+
+    <link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/commo.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/Vaildform.css"/>
+    <link rel="stylesheet" href="../../lib/bootstrap-3.3.7-dist/fileinput/css/fileinput.css" media="all" type="text/css"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../../lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../../lib/respond.min.js"></script>
+    <![endif]-->
+
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../../lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <style>
+        .form-horizontal label {
+            padding-left: 0;
+            padding-right: 0;
+            text-align: right;
+        }
+        .fileinput-upload-button{display: none !important;}
+        #parent_id{border:1px solid white;width:80%;color:red;background: white;outline: none;}
+        #parent_id:focus{
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container-fluid mt-15">
+
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="type-name" class="col-sm-3  col-xs-2 control-label mt-10">当前父类：</label>
+            <div class="col-sm-9 col-xs-9 pd-0  mt-10">
+                <span id="parent_id"></span>
+                <!--<input id="parent_id" class="form-control" readonly type="text" value="">-->
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="type-name" class="col-sm-3  col-xs-2 control-label mt-15">分类名称：</label>
+            <div class="col-sm-9 col-xs-9 pd-0  mt-10">
+                <input id="type-name" class="form-control" placeholder="分类名称" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="remarks" class="col-sm-3  col-xs-2 control-label mt-15">备注</label>
+            <div class="col-sm-9 col-xs-9 pd-0 mt-10">
+                <textarea class="form-control" name="remarks" id="remarks" rows="6"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3  col-xs-2 control-label mt-15"> </label>
+            <div class="col-sm-9 col-xs-9 pd-0 mt-10">
+                <button type="cancel" id="cancelBtn" class="btn btn-default btn-sm">取消</button>
+                <button type="submit" id="submitBtn" class="btn btn-primary btn-sm mr-20">创建</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<!--主要框架类库sss-->
+<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+<script src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="../../lib/bootstrap-3.3.7-dist/fileinput/js/fileinput.min.js"></script>
+<script src="../../lib/bootstrap-3.3.7-dist/fileinput/js/locales/zh.js"></script>
+<script type="text/javascript" src="../../lib/layer/2.4/layer.js"></script>
+<!--<script src="../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>-->
+<!--<script src="../js/manage/common.js" type="text/javascript" charset="utf-8"></script>-->
+<!--<script src="../lib/jquery.diy.js" type="text/javascript" charset="utf-8"></script>-->
+<!--<script src="../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>-->
+<!--<script src="../lib/Validform_v5.3.2_min.js" type="text/javascript" charset="utf-8"></script>-->
+
+<!--<script src="../js/public.js"></script>-->
+<script src="../../js/laypage-public.js"></script>
+<script src="../../js/config.js"></script>
+<script src="../../js/unit/type-add.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="912f9092-260c-4d4b-951b-a2623e024ea3" name="pdu" url="http://10.10.10.203">
+        <fileTransfer host="10.10.10.203" port="22" rootFolder="/var/www/html/pdu" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

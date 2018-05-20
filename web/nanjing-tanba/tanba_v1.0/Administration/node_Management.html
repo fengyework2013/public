@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<title>独尊探霸【独尊科技旗下站】</title>
+
+		<link rel="stylesheet" type="text/css" href="/tanba_v1.0/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/tanba_v1.0/css/main.css" />
+		<link rel="stylesheet" href="/tanba_v1.0/css/plug-ins/paging.css" />
+		<link rel="stylesheet" type="text/css" href="css/node_Management.css" />
+	</head>
+
+	<body>
+		<!--导航栏-->
+		<div class="chart-type-head">
+			<a href="personal_Data.html" id="home">首页</a>
+			<i class="glyphicon glyphicon-menu-right"></i>
+			<span class="chart-type-head-title">节点管理</span>
+		</div>
+		<!--内容区-->
+		<div class="data_Box clearfix">
+			<!--板块标题-->
+			<div class="data_box_bg">
+				<div class="data_box_BigTitle">
+					<span>节点管理</span>
+					<span class="data_box_remark">权限详情的增删改查</span>
+				</div>
+			</div>
+			<!--权值设定-->
+			<div class="conShow_box">
+				<div class="conShow_box_title">
+					<span>详情配置</span>
+					<a href="#" class="conShow_box_title_right" id="addPowersA">
+						<i class="glyphicon glyphicon-plus"></i> 新增权限
+					</a>
+				</div>
+				<div class="conShow_box_inner">
+					<table class="table table-hover" id="conShow-box-inner-table">
+						<thead>
+							<tr>
+								<th>权限名</th>
+								<th>接口</th>
+								<th class="th-operate">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--权限分配-->
+							<!-- 	<tr class="tr-ul">
+								<td><span class="glyphicon glyphicon-th-large"></span>权限分配</td>
+								<td>Role</td>
+								<td class="td-operate">
+									<button class="conShow-table-delBtn">删除</button>
+								</td>
+							</tr>
+							<tr>
+								<td><span class="glyphicon glyphicon-list tr-li"></span>新增权限名</td>
+								<td>Role/addRole</td>
+								<td class="td-operate">
+									<button class="conShow-table-allotBtn">分配</button>
+									<button class="conShow-table-delBtn">删除</button>
+								</td>
+							</tr> -->
+
+						</tbody>
+					</table>
+					<div id="pageToolbar"></div>
+					<p class="conShow_box_Prompt">没有设置任何节点</p>
+
+				</div>
+			</div>
+		</div>
+		<!--反馈弹框-->
+		<div class="infoAlertBox">
+			<!--蒙板-->
+			<div class="mask"></div>
+			<!--填写弹窗-->
+			<div class="infoAlert">
+				<div id="infoAlertText">数据加载中...</div>
+				<div class="infoAlertBtn"><button id="infoAlertBtn">确定</button></div>
+			</div>
+		</div>
+		<!-- 模态窗：新增节点 -->
+		<div id="modal-Content-box" class="modal-Content-box">
+			<!--蒙板-->
+			<div class="modal-Content-mask"></div>
+			<!--窗口-->
+			<div class="modal-Content-window">
+				<!--标题栏-->
+				<div class="modal-Content-window-title">
+					<span class="modal-Content-window-title-text">新增权限</span>
+					<span class="layui-layer-setwin"><a href="#" id="modal-Content-window-title-closeBtn" class="glyphicon glyphicon-remove"></a></span>
+				</div>
+				<!--内容-->
+				<div class="modal-Content-window-container">
+					<!--表单-->
+					<div class="modal-Content-window-container-form">
+						<!--权限类型-->
+						<div class="row clearfix">
+							<label for="nodeName" class="col-xs-3">权限类型:</label>
+							<select name="nodeNameType-select" id="nodeNameType-select" class="col-xs-8">
+								<option value="0">分类一级</option>
+								<option value="1">分类二级</option>
+							</select>
+						</div>
+						<!--权限名-->
+						<div class="row">
+							<label for="nodeName" class="col-xs-3">权限名:</label>
+							<select name="nodeName-select" id="nodeName-select" class="col-xs-8">
+								<option value="0">权限管理</option>
+								<option value="1">节点管理</option>
+								<option value="2">用户管理</option>
+								<option value="3">设备管理</option>
+								<option value="4">数据图表</option>
+								<option value="5">排行分析</option>
+								<option value="6">数据信息</option>
+								<option value="7">设备信息</option>
+							</select>
+						</div>
+						<!--上级权限-->
+						<div class="row upNodeDiv">
+							<label for="upNode" class="col-xs-3">上级权限：</label>
+							<select name="upNode" id="upNode" class="col-xs-8"></select>
+						</div>
+						<!--控制器-->
+						<div class="row">
+							<label for="nodeName-input" class="col-xs-3">后台控制器:</label>
+							<input type="text" class="col-xs-8" id="nodeName-input" placeholder="例：Role" />
+						</div>
+						<!--子节点权限名-->
+						<div class="row childNodeDiv">
+							<label for="childNodeName-input" class="col-xs-3">权限名:</label>
+							<input type="text" class="col-xs-8" id="childNodeName-input" placeholder="例：角色管理的添加功能" />
+						</div>
+						<!--子节点函数名-->
+						<div class="row childNodeDiv">
+							<label for="childNodeFunName" class="col-xs-3">子节点函数名:</label>
+							<input type="text" class="col-xs-8" id="childNodeFunName" placeholder="例：addRole" />
+						</div>
+						<!--子权限定义的功能类型-->
+						<div class="row childNodeDiv">
+							<label for="childNodeType" class="col-xs-3">子权限定义的功能类型:</label>
+							<select name="childNodeType" id="childNodeType" class="col-xs-8">
+								<option value="-1">==请选择==</option>
+								<option value="0">添加</option>
+								<option value="1">查看</option>
+								<option value="2">编辑</option>
+								<option value="3">删除</option>
+							</select>
+						</div>
+						<!--隐藏参数-->
+						<div><input type="hidden" id="childNodeId" value=""/></div>
+						<!--按钮-->
+						<div class="btnDiv">
+							<button class="subMitBtn" id="nodeNameSubmit">提交</button>
+							<button class="subMitBtn" id="childNodeTypeSubmit">提交</button>
+							<button class="subMitBtn" id="updateSubmit">提交</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="/tanba_v1.0/js/common/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/tanba_v1.0/js/common/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/tanba_v1.0/js/common/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/tanba_v1.0/js/common/query.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common/paging.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/oAjax.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/node_Management.js" type="text/javascript" charset="utf-8"></script>
+	</body>ddd
+
+</html>

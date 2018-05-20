@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<!-- IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- 设置 viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 兼容国产浏览器的高速模式 -->
+		<meta name="renderer" content="webkit">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title>设备详情</title>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		<!-- boots-->
+		<link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/commo.css" />
+
+		<!--[if lt IE 8]>     
+      <link rel="stylesheet" type="text/css" href="../../lib/lxui/css/lxui-ie6.min.css"/>
+      <script src="../../lib/lxui/js/lxui-ie.min.js" type="text/javascript" charset="utf-8"></script>
+    <![endif]-->
+
+		<link rel="stylesheet" href="css/deviceDetail.css" />
+	</head>
+
+	<body>
+		<div class="container-fluid mt-15">
+			<!--设备信息-->
+			<div class="panel panel-primary">
+				<div class="panel-heading">设备信息：</div>
+				<div class="panel-body">
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="deviceInfo">
+							<div class="title">设备MAC：</div>
+							<div class="cont" id="deviceMac">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="deviceInfo">
+							<div class="title">设备名称：</div>
+							<div class="cont" id="deviceName">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="deviceInfo">
+							<div class="title">部署区域：</div>
+							<div class="cont" id="disposeArea">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="deviceInfo">
+							<div class="title">详细地址：</div>
+							<div class="cont" id="addressinfo">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="deviceInfo">
+							<div class="title">数据服务器IP：</div>
+							<div class="cont" id="serverip">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="deviceInfo">
+							<div class="title">命令服务器IP：</div>
+							<div class="cont" id="cfgserverip">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="deviceInfo">
+							<div class="title">设备型号：</div>
+							<div class="cont" id="model">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="deviceInfo">
+							<div class="title">经度：</div>
+							<div class="cont" id="longitude">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="deviceInfo">
+							<div class="title">纬度：</div>
+							<div class="cont" id="latitude">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="deviceInfo">
+							<div class="title">位置类型：</div>
+							<div class="cont" id="locationType">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="deviceInfo">
+							<div class="title">天线功率：</div>
+							<div class="cont" id="antennaPower">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<div class="deviceInfo">
+							<div class="title">创建时间：</div>
+							<div class="cont" id="createtime">获取中...</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--设备状态-->
+			<div class="panel panel-default">
+				<div class="panel-heading">设备状态：</div>
+				<div class="panel-body">
+					<div class="col-xs-6 col-sm-4 col-md-3">
+						<div class="deviceInfo">
+							<div class="title">运行状态：</div>
+							<div class="cont" id="deviceStatus">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3">
+						<div class="deviceInfo">
+							<div class="title">网络类型：</div>
+							<div class="cont" id="onlineType">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3">
+						<div class="deviceInfo">
+							<div class="title">连网状态：</div>
+							<div class="cont" id="onlineStatus">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3">
+						<div class="deviceInfo">
+							<div class="title">电源状态：</div>
+							<div class="cont" id="sourceStatus">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3">
+						<div class="deviceInfo">
+							<div class="title">剩余电量：</div>
+							<div class="cont" id="surplusSource">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3">
+						<div class="deviceInfo">
+							<div class="title">数据服务器心跳间隔：</div>
+							<div class="cont" id="dHeartbeat">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3">
+						<div class="deviceInfo">
+							<div class="title">配置服务器心跳间隔：</div>
+							<div class="cont" id="cHeartbeat">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3">
+						<div class="deviceInfo">
+							<div class="title">设备温度：</div>
+							<div class="cont" id="devicrTemp">获取中...</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3">
+						<div class="deviceInfo">
+							<div class="title">风扇状态：</div>
+							<div class="cont" id="fanStatus">获取中...</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--设备操作-->
+			<div class="panel panel-default">
+				<div class="panel-heading">操作命令：</div>
+				<div class="panel-body">
+					<div class="col-xs-6 col-sm-4 col-md-3">
+						<div class="deviceInfo">
+							<div class="btn-title">重启设备：</div>
+							<div class="btn-cont">
+								<button class="btn btn-default btn-block" id="restartBtn">重启</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3">
+						<div class="deviceInfo">
+							<div class="btn-title">复位设备：</div>
+							<div class="btn-cont">
+								<button class="btn btn-default btn-block" id="resetBtn">复位</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3">
+						<div class="deviceInfo">
+							<div class="btn-title">设置心跳间隔：</div>
+							<div class="btn-cont">
+								<button class="btn btn-default btn-block">设置</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3">
+						<div class="deviceInfo">
+							<div class="btn-title">设置设备离线时间：</div>
+							<div class="btn-cont">
+								<button class="btn btn-default btn-block" id="setOutBtn">设置</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3">
+						<div class="deviceInfo">
+							<div class="btn-title">调整数据上报间隔：</div>
+							<div class="btn-cont">
+								<button class="btn btn-default btn-block" id="adjustBtn">调整</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3">
+						<div class="deviceInfo">
+							<div class="btn-title">查看错误日志：</div>
+							<div class="btn-cont">
+								<button class="btn btn-default btn-block">查看</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--主要框架类库sss-->
+		<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<!--<script src="../../lib/echarts/echarts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/echarts/bmap.min.js" type="text/javascript" charset="utf-8"></script><br />
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8ZEtx5kDGsbBFL80Ppda29D8wjnGil7I"></script>-->
+		<!--主要框架类库eee-->
+
+		<!--公共脚本sss-->
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.diy.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<!--公共脚本eee-->
+
+		<!--常用插件sss-->
+		<script src="../../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.nicescroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+		<!--常用插件eee-->
+		<script src="js/deviceDetail.js" type="text/javascript" charset="utf-8"></script>
+
+	</body>
+
+</html>

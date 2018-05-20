@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+		<title>动态预警添加任务</title>
+		<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+		<link rel="stylesheet" type="text/css" href="../../css/H-ui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/commo.css" />
+		<link rel="stylesheet" type="text/css" href="css/chosen.css" />
+
+		<style>
+			.page-container {
+				padding-top: 20px;
+			}
+			
+			.page-container .form-title {
+				display: inline-block;
+				width: 100px;
+				text-align: right;
+			}
+			
+			.page-container .form-content {
+				display: inline-block;
+				width: 150px;
+				text-align: left;
+			}
+			
+			.form-content-uploadfile {
+				display: inline-block;
+				width: 320px;
+				text-align: left;
+			}
+			
+			.table>tbody>tr>td,
+			.table>tbody>tr>th,
+			.table>tfoot>tr>td,
+			.table>tfoot>tr>th,
+			.table>thead>tr>td,
+			.table>thead>tr>th {
+				border-top: none;
+				text-align: center;
+			}
+			.btn {
+				padding: 6px 30px;
+			}
+		</style>
+		<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+	</head>
+
+	<body>
+		<div class="page-container">
+			<form class="demoform" id="form-add" >
+				<table class="table">
+					<tr>
+						<td>
+							<div class="mb-20">
+								<label for="amount" class="form-title">任务名称：</label>
+								<div class="form-content">
+									<input type="text" class="input-text" id="name" name="name" autocomplete="off" datatype="n">
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="mb-20">
+								<label for="amount" class="form-title">任务开始时间：</label>
+								<div class="form-content">
+									<input type="text" onFocus="WdatePicker({startDate:'2017-12-01'})" id="creationStart" class="form-control Wdate" />
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="mb-20">
+								<label for="amount" class="form-title">任务结束时间：</label>
+								<div class="form-content">
+									<input type="text" onFocus="WdatePicker({startDate:'2017-12-01'})" id="creationEnd" class="form-control Wdate" />
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="mb-20">
+								<label for="amount" class="form-title">关注目标：</label>
+								<div class="form-content">
+									<select data-placeholder="请选择关注目标" class="chzn-select" id="people" multiple style="width:100%;"tabindex="4">
+						                <option value=""></option> 
+						                <option value="30">120000000044</option> 
+						                <option value="32">6666666666666666</option> 
+						                <option value="15">b8ee658d6e02</option> 
+									</select>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="mb-20">
+								<label for="amount" class="form-title">集结地点预设：</label>
+								<div class="form-content" style="height: 50px;">
+									<!--<input type="text" class="input-text" id="area" name="area" autocomplete="off" datatype="n" readonly="readonly">-->
+									<div class="showArea row border-2-gray radius" id="area" style="width: 200%;"></div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3" style="padding-top: 50px;">
+							<div class="text-c">
+								<input class="btn btn-primary radius mr-20" type="button" id="submitBtn" value="提交">
+								<!--<input class="btn btn-default radius" type="button" id="cancelBtn" value="取消">-->
+							</div>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<!--<script src="../../lib/echarts/echarts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/echarts/bmap.min.js" type="text/javascript" charset="utf-8"></script><br />
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8ZEtx5kDGsbBFL80Ppda29D8wjnGil7I"></script>-->
+
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.diy.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+
+		<script src="../../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.nicescroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+
+		<script src="js/chosen.js" type="text/javascript" charset="utf-8"></script>
+
+		<script>
+			
+			var strArea = "";
+			var strId = [];
+			$('#area').click(function() {
+				if($('#area').val() == "") {
+					layer.open({
+						type: 2,
+						title: "集结地点区域预设",
+						area: ['55%', '55%'],
+						content: "addarea.html",
+						end: function() {
+							var aArea = JSON.parse($.cookie("aArea"));
+							for(var i = 0; i < aArea.length; i++) {
+								strArea += aArea[i].text + ";&nbsp;";
+								strId.push(aArea[i].id*1);
+							}
+							$('#area').html(strArea);
+						}
+					});
+				}
+			})
+			
+			var setId = $.cookie('setId');
+			$(".chzn-select").chosen();
+			
+			var ifset = $.cookie('ifset');
+		//ifset等于0为添加任务
+		if(ifset == 0){
+			console.log('添加')
+			$('#submitBtn').click(function() {
+				if($('#name').val() == "" || $('#creationStart').val() == "" || $('#creationEnd').val() == "" || $('#people').val() == "" || $('#area').text() == "") {
+					layer.msg('请完整输入内容', {
+						icon: 15,
+						time: 2000
+					});
+				} else {
+					var arr = [];
+						arr.push({
+							"num": "",
+							"dist": ""
+						});
+					var Data = {
+						"taskName": $('#name').val(),
+						"taskType": 4,
+						"objPerson": $('#people').val(),
+						"aggLimit": arr, //其他限制条件
+						"areaList": strId,
+						"startTime": $('#creationStart').val(),
+						"endTime": $('#creationEnd').val()
+					};
+					fnAjax.method_4(url_join3("taskaction/new"), Data, "post", function(data) {
+							if(data.code==0){
+								console.log(data);
+								layer.msg(data.message, {
+										icon: 1,
+										time:2000
+									},function(){
+										parent.location.reload();
+										parent.parent.location.reload();
+									});
+							}else{
+								layer.msg(data.message, {
+										icon: 2,
+										time:2000
+									});
+							}
+					})
+				}
+
+			})
+		}else{
+			//编辑
+			console.log('编辑');
+			//或缺数据填充
+			fnAjax.method_4(url_join3("taskaction/task/"+setId), "", "post", function(data) {
+					$('#name').val(data.data.info.sTaskName);
+							
+				});
+				
+			$('#submitBtn').click(function() {
+				if($('#name').val() == "" || $('#creationStart').val() == "" || $('#creationEnd').val() == "" || $('#people').val() == "" || $('#area').text() == "") {
+					layer.msg('请完整输入内容', {
+						icon: 15,
+						time: 2000
+					});
+				} else {
+					var arr = [];
+						arr.push({
+							"num": "",
+							"dist": ""
+						});
+					var Data = {
+						"taskName": $('#name').val(),
+						"taskType": 4,
+						"objPerson":$('#people').val(),
+						"aggLimit": arr,
+						"areaList": strId,
+						"startTime": $('#creationStart').val(),
+						"endTime": $('#creationEnd').val()
+					};
+					fnAjax.method_4(url_join3("taskaction/edit/"+setId), Data, "post", function(data) {
+							if(data.code==0){
+								layer.msg(data.message, {
+										icon: 1,
+										time:2000
+									},function(){
+										parent.location.reload();
+										parent.parent.location.reload();
+									});
+							}else{
+								layer.msg(data.message, {
+										icon: 2,
+										time:2000
+									});
+							}
+					})
+				}
+
+			})
+			
+		}
+				
+			
+
+		</script>
+
+	</body>
+
+</html>

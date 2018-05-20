@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<!-- IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- 设置 viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 兼容国产浏览器的高速模式 -->
+		<meta name="renderer" content="webkit">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title>编辑权限</title>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		<!-- boots-->
+		<link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/commo.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/Vaildform.css" />
+		<!--[if lt IE 8]>     
+      <link rel="stylesheet" type="text/css" href="../../lib/lxui/css/lxui-ie6.min.css"/>
+      <script src="../../lib/lxui/js/lxui-ie.min.js" type="text/javascript" charset="utf-8"></script>
+    <![endif]-->
+		<link rel="stylesheet" href="css/permiss-add.css" />
+	</head>
+
+	<body>
+
+		<div class="container-fluid">
+			<form class="form">
+				<div class="mt-20">
+					<div class="form-group">
+						<label for="powerType" class="required col-sm-4">权限类型：</label>
+						<div class="col-sm-8">
+							<select class="form-control" id="powerType" disabled="disabled">
+								<option value="0">权限组</option>
+								<option value="1" selected="selected">子权限</option>
+							</select>
+						</div>
+					</div>
+					<!--权限组-->
+					<div class="supPowerBox">
+						<div class="form-group">
+							<label for="powerName" class="required col-sm-4">权限组名称：</label>
+							<div class="col-sm-8">
+								<select class="form-control" id="powerName">
+									<option value="-1">请选择</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="powerNode" class="required col-sm-4">权限组对应后台控制器：</label>
+							<div class="col-sm-8">
+								<input type="text" name="powerNode" id="powerNode" class="form-control" placeholder="请输入控制器的名称" />
+							</div>
+						</div>
+					</div>
+					<!--权限组 end-->
+					<!--子权限-->
+					<div class="subPowerBox">
+						<div class="form-group">
+							<label for="supPower" class="required col-sm-4">上级权限：</label>
+							<div class="col-sm-8">
+								<select class="form-control" id="supPower">
+									<option value="-1">请选择</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="powerName-sub" class="required col-sm-4">子权限名称：</label>
+							<div class="col-sm-8">
+								<input type="text" name="powerName-sub" id="powerName-sub" class="form-control" placeholder="例：角色管理的删除功能" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="powerNode-sub" class="required col-sm-4">子权限函数名：</label>
+							<div class="col-sm-8">
+								<input type="text" name="powerNode-sub" id="powerNode-sub" class="form-control" placeholder="例：delUser" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="powerType-str" class="required col-sm-4">子权限功能类型：</label>
+							<div class="col-sm-8">
+								<select class="form-control" id="powerType-str">
+									<option value="-1">请选择类别</option>
+									<option value="0">添加</option>
+									<option value="1">查看</option>
+									<option value="2">编辑</option>
+									<option value="3">删除</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<!--子权限 end-->
+					<div class="form-group text-c">
+						<button type="button" class="btn btn-default mr-10 submitBtn">保存</button>
+						<button type="reset" class="btn btn-default resetBtn">取消</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<!--主要框架类库sss-->
+		<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<!--<script src="../../lib/echarts/echarts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/echarts/bmap.min.js" type="text/javascript" charset="utf-8"></script><br />
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8ZEtx5kDGsbBFL80Ppda29D8wjnGil7I"></script>-->
+		<!--主要框架类库eee-->
+
+		<!--公共脚本sss-->
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.diy.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<!--公共脚本eee-->
+
+		<!--常用插件sss-->
+		<script src="../../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.nicescroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/Validform_v5.3.2_min.js" type="text/javascript" charset="utf-8"></script>
+		<!--常用插件eee-->
+		<script src="js/permiss-edit.js" type="text/javascript" charset="utf-8"></script>
+
+	</body>
+
+</html>

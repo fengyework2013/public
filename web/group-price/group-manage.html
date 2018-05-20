@@ -1,0 +1,467 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <title>分类管理</title>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="../static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/skin/default/skin.css" id="skin"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <style>
+        #header {
+            display: flex;
+            justify-content: space-between;
+        }
+        .xilie{width: 60%;}
+        .types {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .types li {
+            display: flex;
+            flex: 1;
+            align-items: center;
+        }
+
+        .types div {
+            padding: 5px 0;
+        }
+
+        .types .subType {
+            background: #323232;
+            color: #ddd;
+            flex: 1;
+            text-align: center;
+        }
+
+        .types .subNames {
+            background: #ccc;
+            flex: 1;
+            padding-left: 10px;
+        }
+        /*price*/
+        #header .price{width:35%;}
+        #header .price div:first-child{
+            width:90%;
+            background: #0078A1;
+            font-size:30px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+            height:70%;
+            display: flex;
+            justify-content: center;
+            align-items:center;
+            color:white;
+        }
+
+        /*...*/
+        .td-img img {
+            width: 100%;
+        }
+
+        .ul-text li {
+            padding: 8px 0;
+        }
+
+        .ul-text li span:first-child {
+            padding: 5px 10px;
+        }
+
+        .ul-text li span:last-child {
+            padding: 5px 10px;
+        }
+
+        .numbers {
+            width: 50px;
+        }
+
+    </style>
+</head>
+
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> PDU单元管理 <span
+        class="c-gray en">&gt;</span> PDU分类管理
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+       href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<div class="page-container">
+    <div id="header" class="mt-20 mb-15">
+        <div class="xilie">
+            <ul class="types">
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+            </ul>
+            <ul class="types">
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+            </ul>
+            <ul class="types">
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+            </ul>
+            <ul class="types">
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+            </ul>
+
+            <ul class="types">
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+            </ul>
+            <ul class="types">
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+                <li>
+                    <div class="subType">PDU系列</div>
+                    <div class="subNames">插电头</div>
+                </li>
+            </ul>
+        </div>
+        <div class="price">
+            <div>998元</div>
+            <div>
+                <button class="btn btn-primary radius">获取总价</button>
+                <button class="btn btn-primary radius">生成报价表</button>
+            </div>
+        </div>
+
+    </div>
+    <table class="table table-border table-bordered table-hover table-bg">
+
+        <tbody>
+        <tr>
+            <td>
+                <div class="td-img">
+                    <img src="../img/tu.png" alt="">
+                </div>
+                <ul class="ul-text">
+                    <li><span>国标10A插头</span></li>
+                    <li class="li-bottom"><span>数量</span><input type="text" class="input-text radius size-MINI numbers">
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <div class="td-img">
+                    <img src="../img/tu.png" alt="">
+                </div>
+                <ul class="ul-text">
+                    <li><span>国标10A插头</span></li>
+                    <li class="li-bottom"><span>数量</span><input type="text" class="input-text radius size-MINI numbers">
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <div class="td-img">
+                    <img src="../img/tu.png" alt="">
+                </div>
+                <ul class="ul-text">
+                    <li><span>国标10A插头</span></li>
+                    <li class="li-bottom"><span>数量</span><input type="text" class="input-text radius size-MINI numbers">
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <div class="td-img">
+                    <img src="../img/tu.png" alt="">
+                </div>
+                <ul class="ul-text">
+                    <li><span>国标10A插头</span></li>
+                    <li class="li-bottom"><span>数量</span><input type="text" class="input-text radius size-MINI numbers">
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <div class="td-img">
+                    <img src="../img/tu.png" alt="">
+                </div>
+                <ul class="ul-text">
+                    <li><span>国标10A插头</span></li>
+                    <li class="li-bottom"><span>数量</span><input type="text" class="input-text radius size-MINI numbers">
+                    </li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="td-img">
+                    <img src="../img/tu.png" alt="">
+                </div>
+                <ul class="ul-text">
+                    <li><span>国标10A插头</span></li>
+                    <li class="li-bottom"><span>数量</span><input type="text" class="input-text radius size-MINI numbers">
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <div class="td-img">
+                    <img src="../img/tu.png" alt="">
+                </div>
+                <ul class="ul-text">
+                    <li><span>国标10A插头</span></li>
+                    <li class="li-bottom"><span>数量</span><input type="text" class="input-text radius size-MINI numbers">
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <div class="td-img">
+                    <img src="../img/tu.png" alt="">
+                </div>
+                <ul class="ul-text">
+                    <li><span>国标10A插头</span></li>
+                    <li class="li-bottom"><span>数量</span><input type="text" class="input-text radius size-MINI numbers">
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <div class="td-img">
+                    <img src="../img/tu.png" alt="">
+                </div>
+                <ul class="ul-text">
+                    <li><span>国标10A插头</span></li>
+                    <li class="li-bottom"><span>数量</span><input type="text" class="input-text radius size-MINI numbers">
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <div class="td-img">
+                    <img src="../img/tu.png" alt="">
+                </div>
+                <ul class="ul-text">
+                    <li><span>国标10A插头</span></li>
+                    <li class="li-bottom"><span>数量</span><input type="text" class="input-text radius size-MINI numbers">
+                    </li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="td-img">
+                    <img src="../img/tu.png" alt="">
+                </div>
+                <ul class="ul-text">
+                    <li><span>国标10A插头</span></li>
+                    <li class="li-bottom"><span>数量</span><input type="text" class="input-text radius size-MINI numbers">
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <div class="td-img">
+                    <img src="../img/tu.png" alt="">
+                </div>
+                <ul class="ul-text">
+                    <li><span>国标10A插头</span></li>
+                    <li class="li-bottom"><span>数量</span><input type="text" class="input-text radius size-MINI numbers">
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <div class="td-img">
+                    <img src="../img/tu.png" alt="">
+                </div>
+                <ul class="ul-text">
+                    <li><span>国标10A插头</span></li>
+                    <li class="li-bottom"><span>数量</span><input type="text" class="input-text radius size-MINI numbers">
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <div class="td-img">
+                    <img src="../img/tu.png" alt="">
+                </div>
+                <ul class="ul-text">
+                    <li><span>国标10A插头</span></li>
+                    <li class="li-bottom"><span>数量</span><input type="text" class="input-text radius size-MINI numbers">
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <div class="td-img">
+                    <img src="../img/tu.png" alt="">
+                </div>
+                <ul class="ul-text">
+                    <li><span>国标10A插头</span></li>
+                    <li class="li-bottom"><span>数量</span><input type="text" class="input-text radius size-MINI numbers">
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div id="paging-bar" style="text-align:center;margin-top: 15px;"></div>
+</div>
+
+<script type="text/javascript" src="../lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+<script src="../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery.myPlugIn_v1.0.js" type="text/javascript" charset="utf-8"></script>
+
+<!--<script src="../js/public.js"></script>-->
+<script src="../js/laypage-public.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/paging.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        var T = new CreateTable({});
+        paging({
+            text: "获取角色列表成功",
+            num: 10,
+            pagination: 1,
+            value: $("#keywords").val(),
+            tableEle: $('.table'),
+            pagingUrl: config.pdutype,
+            delUrl: config.pdutypeDelete,
+            createTable: function (container, data) {
+                container.children("tbody").html("");
+                $.each(data.data, function (i, v) {
+
+                    console.log(v);
+
+                    // var sTr = '<tr class="text-c"  data-id="' + v.id + '">' +
+                    //     '<td class="num">' + (data.from + i) + '</td>' +
+                    //     '<td class="roleName" >基础部件</td>' +
+                    //     '<td class="bindState" data-state="' + v.bind + '">张三</td>' +
+                    //     '<td class="createTime">' + v.createtime + '</td>' +
+                    //     '<td class="bak">最最基础的部件</td>'+
+                    //     '<td class="option f-14">' +
+                    //     '<a title="编辑" href="javascript:void(0);"  class="ml-5 btn-edit">编辑</a>' +
+                    //     '<a title="删除" href="javascript:void(0);"  class="ml-5 btn-del">删除</a>' +
+                    //     '</td>' +
+                    //     '</tr>';
+                    container.children("tbody").append($(sTr));
+                });
+
+
+                // 编辑角色
+                $(".btn-edit").on("click", function () {
+
+                    var dataId = $(this).parents("tr").attr("data-id");
+                    sessionStorage.roleId = dataId;
+                    layer.open({
+                        type: 2,
+                        title: '编辑角色',
+                        area: ['500px', '260px'],
+                        content: "type-edit.html",
+                        end: function () {
+                            window.location.reload();
+                        }
+                    });
+
+                });
+
+                //删除数据
+                $('.table tbody').on("click", ".btn-del", function () {
+                    var nId = $(this).parents("tr").attr("data-id");
+                    layer.confirm("是否删除当前数据", function () {
+                        T.ajaxFour(
+                            config.delRole,
+                            {id: nId},
+                            "post",
+                            function (data) {
+                                layer.msg(data.message, {time: 1500}, function () {
+                                    window.location.reload();
+                                });
+                            }
+                        );
+
+                    });
+                });
+
+            }
+        });
+
+        // 添加角色
+        $(".btn-add").on("click", function () {
+            layer.open({
+                type: 2,
+                title: '添加分类',
+                area: ['500px', '260px'],
+                content: "type-add.html",
+                end: function () {
+                    window.location.reload();
+                }
+            });
+        });
+
+    });
+
+
+</script>
+</body>
+
+</html>

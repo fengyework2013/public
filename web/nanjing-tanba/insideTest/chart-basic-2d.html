@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+		<!--<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />-->
+		<link rel="stylesheet" type="text/css" href="../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+		<!--图表公共样式-->
+		<link rel="stylesheet" type="text/css" href="css/chartCommon.css" class="chartCommonStyle" />
+		<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+		<title>探霸RSSI</title>
+		<style type="text/css">
+			#container {
+				height: 100vh;
+				width: 100vw;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="page-container">
+			<div class="searchBox container-fluid">
+				<div class="row" >
+					<form class="form-inline" role="form" style="margin: 2em; margin-bottom:0">
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon">探霸ID:</div>
+							    <input type="text" placeholder="探霸ID" id="tbid" class="form-control"/>
+							</div>
+							<div class="input-group">
+								<div class="input-group-addon">设备ID:</div>
+							    <input type="text" placeholder="设备ID" id="devid" class="form-control"/>
+							</div>
+							
+							<label for="">
+								信号类型:
+							</label>
+							<select name="" id="devType" class="form-control">
+									<option value="0" seceted>RF</option>
+									<option value="1">STA</option>
+									<option value="2">AP</option>
+								</select>
+							<button type="button" class="btn btn-info border-radius form-control"  id="bxSel">GO</button>
+							<div style="display:block;border:1px solid #ddd;border-radius:5px;margin-top:10px;padding-left:10px;">
+								当前的rssi为:<span class="orssi" style="color:red">0</span>
+								,滤波后为:<span class="RSSI" style="color:#333333">0</span><br>
+								卡尔曼滤波值为:<span class="kerm" style="color:#79AFB5">0</span>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div id="container"></div>
+		</div>
+
+		<script src="../lib/jquery/1.9.1/jquery.js"></script>
+		<script src="../lib/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<script src="../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../lib/echarts/echarts.js"></script>
+		<script src="../lib/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+		<!--滚动条美化插件和图表公共js    ------eeee-->
+		<script src="../js/jquery.nicescroll.js" type="text/javascript" charset="utf-8"></script>
+		<!--滚动条美化插件和图表公共js    ------sss-->
+		<script src="js/sylvester.src.js"></script>
+		<script src="js/KF.js"></script>
+		<script>
+			$(function() {
+				function loadTest() { //测试浏览器是否支持websocket
+					if(window.WebSocket) {
+						console.log('supported')
+					} else {
+						console.log('not supported')
+					}
+				}
+				loadTest();
+
+				var url = "ws://119.10.54.43:9501/?type=data&channel=Rssi_data_info_"+getQueryString('type')+"_"+getQueryString('tbid');
+				var ws = new WebSocket(url);
+				console.log(ws.readyState);
+
+				ws.onopen = function(){
+					ws.send(JSON.stringify({'cname':'IniDataServer_data','type':'a001','tbid':getQueryString('tbid')})); 
+				};
+
+				//获取url的参数
+				function getQueryString(name) { 
+					var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+					var r = window.location.search.substr(1).match(reg); 
+					if (r != null) return unescape(r[2]); return null; 
+				};
+				
+				$("#tbid").val(getQueryString('tbid'));  //显示探霸的ID
+				$("#devid").val(getQueryString('devid')); //显示设备的ID
+				
+				//显示的option的内容
+				$($("#devType option")).each(function(i,e){
+					if($(e).text()==getQueryString('type')){
+						$(e).attr('selected','selected');
+						$(e).siblings().removeAttr('selected');
+					}
+				});
+				
+				
+				
+				// 基于准备好的dom，初始化echarts实例
+				var myChart = echarts.init(document.getElementById('container'));
+
+				
+				
+				var data1=[],data2=[],data3=[],arr=[];
+				for(var i=1;i<=100;i++){
+					arr.push(i);
+				};
+				
+				//GO的点击事件
+				$("#bxSel").click(function(){
+					var tbidNum = $("#tbid").val();
+					var devidNum = $("#devid").val();
+					var typeName = $("#devType option:selected").text();
+					var reg = /^\s*$/g;
+					if(tbidNum=="" || reg.test(tbidNum) ||devidNum=="" || reg.test(devidNum)){
+						layer.alert("必须输入设备ID和探霸ID");
+					}else{
+						location.href="http://123.58.43.16:90/ce8/chart/3D/chart-basic-2d.html?__hbt=1510276067194&devid="+devidNum+"&tbid="+tbidNum+"&type="+typeName;
+					}
+				});
+				
+				
+				
+				// Parameters
+			    var X = $M([70]); // Initial state
+			    var P = $M([ 1 ]); // Initial covariance (0, 1?)
+			    var A = $M([ 1 ]); // Constant state transition
+			    var H = $M([ 1 ]); // Input is the same dimension as output
+			    var B = $M([ 0 ]); // No control here  //
+			    var Q = $M([ 0.1 ]); // Process covariance, low? //过程协方差
+			    var R = $M([ 10 ]); // Measurement covariance//测量协方差 --信任度 越小越相信测量值，越大越相信自己的估算值
+				
+			    // Initialize the filter
+			    var kf = new KF.KalmanFilter(A,B, H, Q, R, X, P);
+				var n=100;
+				ws.onmessage = function(data) {
+					
+					console.log(data);
+					var res = JSON.parse(data.data);
+					console.log(res);
+					if(res.tbid== getQueryString('tbid') && res.devid ==getQueryString('devid')){
+						data1.push(parseFloat(res.orssi));
+						data2.push(parseFloat(res.RSSI));
+					
+					    // Feed data
+					    var measurement = $M([ parseFloat(res.orssi) ]);
+					    console.log(measurement)
+					
+				    	//var kalmanV = kf.update($V([ measurement ]), $V([ 0 ]));
+				   		//console.log(measurement + "\t" + kalmanV.e(1));
+				
+				        var o = kf.filter(measurement);
+				        
+				        kf.predict(measurement);
+				        console.log(o.state);
+				        console.log(kf.predict(o.state.e(1, 1)))
+				        console.log(o.state.elements[0][0]);
+				        console.log(o.state.e(1, 1));
+				        //console.log(o.state.inspect());
+				        //console.log(o.covariance.inspect());
+				        data3.push(o.state.elements[0][0]);
+				       
+				        if(data3.length>100){
+				        	n++;
+				        	arr.push(n);
+				        	arr.shift();
+				        	data1.shift();
+				        	data2.shift();
+				        	data3.shift();
+				        };
+				        
+						$('.orssi').html(res.orssi);
+						$('.RSSI').html(res.RSSI);
+						$(".kerm").html(parseFloat(o.state.elements[0][0]).toFixed(2))
+						
+						// 使用刚指定的配置项和数据显示图表。
+						myChart.setOption(setNewOp(data1,data2,data3,arr,null));
+						
+					};
+					
+					
+					
+					
+				};
+
+				
+
+				function setNewOp(data1,data2,data3,arr){
+			    	var option = {
+						    tooltip: {
+						    	trigger: 'axis',
+						    	axisPointer: {
+					                type: 'cross'
+					            }
+						    },
+						    legend: {
+						        data:['orssi','RSSI','卡尔曼']
+						    },
+						    toolbox: {
+						        show: true
+						    },
+						    xAxis:  {
+						    	axisTick:{
+						    		show:true,
+						    		alignWithLabel:true,
+						    		interval:0
+						    	},
+						        data: arr
+						       
+						    },
+						    yAxis: {
+						        type: 'value',
+						        min:40,
+						        max:100
+						    },
+						    series: [
+						        {
+						            name:'orssi',
+						            type:'line',
+						            data: data1
+						        },
+						        {
+						            name:'RSSI',
+						            type:'line',
+						            data: data2
+						        },
+						        {
+						            name:'卡尔曼',
+						            type:'line',
+						            data: data3
+						        }
+						        
+						    ]
+						};
+
+				    return option;
+			    }
+
+
+
+
+
+
+
+
+
+
+			});
+				
+		</script>
+	</body>
+
+</html>

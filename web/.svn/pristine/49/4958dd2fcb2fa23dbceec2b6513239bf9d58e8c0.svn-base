@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../lib/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/commo.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/Vaildform.css"/>
+
+    <!--<link rel="stylesheet" type="text/css" href="../static/h-ui/css/H-ui.min.css"/>-->
+    <!--<link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/H-ui.admin.css"/>-->
+    <!--<link rel="stylesheet" type="text/css" href="../lib/Hui-iconfont/1.0.8/iconfont.css"/>-->
+    <!--<link rel="stylesheet" type="text/css" href="../static/h-ui.admin/skin/default/skin.css" id="skin"/>-->
+
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <link rel="stylesheet" href="../css/approve/datum.css">
+    <title>审批完成</title>
+</head>
+
+<body>
+<div class="container-fluid mt-15">
+
+    <section class="contents">
+        <!--left-->
+        <ul class="lefts">
+            <li><img src="../img/tu.png" alt=""></li>
+            <li>
+                <h4>基本部件</h4>
+                <div>部件：输入插头</div>
+                <div>类型：万用、国标10A\16A，C13，C19</div>
+                <div>备注内容</div>
+                <div>提交人：王某</div>
+                <textarea class="bak" placeholder="备注内容">
+
+                    </textarea>
+            </li>
+        </ul>
+
+        <!--right-->
+        <ul class="right">
+            <li>
+                <input class="btn btn-primary size-MINI radius" value="通过">
+                <input class="btn btn-primary size-MINI radius" value="驳回">
+            </li>
+            <li>
+                    <textarea name="" id="" cols="20" rows="8" placeholder="备注内容">
+
+                    </textarea>
+            </li>
+            <li style="text-align: right">
+                <input class="btn btn-primary size-S radius" type="button" value="确认">
+            </li>
+        </ul>
+    </section>
+
+    <section class="contents">
+        <!--left-->
+        <ul class="lefts">
+            <li><img src="../img/tu.png" alt=""></li>
+            <li>
+                <h4>基本部件</h4>
+                <div>部件：输入插头</div>
+                <div>类型：万用、国标10A\16A，C13，C19</div>
+                <div>备注内容</div>
+                <div>提交人：王某</div>
+                <textarea class="bak" placeholder="备注内容">
+
+                </textarea>
+            </li>
+        </ul>
+
+        <!--right-->
+        <ul class="right">
+            <h2 class="texts text-c">等待审批</h2>
+        </ul>
+    </section>
+
+    <section class="contents">
+        <!--left-->
+        <ul class="lefts">
+            <li><img src="../img/tu.png" alt=""></li>
+            <li>
+                <h4>基本部件</h4>
+                <div>部件：输入插头</div>
+                <div>类型：万用、国标10A\16A，C13，C19</div>
+                <div>备注内容</div>
+                <div>提交人：王某</div>
+                <textarea class="bak" placeholder="备注内容">
+
+                </textarea>
+            </li>
+        </ul>
+
+        <!--right-->
+        <ul class="right">
+            <h2 class="no text-c">未通过审批</h2>
+            <li class="hint">部件资料中存在错误</li>
+            <input class="edit btn btn-primary size-S radius" type="button" value="重新编辑">
+        </ul>
+    </section>
+
+</div>
+
+<script type="text/javascript" src="../lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+<script src="../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/manage/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="../lib/jquery.diy.js" type="text/javascript" charset="utf-8"></script>
+<script src="../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="../lib/Validform_v5.3.2_min.js" type="text/javascript" charset="utf-8"></script>
+
+<!--<script src="../js/public.js"></script>-->
+<script src="../js/laypage-public.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/manage/user-add.js"></script>
+</body>
+
+</html>

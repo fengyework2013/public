@@ -1,0 +1,40 @@
+.allot-dl {
+	width: 100%;
+	min-height: 45px;
+	line-height: 45px;
+	border-bottom: 1px solid #ddd;
+}
+
+.allot-dl .allot-dt-left {
+	display: inline-block;
+	float: left;
+}
+
+.allot-dl .allot-dt {
+	font-weight: bold;
+}
+
+.allot-dl .allot-dt-right {
+	margin-left: 25%;
+}
+
+.allot-dl .allot-dd {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.allot-dl .allot-dt span,
+.allot-dl .allot-dd span.nodeName {
+	margin-left: 10px;
+}
+
+.allot-btn {
+	text-align: center;
+	margin: 15px 0;
+}
+
+input[type=checkbox],
+input[type=radio] {
+	vertical-align: middle;
+	margin: 0;
+}

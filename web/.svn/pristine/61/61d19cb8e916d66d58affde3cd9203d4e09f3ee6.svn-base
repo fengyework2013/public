@@ -1,0 +1,241 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <title>PDU基础资料</title>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="../static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/skin/default/skin.css" id="skin"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <style>
+    </style>
+</head>
+
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> PDU单元管理 <span
+        class="c-gray en">&gt;</span> PDU基础资料
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+       href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+
+
+<div id="tab_type" class="HuiTab">
+
+    <div class="page-container">
+        <span class="select-box">
+          <select id="selectType" class="select" size="1" name="demo1">
+            <option value="" selected>请选择分类</option>
+              <!--<option value="1">菜单一</option>-->
+              <!--<option value="2">菜单二</option>-->
+              <!--<option value="3">菜单三</option>-->
+          </select>
+        </span>
+
+        <div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l">
+                    <a class="btn btn-primary radius btn-add" href="javascript:void(0);">
+						<i class="Hui-iconfont">&#xe600;</i> 添加模块
+					</a>
+				</span>
+            <span class="r">共有数据：<strong class="nTotal">0</strong> 条</span>
+        </div>
+        <table class="table table-border table-bordered table-hover table-bg">
+            <thead>
+
+            <tr class="text-c">
+                <th width="30">编号</th>
+                <th>模块名称</th>
+                <th>创建用户</th>
+                <th>审核状态</th>
+                <th width="150">创建时间</th>
+                <th>备注</th>
+                <th width="100">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <div id="paging-bar" style="text-align:center;margin-top: 15px;"></div>
+    </div>
+
+
+</div>
+
+
+<script type="text/javascript" src="../lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+<script src="../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery.myPlugIn_v1.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="../lib/H-ui.js"></script>
+<!--<script src="../js/public.js"></script>-->
+<script src="../js/laypage-public.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/paging.js"></script>
+<script src="../js/mock.js"></script>
+<script type="text/javascript">
+    var T = new CreateTable({});
+    $(function () {
+        // $.Huitab("#tab_type .tabBar span", "#tab_type .tabCon", "current", "click", "0");
+
+        Mock.mock(config.basicType, {
+            'code': 0,
+            'data|1-10': [{
+                'id|+1': 1,
+                'name|+1': '张三',
+            }],
+            'message': "获取用户列表成功",
+        });
+
+        Mock.mock(config.basicData, {
+            'code': 0,
+            'data|1-10': [{
+                'from|+1': 1,
+                'typename':'基础部件',
+                'user':'张三',
+
+                'name|+1': '张三',
+            }],
+            'message': "获取用户列表成功",
+        });
+
+
+        // 菜单请求事件
+        T.ajaxFour(config.basicType, {}, "get", function (data) {
+            var $select = $("#selectType");
+            $.each(data.data,function (i,v){
+                var options = $(
+                    "<option value="+v.id+">"+v.name+"</option>"
+                );
+                $select.append(options);
+            });
+
+        });
+
+        // 选择的请求事件
+        $("#selectType").on("change", function () {
+            paging({
+                text: "获取角色列表成功",
+                num: 10,
+                pagination: 1,
+                value: $("#keywords").val(),
+                tableEle: $('.table'),
+                // pagingUrl: config.roleList,
+                pagingUrl: config.basicData,
+                delUrl: config.delRole,
+                createTable: function (container, data) {
+                    container.children("tbody").html("");
+                    $.each(data.data, function (i, v) {
+                        var sTr = '<tr class="text-c"  data-id="' + v.id + '">' +
+                            '<td class="num">' + (data.from + i) + '</td>' +
+                            '<td class="roleName" >'+v.typename+'</td>' +
+                            '<td class="bindState" data-state="' + v.user + '">'+v.user+'</td>' +
+                            '<td>审核中</td>' +
+                            '<td class="createTime">' + v.createtime + '</td>' +
+                            '<td class="bak">最最基础的部件</td>' +
+                            '<td class="option f-14">' +
+                            '<a title="编辑" href="javascript:void(0);"  class="ml-5 btn-edit">编辑</a>' +
+                            '<a title="删除" href="javascript:void(0);"  class="ml-5 btn-del">删除</a>' +
+                            '</td>' +
+                            '</tr>';
+                        container.children("tbody").append($(sTr));
+                    });
+
+
+                    // 编辑角色
+                    $(".btn-edit").on("click", function () {
+
+                        var dataId = $(this).parents("tr").attr("data-id");
+                        sessionStorage.roleId = dataId;
+                        layer.open({
+                            type: 2,
+                            title: '编辑角色',
+                            area: ['500px', '260px'],
+                            content: "type-edit.html",
+                            end: function () {
+                                window.location.reload();
+                            }
+                        });
+
+                    });
+
+                    //删除数据
+                    $('.table tbody').on("click", ".btn-del", function () {
+                        var nId = $(this).parents("tr").attr("data-id");
+                        layer.confirm("是否删除当前数据", function () {
+                            T.ajaxFour(
+                                config.delRole,
+                                {id: nId},
+                                "post",
+                                function (data) {
+                                    layer.msg(data.message, {time: 1500}, function () {
+                                        window.location.reload();
+                                    });
+                                }
+                            );
+
+                        });
+                    });
+
+                }
+            });
+        });
+
+
+
+
+        // 添加角色
+        $(".btn-add").on("click", function () {
+            layer.open({
+                type: 2,
+                title: '添加分类',
+                area: ['500px', '260px'],
+                content: "type-add.html",
+                end: function () {
+                    window.location.reload();
+                }
+            });
+        });
+        /*
+        T.ajaxFour({
+            // murl,
+            // mdata,
+            // method,
+            // successFn
+            function(res){
+                var data = res.xxx;
+                if (data.xxx = xxx){
+                    for(var i = 0; i<res.xxx.length; i++){
+                        var span = $("<span></span>").append();
+                        var div = $('<div class="tabCon"></div>');
+                        $(".tabBar").append(span); // 菜单
+                        $("#tab_type").append(div); // 内容
+                    }
+                }
+
+            }
+        });
+        */
+
+
+    });
+
+
+</script>
+</body>
+
+</html>

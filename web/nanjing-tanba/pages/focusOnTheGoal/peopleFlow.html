@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>人流量统计</title>
+    <!-- 引入 echarts.js -->
+    <link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body{overflow-x:hidden;}
+        #main1 {
+            width: 90vw;
+            height: 75vh;
+            z-index: 0;
+            right: 1vw;
+        }
+
+        input {
+            line-height: 20px;
+            height: 20px;
+            border: none;
+            background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+            margin: 4px;
+            overflow: hidden;
+            padding-left: 5px;
+            color: rgb(57, 154, 215);
+            z-index: 1000;
+        }
+
+        .button {
+            float: left;
+            margin-top: 3px;
+            margin-left: 8px;
+        }
+
+        .text {
+            float: left;
+            margin-top: 10px;
+        }
+
+        .date {
+            display: inline-block;
+            margin: 15px;
+            width: 100%;
+            height: 64px;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="imgBox">
+    <div class="mt-20 parentClear date">
+        <p class="text">日期查询：</p>
+        <input type="text" value="" onFocus="WdatePicker({startDate:'2017-12-01'})" id="setTime"
+               class="form-control Wdate" style="width: 10%;display: inline-block;float: left;"/>
+        <p class="text">地区选择：</p>
+        <input type="text" value="深圳市" id="area" class="form-control"
+               style="width: 10%;display: inline-block;float: left;margin-right: 0;" readonly="readonly"/>
+        <button type="button" class="btn btn-default chooseAdress lf" data="1" id="chooseAdress"
+                style="float: left;margin-top: 4px;">选择地点
+        </button>
+        <button type="button" class="btn btn-primary button" style="float: left;">查询</button>
+    </div>
+
+    <div style="text-align: center;" class="msg">
+        <p>当前没有数据</p>
+    </div>
+    <div id="main1"></div>
+</div>
+
+<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="../../lib/echarts/echarts.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../lib/echarts/bmap.min.js" type="text/javascript" charset="utf-8"></script>
+<br/>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8ZEtx5kDGsbBFL80Ppda29D8wjnGil7I"></script>
+<!--主要框架类库eee-->
+
+<!--公共脚本sss-->
+<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery.diy.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+<!--公共脚本eee-->
+
+<!--常用插件sss-->
+<script src="../../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../lib/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery.nicescroll.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var newSTAcount = []; //新增人数
+        var STAcount = []; //总人数
+        var createTime = [];
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main1'));
+
+        $("#setTime").val(getOnTime("y-m-d"));
+
+        // echarts 配置
+        var option = {
+            title: {
+                text: '人流量统计图',
+                // subtext: '独尊探霸',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            toolbox: { // toolbox工具栏。内置有导出图片，数据视图，动态类型切换，数据区域缩放，重置五个工具。
+                show: true,
+                right: 0,
+                feature: {
+                    dataView: {
+                        readOnly: false
+                    },
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            legend: {
+                data: ['人流量'],
+                right: 0,
+                top: 30,
+                orient: 'vertical', //竖排
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: []
+            },
+            yAxis: {
+                type: 'value',
+            },
+            label: { //数据显示
+                normal: {
+                    show: false,
+                    position: 'top',
+                    formatter: '{c}'
+                }
+            },
+            series: [{
+                name: '人流量',
+                type: 'bar',
+                stack: '总量',
+                label: { //文本
+                    normal: {
+                        show: false,
+                        position: 'insideRight'
+                    }
+                },
+                itemStyle: { //对象
+                    normal: {
+                        color: '#009688'
+                    }
+                },
+                data: []
+            }]
+        };
+
+        shuju();
+        var strId = 1;
+        var strArea = "";
+        
+        // 地点选择
+        $('#chooseAdress').click(function () {
+            layer.open({
+                type: 2,
+                title: "区域选择",
+                area: ['45%', '55%'],
+                content: "ztree-area-search-one.html",
+                end: function () {
+                    aArea = JSON.parse($.cookie("addressInfo"));
+                    strArea = aArea.text;
+                    strId = aArea.id;
+                    $('#area').val(strArea);
+                }
+            });
+        });
+
+        // 查询具体天数的人流量
+        $('.button').click(function () {
+            if ($('#setTime').val() == "" || $('#area').val() == "") {
+                layer.msg("请完整输入条件", {
+                    icon: 15,
+                    time: 1500
+                });
+            } else {
+                var startTime = $('#setTime').val();
+                fnAjax.method_4(url_join("Flow/queryDay?startTime=" + startTime + "&areaid=" + strId), '', "get", function (data) {
+                    if (data.data == "") {
+                        $('.msg').css("display", 'block');
+                    } else {
+                        $('.msg').css("display", 'none');
+                    }
+                    dataDispose(data);
+                });
+            }
+        });
+
+        function shuju() {
+            fnAjax.method_4(url_join("Flow/queryDay?startTime=" + $('#setTime').val() + "&areaid=1"), '', "get", function (data) {
+                if (data.data == "") {
+                    $('.msg').css("display", 'block');
+                } else {
+                    $('.msg').css("display", 'none');
+                }
+                dataDispose(data);
+            });
+
+        }
+
+        function dataDispose(data) {
+            console.log(data);
+            option.series[0].data = [];
+            option.xAxis.data = [];
+            $.each(data.data, function (e, i) {
+                option.series[0].data.push(i.flow);
+                option.xAxis.data.push(i.hour);
+            });
+            myChart.setOption(option);
+        }
+
+    });
+</script>
+</body>
+
+</html>

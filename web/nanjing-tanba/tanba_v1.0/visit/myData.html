@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<title>独尊探霸【独尊科技旗下站】</title>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/myData.css" />
+	</head>
+
+	<body>
+		<!--导航栏-->
+		<div class="chart-type-head">
+			<a href="personal_Data.html" id="home">首页</a>
+			<i class="glyphicon glyphicon-menu-right"></i>
+			<span class="chart-type-head-title">数据信息</span>
+		</div>
+		<!--内容区-->
+		<div class="data_Box clearfix">
+			<!--板块标题-->
+			<div class="data_box_bg">
+				<div class="data_box_BigTitle">
+					<span>数据信息</span>
+					<span class="data_box_remark">查询终端反馈数据</span>
+				</div>
+			</div>
+			<!--区块标题-->
+			<div class="data_box_title">
+				<ul class="data_box_ul clearfix">
+					<li class="active">
+						<a href="#RFData" aria-controls="RFData" role="tab" data-toggle="tab">RF 数据</a>
+					</li>
+					<li class="">
+						<a href="#WIFIData" aria-controls="WIFIData" role="tab" data-toggle="tab">WIFI 数据</a>
+					</li>
+					<li class="">
+						<a href="#DataAP" aria-controls="DataAP" role="tab" data-toggle="tab">WIFI-AP 数据</a>
+					</li>
+				</ul>
+			</div>
+			<div class="tab-content">
+				<!--射频 STAR-->
+				<div role="tabpanel" class="tab-pane active" id="RFData">
+					<!--查询条件-->
+					<div class="conShow_box" id="queryCriteria">
+						<span class="title"><i class="glyphicon glyphicon-search"></i> 筛选条件:</span>
+						<input type="text" id="queryCriteriaInput" />
+						<button id="queryCriteriaBtn" class="queryCriteriaBtn">开始过滤</button>
+					</div>
+					<!--内容区域-->
+					<div class="conShow_box">
+						<div class="conShow_box_title">
+							<span>终端设备</span>
+							<!--操作按钮-->
+							<a href="#" class="conShow_box_title_right" id="PauseReceive">
+								<i class="glyphicon glyphicon-stop"></i> 暂停接收
+							</a>
+							<a href="#" class="conShow_box_title_right" id="conReceive">
+								<i class="glyphicon glyphicon-play"></i> 重新接收
+							</a>
+							<!--当前数量-->
+							<div class="conShow_box_title_urrentNumber">
+								<p>当前设备数量：<span class="urrentNumber" id="urrentNumber">0</span></p>
+							</div>
+						</div>
+						<div class="conShow_box_content clearfix">
+							<!--终端列表-->
+							<div class="list">
+								<p class="list_Prompt">正在接收数据...</p>
+								<ul id="deviceUl" class="deviceUl">
+								</ul>
+							</div>
+							<!--接收的数据-->
+							<div class="data_list">
+								<div id="device_dataUl">
+									<table border="0" cellspacing="0" cellpadding="0">
+										<thead>
+											<tr>
+												<th class="Time">Time</th>
+												<th class="Source">Source</th>
+												<th class="ID">ID</th>
+												<th class="Battery">Battery</th>
+												<th class="Rssi">Rssi</th>
+												<th class="State">State</th>
+											</tr>
+										</thead>
+										<tbody id="device_dataUl_tbody"></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="DeviceDetailsDiv" class="clearfix">
+					</div>
+				</div>
+				<!--射频 END-->
+				<!--WIFI STAR-->
+				<div role="tabpanel" class="tab-pane" id="WIFIData">
+					<!--查询条件-->
+					<div class="conShow_box" id="queryCriteria_wifi">
+						<span class="title"><i class="glyphicon glyphicon-search"></i> 筛选条件:</span>
+						<input type="text" id="queryCriteriaInput_wifi" />
+						<button id="queryCriteriaBtn_wifi" class="queryCriteriaBtn">开始过滤</button>
+					</div>
+					<div class="conShow_box">
+						<div class="conShow_box_title">
+							<span>终端设备</span>
+							<!--操作按钮-->
+							<a href="#" class="conShow_box_title_right" id="WIFIPauseReceive">
+								<i class="glyphicon glyphicon-stop"></i> 暂停接收
+							</a>
+							<a href="#" class="conShow_box_title_right" id="WIFIconReceive">
+								<i class="glyphicon glyphicon-play"></i> 重新接收
+							</a>
+							<!--当前数量-->
+							<div class="conShow_box_title_urrentNumber">
+								<p>当前设备数量：<span class="urrentNumber" id="WIFIurrentNumber">0</span></p>
+							</div>
+						</div>
+						<div class="conShow_box_content clearfix">
+							<!--终端列表-->
+							<div class="list">
+								<p class="list_Prompt">正在接收数据...</p>
+								<ul id="WIFIdeviceUl" class="deviceUl">
+								</ul>
+							</div>
+							<!--接收的数据-->
+							<div class="data_list">
+								<div id="WIFIdevice_dataUl" class="device_dataUl">
+									<table border="0" cellspacing="0" cellpadding="0">
+										<thead>
+											<tr>
+												<th class="Time">Time</th>
+												<th class="Source">Source</th>
+												<th class="MAC">MAC</th>
+												<th class="Brand">Brand</th>
+												<th class="Rssi">Rssi</th>
+												<th class="Link">Link</th>
+												<th class="APMAC">AP-MAC</th>
+												<th class="APBrand">AP-Brand</th>
+											</tr>
+										</thead>
+										<tbody id="WIFIdevice_dataUl_tbody"></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="WIFIDeviceDetailsDiv" class="clearfix">
+					</div>
+				</div>
+				<!--WFIF END-->
+				<!--AP STAR-->
+				<div role="tabpanel" class="tab-pane" id="DataAP">
+					<!--查询条件-->
+					<div class="conShow_box" id="queryCriteria_ap">
+						<span class="title"><i class="glyphicon glyphicon-search"></i> 筛选条件:</span>
+						<input type="text" id="queryCriteriaInput_ap" />
+						<button id="queryCriteriaBtn_ap" class="queryCriteriaBtn">开始过滤</button>
+					</div>
+					<div class="conShow_box">
+						<div class="conShow_box_title">
+							<span>终端设备</span>
+							<!--操作按钮-->
+							<a href="#" class="conShow_box_title_right" id="PauseReceive_AP">
+								<i class="glyphicon glyphicon-stop"></i> 暂停接收
+							</a>
+							<a href="#" class="conShow_box_title_right" id="conReceive_AP">
+								<i class="glyphicon glyphicon-play"></i> 重新接收
+							</a>
+							<!--当前数量-->
+							<div class="conShow_box_title_urrentNumber">
+								<p>当前设备数量：<span class="urrentNumber" id="urrentNumber_AP">0</span></p>
+							</div>
+						</div>
+						<div class="conShow_box_content clearfix">
+							<!--终端列表-->
+							<div class="list">
+								<p class="list_Prompt">正在接收数据...</p>
+								<ul id="deviceUl_AP" class="deviceUl">
+								</ul>
+							</div>
+							<!--接收的数据-->
+							<div class="data_list">
+								<div id="device_dataUl_AP" class="device_dataUl">
+									<table border="0" cellspacing="0" cellpadding="0">
+										<thead>
+											<tr>
+												<th class="Time">Time</th>
+												<th class="Source">Source</th>
+												<th class="BSSID">BSSID</th>
+												<th class="SSID">SSID</th>
+												<th class="Length">Length</th>
+												<th class="Channel">Channel</th>
+												<th class="Rssi">Rssi</th>
+												<th class="Privacy">Privacy</th>
+											</tr>
+										</thead>
+										<tbody id="device_dataUl_tbody_AP"></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="DeviceDetailsDiv_AP" class="clearfix">
+					</div>
+				</div>
+				<!--AP END-->
+			</div>
+		</div>
+		<script src="../js/common/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common/reconnecting-websocket.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/myData.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

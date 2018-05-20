@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../../lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../../lib/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" href="group-price.css">
+
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../../lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+
+    <title>PDU组合报价</title>
+
+</head>
+
+<body>
+<div class="container-fluid mt-15">
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="l">PDU组合报价</span>
+    </div>
+    <div class="cl">
+        <span class="f-l mt-5">请选择分类: </span>
+        <div class="btn-group f-l ml-20">
+            <span class="btn btn-primary radius">飞机</span>
+            <span class="btn btn-default radius">大炮</span>
+            <span class="btn btn-default radius">导弹</span>
+            <span class="btn btn-default radius">火箭</span>
+            <span class="btn btn-default radius">坦克</span>
+            <span class="btn btn-default radius">高射炮</span>
+        </div>
+    </div>
+
+    <div id="content">
+        <div id="left">
+            <header>PDU组合报价单</header>
+            <section>
+                <div>
+                    下拉选择
+                </div>
+                <div>
+                    <img src="" alt="">
+                    <div>- 1 +</div>
+                    <div>￥99.8</div>
+                </div>
+            </section>
+            <div>
+                <div>共选9项</div>
+                <div>合计 ￥898.2</div>
+            </div>
+
+            <section>
+                <div>
+                    <p>名称：* （为了避免重复请输入大于6个汉字/字符)</p>
+                    <p>0/20</p>
+                </div>
+                <input type="text">
+                <div>
+                    <span>备注：* （为了避免重复请输入大于6个汉字/字符)</span>
+                    <span>0/200</span>
+                </div>
+                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <div class="btn-group f-l ml-20">
+                    <span class="btn btn-primary radius">导出报价单</span>
+                    <span class="btn btn-default radius">提交PDU组合报价单</span>
+                    <span class="btn btn-default radius">清   空</span>
+                </div>
+            </section>
+        </div>
+
+
+        <div id="right">
+            <header>
+                <div>基本部件</div>
+                <div>
+                    <input type="text" placeholder="请输入搜索内容">
+                </div>
+            </header>
+
+            <section id="medias">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object" src="../../img/tu.png" alt="...">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Media heading</h4>
+                        <div><span>国标10A插头</span> <span>￥99.8</span></div>
+                        <div>部件：输入插头</div>
+                        <div>类型：万用、国标10A\16A，C13，C19</div>
+
+                        <span class="l">
+                            <a class="btn btn-primary radius btn-add" href="javascript:void(0);">
+                                <i class="Hui-iconfont">&#xe600;</i>  加入报价单
+                            </a>
+                        </span>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../lib/layer/2.4/layer.js"></script>
+<script src="../../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/manage/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../lib/jquery.diy.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../lib/Validform_v5.3.2_min.js" type="text/javascript" charset="utf-8"></script>
+
+<!--<script src="../js/public.js"></script>-->
+<script src="../../js/laypage-public.js"></script>
+<script src="../../js/config.js"></script>
+<script>
+    $(document).ready(function () {
+        var dataIn = {
+            T: new CreateTable({}),
+            init: function () {
+                // this.clickEvent();
+                // this.getPduList();
+            },
+            clickEvent: function () {
+                // 添加分类
+                $(".container-fluid").on("click", ".btn-add", function () {
+                    layer.open({
+                        type: 2,
+                        title: '添加分类',
+                        area: ['500px', '93%'],
+                        content: "data-add.html",
+                        end: function () {
+                            window.location.reload();
+                        }
+                    });
+                });
+            },
+            /*
+
+            getPduList: function () {
+                var _this = this;
+                this.T.ajaxThree(config.pduarchives, {}, "get", function (res) {
+                    var container = $(".container-fluid");
+                    if (res.code == 0) {
+                        // status : 0 等待审批, 1 通过, 2 未通过
+                        $.each(res.data.data, function (i, v) {
+                            var status = "";
+                            if (v.status == 0) {
+                                status = '<h2 class="texts text-c">等待审批</h2>';
+                            } else if (v.status == 1) {
+                                status = '<h2 class="texts text-c">审批通过</h2>';
+                            } else {
+                                status = '<h2 class="no text-c" style="color:red;">审批未通过</h2>' +
+                                    '<li class="hint">' + v.remarks + '</li>' +
+                                    '<input class="edit btn btn-primary size-S radius btn-add" type="button" value="重新编辑">';
+                            }
+
+                            var section = `<section class="contents">
+                                   <ul class="lefts">
+                                       <li><img src="${v.image || '../../img/not-img.png'}" alt=""></li>
+                                       <li class="two">
+                                           <h4>${v.name}</h4>
+                                           <div>类型：${v.type_name}</div>
+                                           <div class="subPerson">提交人：${v.creator}</div>
+                                           备注内容:<div class="bak">${v.remarks || "无"}</div>
+                                       </li>
+                                   </ul>
+                                   <!--right-->
+                                <ul class="right">
+                                ${status}
+                                </ul>
+                                </section>`;
+                                container.append(section);
+                                });
+
+                           // pageSum //总页数
+                           // pagingBar,//控制分页容器，
+                           // 可选:
+                           // groups//连续显示分页数
+
+                        // _this.T.dataPaging();
+                    } else if (res.data.data.length == 0) {
+                        container.append('<div style="width:100%;font-size:30px;margin-top:200px;text-align: center;">暂时没有相关资料</div>')
+                        .find("section").css("display", "none");
+                    }
+                });
+            },
+
+    */
+            paging: function (opt) {
+                /* opt.num //每页显示的条数 10
+                  opt.value // $("#keywords").val()
+                  opt.pagination // 页码
+                  opt.text // "获取用户列表成功"
+                  opt.tableEle // $('.table')
+                  opt.pagingUrl // 分页的地址
+                  opt.delUrl // 删除数据的url
+                  opt.createTable // 回调函数
+                */
+                var tableEle = opt.tableEle, _this = this;
+                this.T.ajaxThree(opt.pagingUrl,
+                    {
+                        page: opt.pagination,//页码
+                        keyword: opt.value,//关键词
+                        itemNum: opt.num,//一页显示的条数
+                    },
+                    'get',
+                    function (res) {
+                        if (res.message == opt.text) {
+                            var page = parseInt(res.data.current_page);
+                            opt.createTable(tableEle, res.data);// 创建表格
+                            _this.T.paging(
+                                {
+                                    pageSum: res.data.last_page, // 总页数
+                                },
+                                function (obj) {
+                                    var data = {
+                                        page: obj.curr,//页码
+                                        keyword: opt.value,// 关键词
+                                        itemNum: opt.num,//一页显示的条数
+                                    }
+                                    _this.T.ajaxThree(opt.pagingUrl, data, "get", function (res) {
+                                        if (parseInt(res.data.total)) {
+                                            page = parseInt(res.data.current_page);
+                                            opt.createTable(tableEle, res.data);// 创建表格
+                                        }
+                                        else if (parseInt(res.data.total) == 0) {
+                                            // $(tableEle).find("tbody").html("").after($("<div>没有相关数据!</div>"));
+                                        }
+                                    });
+                                }
+                            ); //分页
+                        }
+                    }
+                );
+            },
+        }
+        dataIn.init();
+    });
+</script>
+</body>
+</html>

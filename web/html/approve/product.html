@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../../lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../../lib/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="../../static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../../lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/h-ui.admin/skin/default/skin.css" id="skin"/>
+
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../../lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <link rel="stylesheet" href="../../css/approve/datum.css">
+    <title>产品定价</title>
+</head>
+
+<body>
+<div class="container-fluid mt-15">
+    <section style="border-top: 3px solid #ccc;"></section>
+
+</div>
+
+<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../lib/layer/2.4/layer.js"></script>
+<script src="../../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+<!--<script src="../../js/manage/common.js" type="text/javascript" charset="utf-8"></script>-->
+<!--<script src="../../lib/jquery.diy.js" type="text/javascript" charset="utf-8"></script>-->
+<!--<script src="../../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>-->
+<script src="../../lib/Validform_v5.3.2_min.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="../../js/laypage-public.js"></script>
+<script src="../../js/config.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var dataIn = {
+            T: new CreateTable({}),
+            init: function () {
+                this.clickEvent();
+                this.getPduList();
+            },
+            clickEvent: function () {
+                var _this = this;
+                $(".container-fluid").on("click", ".btn-submit", function () {
+                    //@param: price,Id，status remarks
+                    var ul = $($(this)).parent().parent();
+                    var param = {
+                        price: ul.find(".price").val(),
+                        id: ul.data("id"),
+                        remarks: ul.find(".areas").val(),
+                    }
+
+                    _this.T.ajaxThree(config.pduofferAdd, param, "post",
+                        function (res) {
+                            if (res.code == 0) {
+                                layer.msg(res.message);
+                                window.location.reload();
+                            }
+
+                        }
+                    );
+
+
+                });
+            },
+            getPduList: function () {
+                this.T.ajaxThree(config.pduoffer, {}, "get", function (res) {
+                    var container = $(".container-fluid");
+                    if (res.code == 0 && res.data.data.length > 0) {
+                        // status : 0 等待审批, 1 通过, 2 未通过
+                        $.each(res.data.data, function (i, v) {
+
+                            var section = `<section class="contents">
+                                   <ul class="lefts">
+                                       <li><img src="${v.image || '../../img/not-img.png'}" alt=""></li>
+                                       <li class="two">
+                                           <h4>${v.name}</h4>
+                                           <div>类型：${v.type_name}</div>
+                                           <div class="subPerson">提交人：${v.creator}</div>
+                                           备注内容:<div class="bak">${v.remarks || "无"}</div>
+                                       </li>
+                                   </ul>
+                                   <!--right-->
+                                <ul class="right" data-id="${v.id}">
+                                    <li><input type="text" name="price" class="input-text radius size-M price" style="width:80%;" placeholder="请输入基础价格"><input style="position:absolute;margin-left: 30px;margin-top:3px;" type="button" class="btn btn-primary size-S radius btn-submit" value="确认"></li><div style="display:none;position:absolute;">
+<div>业务价: xxxx</div>
+<div>经理价: xxxx</div>
+<div>老板价: xxxx</div>
+</div>
+                                    <li>
+                                        <textarea name="remark" class="areas textarea radius"  cols="20" rows="8" placeholder="备注内容"></textarea>
+                                    </li>
+                                </ul>
+                                </section>`;
+                            container.append(section);
+                        });
+                    } else if (res.data.data.length == 0) {
+                        container.append('<div style="width:100%;font-size:30px;margin-top:200px;text-align: center;">暂时没有需要定价的产品</div>')
+                        .find("section").css("display", "none");
+                    }
+                });
+            },
+
+        }
+        dataIn.init();
+
+    });
+</script>
+</body>
+
+</html>

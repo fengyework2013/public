@@ -1,0 +1,185 @@
+var T = new CreateTable({});
+(function (win, doc, $) {
+    function allotManagement(options) {
+        this._init(options);
+    }
+
+    $.extend(allotManagement.prototype, {
+        _init: function (options) {
+            var self = this;
+            self.options = {
+                conShowBox: ".container", //子权限分配容器
+                allotSubmit: "#allot-submit", //提交按钮
+                nodeCheckBox: ".nodeCheckBox", //节点复选框
+                childNodeCheckBox: ".childNodeCheckBox" //子节点复选框
+            };
+            $.extend(true, self.options, options || {});
+            self._initDomEvent();
+            return self;
+        },
+        _initDomEvent: function () {
+            var self = this;
+            var opts = this.options;
+            //分配子权限容器对象
+            self.$conShowBox = $(opts.conShowBox);
+            //提交按钮对象
+            self.$submitBtn = $(opts.allotSubmit);
+            /*初始化*/
+            self._initDomBindEvent();
+            var dataId = sessionStorage.getItem("dataId");
+            if (dataId) {
+                self.selPermissions(dataId);
+            } else {
+                layer.msg('获取列表失败！');
+            }
+        },
+        /**
+         * 初始化DOM绑定事件
+         * @return {[Object]} [this]
+         * */
+        _initDomBindEvent: function () {
+            var self = this;
+            /*权限修改提交*/
+            self.$submitBtn.on("click", function (e) {
+                e.preventDefault();
+                self.submitEvent();
+            });
+        },
+        //查询事件处理
+        selPermissions: function (did) {
+            var self = this;
+            var data = {
+                roleid: did
+            }
+
+            // fnAjax.method_5(url_join("Role/getRoleNode"), data, "get", function (obj) {
+            T.ajaxFive(config.authority, data, "get", function (obj) {
+                if (obj.result != "success") {
+                    layer.alert(obj.message || "数据请求失败!", {
+                        btn: ["确定"],
+                        btnAlign: 'c',
+                        yes: function () {
+                            alert("请手动跳转到登录页面");
+                            // jumpLogin("index");
+                        }
+                    });
+                    return
+                }
+
+                var dl = '';
+                $.each(obj.data, function (index, ele) {
+                    var dd = '';
+                    $.each(ele.child, function (i, e) {
+                        //当前是否拥有该权限
+                        var inputStr = '';
+                        if (e.access == 1) {
+                            inputStr = '<input type="checkbox" parentid="' + e.parentid + '" ptype="' + e.str + '" data-id="' + e.id + '" class="childNodeCheckBox" checked/>';
+                        } else {
+                            inputStr = '<input type="checkbox" parentid="' + e.parentid + '" ptype="' + e.str + '" data-id="' + e.id + '" class="childNodeCheckBox"/>';
+                        }
+                        dd += '<div class="allot-dd">' + inputStr +
+                            '<span class="nodeName">' + e.name + '</span>' +
+                            '<span class="nodeType">（' + e.str + '）</span>' +
+                            '</div>';
+                    });
+                    //判断父节点是否选中
+                    var bool = ele.access;
+                    if (bool) {
+                        inputStr = '<input data-id="' + ele.id + '" type="checkbox" class="nodeCheckBox" checked/>';
+                    } else {
+                        inputStr = '<input data-id="' + ele.id + '" type="checkbox" class="nodeCheckBox"/>';
+                    }
+
+                    dl += '<div class="allot-dl">' +
+                        '<div class="allot-dt-left">' +
+                        '<div class="allot-dt">' + inputStr +
+                        '<span>' + ele.name + '</span>' +
+                        '</div>' +
+                        '</div>' + '<div class="allot-dt-right">' + dd + '</div>' +
+                        '</div>';
+                });
+                self.$conShowBox.html(dl);
+                //绑定全选与反选事件绑定
+                self.checkboxClickEvent();
+
+            });
+
+        },
+        //提交事件
+        submitEvent: function () {
+            var self = this;
+            var dataId = sessionStorage.getItem("dataId");
+            var arrs = [];
+            //获取所有选中的复选框
+            var doms = $(self.options.childNodeCheckBox + ":checked");
+            for (var i = 0; i < doms.length; i++) {
+                arrs.push(doms[i].getAttribute('data-id'));
+            }
+            var data = {
+                roleid: dataId,
+                nodeids: arrs
+            };
+            self.aJaxRequestEvent(url_join("Role/setAccess"), data, function (obj) {
+                if (obj.code == 0) {
+                    layer.alert(obj.message, function () {
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index);
+                    });
+                } else {
+                    layer.msg(obj.message);
+                }
+            });
+        },
+        //全选与反选事件
+        checkboxClickEvent: function () {
+            var self = this;
+            //节点事件绑定
+            $(self.options.nodeCheckBox).on("click", function () {
+                //获取这个节点的ID
+                var tid = $(this).attr("data-id");
+                //获取勾选状态
+                var bool = $(this).is(':checked');
+                if (bool) {
+                    $("[parentid = " + tid + "]").prop("checked", true);
+                } else {
+                    $("[parentid = " + tid + "]").attr("checked", false);
+                }
+            });
+            //子节点事件绑定
+            $(self.options.childNodeCheckBox).on("click", function () {
+                //获取这个节点的父节点ID
+                var tid = $(this).attr("parentid");
+                //获取这个节点的父节点类型
+                var tType = $(this).attr("ptype");
+                //获取所有都是这个父节点ID的复选框的数量
+                var parentNum = $("[parentid = " + tid + "]").length;
+                //任意选中，视为"查看"选中,相同类型的也会选中
+                //取消时同类型也会取消
+                if ($(this).is(':checked')) {
+                    $("[parentid = " + tid + "][ptype = '查看']").prop("checked", true);
+                    $("[parentid = " + tid + "][ptype = '" + tType + "']").prop("checked", true);
+                } else {
+                    $("[parentid = " + tid + "][ptype = '" + tType + "']").attr("checked", false);
+                }
+                ;
+                //如果"查看"未选中，则所有视为未选中
+                if (tType == "查看" && $(this).is(':checked') == false) {
+                    $("[parentid = " + tid + "]").attr("checked", false);
+                    $(".nodeCheckBox[data-id= " + tid + "]").attr("checked", false);
+                }
+                ;
+                //获取所有都是这个父节点ID的复选框并且以勾选的数量
+                var clickParNum = $("[parentid = " + tid + "]:checked").length;
+                //如果这两个数量相等，父节点视为选中,否则不选中
+                if (clickParNum >= 1) {
+                    $(".nodeCheckBox[data-id= " + tid + "]").prop("checked", true);
+                } else {
+                    $(".nodeCheckBox[data-id= " + tid + "]").attr("checked", false);
+                }
+            });
+        }
+    });
+    win.allotManagement = allotManagement;
+})(window, document, jQuery);
+
+new allotManagement();

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<!-- IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- 设置 viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 兼容国产浏览器的高速模式 -->
+		<meta name="renderer" content="webkit">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title>消息中心</title>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		<!-- boots-->
+		<link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/commo.css" />
+
+		<!--[if lt IE 8]>     
+      <link rel="stylesheet" type="text/css" href="../../lib/lxui/css/lxui-ie6.min.css"/>
+      <script src="../../lib/lxui/js/lxui-ie.min.js" type="text/javascript" charset="utf-8"></script>
+    <![endif]-->
+    
+    	<style type="text/css">
+    		body,html{
+    			overflow: auto;
+    		}
+    		body{
+    			background: #F4F6F9;
+    		}
+    		
+    		.overviewBox div:first-child{
+    			padding: 15px 0;
+    		} 
+    		.overviewBox div:last-child{
+    			padding-top:20px;
+    			padding-right: 30px;
+    		} 
+    		.overviewBox div:last-child ul li{
+    			line-height: 2em;
+    		} 
+    		.msgOverview>div{
+    			height: 150px;
+    			box-sizing: border-box;
+    			padding: 0 25px;
+    		}
+    		.overviewBox{
+    			height: 100%;
+    			/*padding: 15px 10px;*/
+    			border: 1px solid #ddd;
+    		} 
+    		.msgOverview dt{
+    			text-align: center;
+    			/*margin: 10px -10px;*/
+    		}
+    		.msgOverview dt img{
+    			/*width: 50%;*/
+    			margin: 0 auto;
+    		}
+    		.msgOverview dd{
+    			margin-top: 10px;
+    		}
+    		ul,li{
+    			list-style: none;
+    			
+    		}
+    		.detailsBtn{
+    			display: inline-block;
+			    width: 100%;
+			    text-align: right;
+    		}
+    		div.container-fluid{
+    			margin: 0 10px;
+    		}
+    		.msgOverview{
+    			margin-bottom: 20px;
+    			margin-top: 10px;
+    		}
+    		.msgCenterHeader{
+    			position: relative;
+    		}
+    		.btnRefresh{
+    			position: absolute;
+    			bottom: 0;
+    			right: 0;
+    		}
+    		.warningTitle{
+    			padding: 0.5em;
+    		}
+    		.warningLog{
+    			border: 1px solid #ddd;
+    			margin: 0 -5px;
+    		}
+    	</style>
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<div class="parentClear msgCenterHeader">
+				<div class="title">
+					<h3 class="mainTitle">消息中心</h3>
+				</div>
+				<div class="">
+					<span class="c-gray secondTitle">消息中心</span>
+					<span class="glyphicon glyphicon-triangle-right c-gray2" aria-hidden="true"></span>
+					<span class="c-black targerPage">消息概览</span>
+				</div>
+				<button type="button" class="btn btn-default btnRefresh">
+					<i class="glyphicon glyphicon-refresh"></i>
+					刷新
+				</button>
+			</div>
+			
+			<!--消息概览sss-->
+			<div class="row msgOverview">
+				<div class="col-sm-4 col-xs-12" id="delState">
+					<div class="overviewBox radius border-2-gray bg-white row">
+						<div class="col-sm-5 col-xs-5 text-c">
+							<dl>
+								<dt><img src="../../images/del_state.png" class="img-responsive"/></dt>
+								<dd>设备状态</dd>
+							</dl>
+						</div>
+						<div class="col-sm-7 col-xs-7">
+							<ul>
+								<li class="parentClear">
+									<span class="lf">设备总数</span>
+									<span class="delTotal rf">556</span>
+								</li>
+								<li class="parentClear">
+									<span class="lf">在线总数</span>
+									<span class="onlineTotal rf">56</span>
+									
+								</li>
+								<li class="parentClear">
+									<span class="lf">离线设备</span>
+									<span class="outlineTotal rf">500</span>
+								</li>
+							</ul>
+							<a href="#" class="detailsBtn delDetails">详情...</a>
+						</div>
+					</div>
+					
+				</div>
+				
+				<div class="col-sm-4 col-xs-12" id="firstWarning">
+					<div class="overviewBox radius border-2-gray bg-white row">
+						<div class="col-sm-5 col-xs-5 text-c">
+							<dl>
+								<dt><img src="../../images/first_warning.png" class="img-responsive"/></dt>
+								<dd>首现预警</dd>
+							</dl>
+						</div>
+						<div class="col-sm-7 col-xs-7">
+							<ul>
+								<li class="parentClear">
+									<span class="lf">预警任务</span>
+									<span class="warningWork rf">82</span>
+								</li>
+								<li class="parentClear">
+									<span class="lf">日志记录</span>
+									<span class="log rf">56</span>
+								</li>
+								<li class="parentClear">
+									<span class="lf">相关目标</span>
+									<span class="aboutTarget rf">500</span>
+								</li>
+							</ul>
+							<a href="#" class="detailsBtn firstDetails">详情...</a>
+						</div>
+					</div>
+					
+				</div>
+				<div class="col-sm-4 col-xs-12" id="activeWarning">
+					<div class="overviewBox radius border-2-gray bg-white row">
+						<div class="col-sm-5 col-xs-5 text-c">
+							<dl>
+								<dt><img src="../../images/active_warning.png" class="img-responsive"/></dt>
+								<dd>动态预警</dd>
+							</dl>
+						</div>
+						<div class="col-sm-7 col-xs-7">
+							<ul>
+								<li class="parentClear">
+									<span class="lf">预警任务</span>
+									<span class="warningWork rf">82</span>
+								</li>
+								<li class="parentClear">
+									<span class="lf">日志记录</span>
+									<span class="log rf">56</span>
+								</li>
+								<li class="parentClear">
+									<span class="lf">相关目标</span>
+									<span class="aboutTarget rf">500</span>
+								</li>
+							</ul>
+							<a href="#" class="detailsBtn activeDetails">详情...</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--消息概览eee-->
+			
+			<!--预警日志通报sss-->
+			<div class="warningLog radius bg-white">
+				<div class="parentClear">
+					<h3 class="warningTitle lf">预警日志通报</h3>
+					<h3 class="mr-10">
+						<button type="button" class="btn btn-default rf cutWs" data="0">停止数据加载</button>
+					</h3>
+					
+				</div>
+				
+				<table class="table table-hover table-striped table-responsive warningTable">
+					<thead>
+						<tr class="text-c">
+							<th>预警类型</th>
+							<th>目标</th>
+							<th>出现地方</th>
+							<th>日期</th>
+							<th>人数</th>
+							<th>操作</th>
+						</tr>						
+					</thead>
+					<tbody>
+						<tr class="text-c">
+							<td class="warningType">
+								<span>#192013</span>
+								[<span class="type">动态预警</span>]
+							</td>
+							<td class="warningMac">
+								<span>嫌疑人a</span>[<span class="mac">0c826854de25</span>]
+							</td>
+							<td class="warningArea">
+								<span>出现地点</span>
+								[<span class="area">市清镇市南门1</span>]
+							</td>
+							<td class="warningDate">
+								2017-10-10 23:12:10
+							</td>
+							<td>1</td>
+							<td class="warningOption td-option">
+								<a href="#" class="log">日志</a>
+								<a href="#" class="monitoring">监控</a>
+							</td>
+						</tr>
+						
+						<tr class="text-c">
+							<td class="warningType">
+								<span>#192013</span>
+								[<span class="type">动态预警</span>]
+							</td>
+							<td class="warningMac">
+								<span>嫌疑人a</span>[<span class="mac">0c826854de25</span>]
+							</td>
+							<td class="warningArea">
+								<span>出现地点</span>
+								[<span class="area">市清镇市南门1</span>]
+							</td>
+							<td class="warningDate">
+								2017-10-10 23:12:10
+							</td>
+							<td>1</td>
+							<td class="warningOption td-option">
+								<a href="#" class="log">日志</a>
+								<a href="#" class="monitoring">监控</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!--预警日志通报eee-->
+		</div>
+
+		<!--主要框架类库sss-->
+		<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<!--<script src="../../lib/echarts/echarts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/echarts/bmap.min.js" type="text/javascript" charset="utf-8"></script><br />
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8ZEtx5kDGsbBFL80Ppda29D8wjnGil7I"></script>-->
+		<!--主要框架类库eee-->
+
+		<!--公共脚本sss-->
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.diy.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<!--公共脚本eee-->
+
+		<!--常用插件sss-->
+		<script src="../../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.nicescroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/My97DatePicker/4.8/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+		<!--ws断开重连-->
+		<script src="../../js/reconnecting-websocket.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--ws断开重连-->
+		
+		<script src="js/msgCenter.js" type="text/javascript" charset="utf-8"></script>
+		<!--常用插件eee-->
+		<script type="text/javascript">
+			
+		</script>
+	</body>
+
+</html>

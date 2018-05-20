@@ -1,0 +1,31 @@
+{
+	"ResultCode": "SUCCESS",
+	"code": 0,
+	"data": [
+		{"str":"消息中心","src":"pages/msgCenter/msgCenter.html"},
+		{"str":"目标查询","src":"search-queryTarget.html"},
+		{"str":"实时监控","src":"search-rTimeMonitoring.html"},
+		{"str":"目标进出统计","src":"search-comeAndGo.html"},
+		{"str":"碰撞分析","src":"search-crashAnalyze.html"},
+		{"str":"专属设备查询","src":"search-exclusiveEq.html"},
+		{"str":"查询记录","src":"search-log.html"},
+		{"str":"关注目标","src":"focusOnTheGoal.html"},
+		{"str":"人流量统计","src":"peopleFlow.html"},
+		{"str":"流量监控","src":"peopleMonitor.html"},
+		{"str":"目标人群统计","src":"focusOnTheGoal.html"},
+		{"str":"归属地统计","src":"PlaceOfBelonging.html"},
+		{"str":"进出统计","src":"../searchCenter/search-comeAndGo.html"},
+		{"str":"动态预警","src":"dynamicEarlyWarning.html"},
+		{"str":"集结预警","src":"aggregation.html"},
+		{"str":"首现预警","src":"firstWaring.html"},
+		{"str":"动态预警日志","src":"dynamicEarlyWarninglog.html"},
+		{"str":"集结预警日志","src":"dynamicEarlyWarninglog.html"},
+		{"str":"首现预警日志","src":"dynamicEarlyWarninglog.html"},
+		{"str":"设备管理","src":"pages/deviceManage/deviceManage.html"},
+		{"str":"专属设备管理","src":"pages/RFManage/rfManage.html"},
+		{"str":"用户管理","src":"use-manage.html"},
+		{"str":"角色管理","src":"role-manage.html"},
+		{"str":"权限管理","src":"permiss-manage.html"},
+		{"str":"区域管理","src":"ztree-area-search.html"}
+	]
+}

@@ -1,0 +1,105 @@
+.contents {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 38px;
+    border-bottom: 3px solid #ccc;
+    padding-bottom: 18px;
+}
+
+.lefts img {
+    margin-right: 10px;
+}
+
+.lefts {
+    display: flex;
+    width: 60%;
+    height: 238px;
+    border-right: 1px solid #ccc;
+}
+
+.two {
+    width: 80%
+}
+
+.lefts .subPerson {
+    margin: 10px 0;
+}
+
+.lefts .bak {
+    width: 90%;
+    height: 40%;
+    border: 1px solid #ccc;
+}
+/*product-approve*/
+.type-price{position: relative}
+.type-price ul{position: absolute;left: 162px;top: 0;}
+.type-price .price{width:100px;}
+.type-price .price{position:absolute;margin-left:65px;border: 1px solid #ccc;padding: 0px 15px;border-radius: 4px;cursor:default;}
+.type-price:hover .otherPrice{
+    display: block;
+}
+.otherPrice{
+    position:absolute;
+    left: 66px;
+    width: 129px;
+    min-height:50px;
+    top: 25px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: none;
+}
+.otherPrice span{
+    padding: 0px 15px;
+}
+
+/*right*/
+.right {
+    min-width: 300px;
+    width: 350px;
+    height: 238px;
+    position: relative;
+}
+
+.right textarea {
+    width: 100%;
+    margin-top: 16px;
+}
+
+.right .texts {
+    height: 238px;
+    line-height: 238px;
+}
+
+.approve {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+/*right 3*/
+.right .no {
+    color: red;
+}
+
+.right .hint {
+    height: 100px;
+    border: 1px solid #ccc;
+}
+
+.right .edit {
+    width: 100%;
+    margin-top: 26px;
+}
+.right .areas{height: 138px;}
+.right .textarea{
+    height: 188px;
+}
+/*审核全部完成*/
+.right .allRight{
+    position: absolute;
+    bottom: 0;
+}
+.personName li{
+    display: flex;
+    justify-content: space-between;
+}

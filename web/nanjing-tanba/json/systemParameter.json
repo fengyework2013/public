@@ -1,0 +1,14 @@
+{
+    "cmsName": "南京探霸警务通",
+    "version": "1.0.0",
+    "author": "独尊前端开发团队",
+    "homePage": "index.html",
+    "server": "windows",
+    "dataBase": "8.00.2039",
+    "maxUpload": "2M",
+    "userRights": "总管理员",
+    "description": "探霸探测手机等设备热感信号，用于警务安保侦探等工作",
+    "powerby": "Copyright © 深圳市独尊科技开发有限公司",
+    "record": "粤ICP备14040xxx号-1",
+    "keywords": "探霸，警务通，信号探测"
+}

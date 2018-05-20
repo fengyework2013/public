@@ -1,0 +1,156 @@
+.conShow_box_title .conShow_box_title_right:hover {
+	color: #a00;
+}
+
+.conShow_box_inner {
+	line-height: normal;
+}
+
+.conShow_box_inner table#conShow-box-inner-table {
+	display: none;
+}
+
+.conShow_box_inner table#conShow-box-inner-table {
+	margin: 10px 0;
+	text-align: center;
+}
+
+.conShow_box_inner table#conShow-box-inner-table th,
+td {
+	text-align: center;
+	vertical-align: middle !important;
+}
+
+.conShow_box_inner table#conShow-box-inner-table tbody span.bind{
+	color: #AA0000;
+	font-weight: bold;
+}
+
+.conShow_box_inner table#conShow-box-inner-table tbody span.nobind{
+	color: #00AA00;
+	font-weight: bold;
+}
+
+.conShow_box_inner table#conShow-box-inner-table tbody td button {
+	width: 60px;
+	border-radius: 13px;
+	border: 1px solid #aaa;
+	margin-left: 5px;
+	outline: none;
+}
+
+.conShow_box_inner table#conShow-box-inner-table tbody .conShow-table-allotBtn {
+	background-color: #fff;
+}
+
+.conShow_box_inner table#conShow-box-inner-table tbody .conShow-table-changeBtn {
+	background-color: #e;
+}
+
+.conShow_box_inner table#conShow-box-inner-table tbody .conShow-table-delBtn {
+	background-color: #666;
+	border: 1px solid #666;
+	color: #fff;
+}
+
+.modal-Content-box {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: none;
+}
+
+.modal-Content-box .modal-Content-mask {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-Content-box .modal-Content-window {
+	position: absolute;
+	width: 60%;
+	max-width: 600px;
+	min-width: 300px;
+	min-height: 150px;
+	background-color: #fff;
+	box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.6) inset;
+	border-radius: 15px;
+	top: 35%;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+}
+
+.modal-Content-box .modal-Content-window .modal-Content-window-title {
+	position: relative;
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	background: rgba(0, 0, 0, 0.06);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	cursor: move;
+}
+
+.modal-Content-window .modal-Content-window-title .modal-Content-window-title-text {
+	margin-left: 20px;
+	color: #666;
+	font-weight: bold;
+}
+
+.modal-Content-window .layui-layer-setwin {
+	position: absolute;
+	right: 16px;
+	top: 11px;
+	line-height: initial;
+}
+
+.modal-Content-window .modal-Content-window-title a {
+	text-decoration: none;
+	color: #666;
+	font-size: 16px;
+}
+
+.modal-Content-box .modal-Content-window .modal-Content-window-container {
+	padding: 10px 15px;
+	color: #666;
+	height: 120px;
+}
+
+.modal-Content-window-container .modal-Content-window-container-form {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	margin-top: 20px;
+}
+
+.modal-Content-window-container-form label {
+	margin-right: 10px;
+}
+
+.modal-Content-window-container-form input.powersName {
+	width: 50%;
+	outline: none;
+	border: 0;
+	border-bottom: 1px solid #aaa;
+	padding-left: 15px;
+	margin-right: 5px;
+}
+
+.modal-Content-window-container-form input.powersNameBtn {
+	border: 1px solid #666;
+	background: #666;
+	color: #fff;
+	width: 60px;
+	height: 26px;
+	border-radius: 13px;
+	outline: none;
+}
+
+.modal-Content-window-container-form input.powersNameBtn:active {
+	background: #444;
+}

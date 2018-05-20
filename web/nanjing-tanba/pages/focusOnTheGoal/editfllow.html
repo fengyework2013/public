@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+		<title>修改别名</title>
+		<link rel="stylesheet" type="text/css" href="../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/commo.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/Vaildform.css" />
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			input {
+				line-height: 20px;
+				height: 20px;
+				border: none;
+				background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+				margin: 4px;
+				overflow: hidden;
+				padding-left: 5px;
+				color: rgb(57, 154, 215);
+				z-index: 1000;
+			}
+			
+			.button {
+				float: left;
+				margin-top: 3px;
+				margin-left: 8px;
+			}
+			
+			.text {
+				float: left;
+				margin-top: 10px;
+			}
+			
+			.date {
+				display: inline-block;
+				margin: 15px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="imgBox">
+			<div class="mt-20 parentClear date">
+				<p class="text">修改别名：</p>
+				<input type="text" value="" id="name" class="form-control " style="width: 55%;display: inline-block;float: left;" />
+				<button type="button" id="submitBtn" class="btn btn-primary button" style="float: left;">确定</button>
+			</div>
+		</div>
+
+		<!--主要框架类库sss-->
+		<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<!--主要框架类库eee-->
+
+		<!--公共脚本sss-->
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.diy.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<!--公共脚本eee-->
+
+		<!--常用插件sss-->
+		<script src="../../lib/laypage/1.2/laypage.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../lib/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jquery.nicescroll.js" type="text/javascript" charset="utf-8"></script>
+
+		<!--常用插件eee-->
+		<script>
+			$('#submitBtn').click(function() {
+				var parameter = {
+					"id": $.cookie("editfllowId"),
+					"name": $('#name').val()
+				}
+				fnAjax.method_4(url_join('Follow/editFollow'), parameter, "post", function(data) {
+					if(data.code == 0) {
+						layer.msg(data.message, {
+							icon: 1,
+							time: 2000
+						}, function() {
+							parent.location.reload();
+							//										parent.parent.location.reload();
+						});
+					} else {
+						layer.msg(data.message, {
+							icon: 2,
+							time: 2000
+						});
+					}
+				})
+			})
+		</script>
+	</body>
+
+</html>

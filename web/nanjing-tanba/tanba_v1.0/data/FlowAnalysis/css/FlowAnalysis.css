@@ -1,0 +1,24 @@
+.table_Box .table_Box_Choice {
+	margin-bottom: 20px;
+	padding: 0 20px;
+	border-bottom: 1px solid #E7E7E7;
+}
+
+.table_Box_Choice input,
+.table_Box_Choice .table_Box_Choice_input {
+	margin-left: 5px;
+	font-size: 12px;
+	padding-left: 5px;
+	width: 120px;
+}
+
+.table_Box_Choice>div {
+	display: inline-block;
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+
+.table_Box .echarts_box {
+	height: 500px;
+	margin-bottom: 5px;
+}
