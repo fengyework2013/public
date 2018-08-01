@@ -26,12 +26,16 @@
             width: 120px;
             margin-right: 10px;
         }
+
+        .items {
+            margin-top: 15px;
+        }
     </style>
 </head>
 
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> PDU单元管理 <span
-        class="c-gray en">&gt;</span> PDU基础资料
+        class="c-gray en">&gt;</span> PDU类别管理
     <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
        href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
 </nav>
@@ -40,42 +44,41 @@
 <div id="tab_type" class="HuiTab">
 
     <div class="page-container">
-        <div id="selects">
-            <span data-flag="0" class="select-box">
-              <select id="selectType" class="select" size="1" name="demo1">
-                <option value="" selected>请选择分类</option>
-              </select>
+        <div class="cl items">
+            <span class="l">
+                <a class="btn btn-primary radius btn-add" href="javascript:void(0);">
+                    <i class="Hui-iconfont">&#xe600;</i> 添加分类
+                </a>
             </span>
+            <div class="btn-group f-l ml-20">
+                <span data-id="1" class="btnClick btn btn-primary radius">飞机</span>
+                <span data-id="2" class="btnClick btn btn-default radius">大炮</span>
+                <span data-id="3" class="btnClick btn btn-default radius">导弹</span>
+                <span data-id="4" class="btnClick btn btn-default radius">火箭</span>
+                <span data-id="5" class="btnClick btn btn-default radius">坦克</span>
+                <span data-id="6" class="btnClick btn btn-default radius">高射炮</span>
+            </div>
         </div>
 
-
-        <div class="cl pd-5 bg-1 bk-gray mt-20">
-				<span class="l">
-                    <a class="btn btn-primary radius btn-add" href="javascript:void(0);">
-						<i class="Hui-iconfont">&#xe600;</i> 添加分类
-					</a>
-				</span>
-            <span class="r">共有数据：<strong class="nTotal">0</strong> 条</span>
+        <div class="cl items">
+            <span class="l">
+                <a class="btn btn-primary radius btn-add" href="javascript:void(0);">
+                    <i class="Hui-iconfont">&#xe600;</i> 添加分类
+                </a>
+            </span>
+            <div class="btn-group f-l ml-20">
+                <span data-id="1" class="btnClick btn btn-primary radius">飞机</span>
+                <span data-id="2" class="btnClick btn btn-default radius">大炮</span>
+                <span data-id="3" class="btnClick btn btn-default radius">导弹</span>
+                <span data-id="4" class="btnClick btn btn-default radius">火箭</span>
+                <span data-id="5" class="btnClick btn btn-default radius">坦克</span>
+                <span data-id="6" class="btnClick btn btn-default radius">高射炮</span>
+            </div>
         </div>
-        <table class="table table-border table-bordered table-hover table-bg">
-            <thead>
 
-            <tr class="text-c">
-                <th width="30">编号</th>
-                <th>模块名称</th>
-                <th>创建用户</th>
-                <th>审核状态</th>
-                <th width="150">创建时间</th>
-                <th>备注</th>
-                <th width="100">操作</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
-        <div id="paging-bar" style="text-align:center;margin-top: 15px;"></div>
     </div>
+
+    <div id="paging-bar" style="text-align:center;margin-top: 15px;"></div>
 
 
 </div>
@@ -91,6 +94,202 @@
 <script src="../../js/config.js"></script>
 <script src="../../js/paging.js"></script>
 <script src="../../js/unit/type-manage.js"></script>
+<script type="text/javascript">
+    // $("#cancelBtn").on("click", function () {
+    //     var index = parent.layer.getFrameIndex(window.name);
+    //     parent.layer.close(index);
+    // });
 
+    //                    var name = $(this).find("option:selected").text();
+
+    var T = new CreateTable({});
+    $(function () {
+        var typeManage = {
+            submit: $("#submitBtn"),
+            pageContainer: $(".page-container"),
+            init: function () {
+                T.saveUserData("parentInfo", {
+                    name: undefined,
+                    'parent_id': undefined,
+                });
+                this.getPduEvent();
+                this.clickEvent();
+            },
+            clickEvent: function () {
+                var _this = this;
+
+                // 添加分类
+                T.addType2Reload({
+                    ele: ".btn-add",
+                    title: "添加分类",
+                    width: "500px",
+                    height: "500px",
+                    html: "type-add.html",
+                    index: true,
+                });
+
+                // 单击的请求事件
+                this.pageContainer.on("click", ".btnClick", function () {
+
+                    var id = $(this).data("id");
+                    var name = $(this).text();
+                    _this.T.saveUserData("parentInfo", {
+                        name: name,
+                        'parent_id': id,
+                    });
+
+                    _this.requestType(id);
+
+                    paging({
+                        text: "获取角色列表成功",
+                        num: 10,
+                        pagination: 1,
+                        value: $("#keywords").val(),
+                        tableEle: $('.table'),
+                        // pagingUrl: config.roleList,
+                        pagingUrl: config.basicData,
+                        delUrl: config.delRole,
+                        createTable: function (container, data) {
+                            container.children("tbody").html("");
+                            $.each(data.data, function (i, v) {
+                                var sTr = '<tr class="text-c"  data-id="' + v.id + '">' +
+                                    '<td class="num">' + (data.from + i) + '</td>' +
+                                    '<td class="roleName" >' + v.typename + '</td>' +
+                                    '<td class="bindState" data-state="' + v.user + '">' + v.user + '</td>' +
+                                    '<td>审核中</td>' +
+                                    '<td class="createTime">' + v.createtime + '</td>' +
+                                    '<td class="bak">最最基础的部件</td>' +
+                                    '<td class="option f-14">' +
+                                    '<a title="编辑" href="javascript:void(0);"  class="ml-5 btn-edit">编辑</a>' +
+                                    '<a title="删除" href="javascript:void(0);"  class="ml-5 btn-del">删除</a>' +
+                                    '</td>' +
+                                    '</tr>';
+                                container.children("tbody").append($(sTr));
+                            });
+
+
+                            // 编辑角色
+                            $(".btn-edit").on("click", function () {
+
+                                var dataId = $(this).parents("tr").attr("data-id");
+                                sessionStorage.roleId = dataId;
+                                layer.open({
+                                    type: 2,
+                                    title: '编辑角色',
+                                    area: ['500px', '260px'],
+                                    content: "type-edit.html",
+                                    end: function () {
+                                        window.location.reload();
+                                    }
+                                });
+
+                            });
+
+                            //删除数据
+                            $('.table tbody').on("click", ".btn-del", function () {
+                                var nId = $(this).parents("tr").attr("data-id");
+                                layer.confirm("是否删除当前数据", function () {
+                                    T.ajaxFour(
+                                        config.delRole,
+                                        {id: nId},
+                                        "post",
+                                        function (data) {
+                                            layer.msg(data.message, {time: 1500}, function () {
+                                                window.location.reload();
+                                            });
+                                        }
+                                    );
+
+                                });
+                            });
+
+                        }
+                    });
+
+                });
+
+
+            },
+            getPduEvent: function (id) {
+                var _this = this;
+                T.ajaxNormal(config.pdutype, {parent_id: 0}, "get", function (res) {
+                    var item = $('<div class="cl items">' +
+                                    '<span class="l">'+
+                                        '<a data-parent_id="" class="btn btn-primary radius btn-add" href="javascript:void(0);">'+
+                                            '<i class="Hui-iconfont">&#xe600;</i> 添加分类'+
+                                        '</a>'+
+                                    '</span>'+
+                                '</div>');
+
+
+                    var item = `<div class="cl items">
+
+                                        <div class="btn-group f-l ml-20">
+                                            <span data-parent-id= ${v.parent_id} data-id="${ v.id}" class="btnClick btn btn-primary radius">${v.name}</span>
+                                        </div>
+                                    </div>`;
+
+                    var data = res.data.data;
+                    $.each(data, function (i, v) {
+                        var item = `<div class="cl items">
+                                        <span class="l">
+                                            <a class="btn btn-primary radius btn-add" href="javascript:void(0);">
+                                                <i class="Hui-iconfont">&#xe600;</i> 添加分类
+                                            </a>
+                                        </span>
+                                        <div class="btn-group f-l ml-20">
+                                            <span data-parent-id= ${v.parent_id} data-id="${ v.id}" class="btnClick btn btn-primary radius">${v.name}</span>
+                                        </div>
+                                    </div>`;
+
+                        _this.pageContainer.append(item);
+                    });
+
+                });
+            },
+//            getPduEvent: function () {
+//                var param = {parent_id: 0};
+//                this.T.ajaxThree(config.pdutype, param, "get", function (res) {
+//                    if (res.code == 0) {
+//                        var $select = $("#selectType");
+//
+//                        var data = res.data.data;
+//                        $.each(data, function (i, v) {
+//                            var options = $(
+//                                "<option data-name='" + v.name + "' data-parent-id='" + v.parent_id + "' value=" + v.id + ">" + v.name + "</option>"
+//                            );
+//                            $select.append(options);
+//                        });
+//                    }
+//                });
+//            },
+            requestType: function (id) {
+                this.T.ajaxThree(config.pdutype, {parent_id: id}, "get", function (res) {
+                    if (res.code == 0) {
+                        var $selects = $("#selects");
+                        var data = res.data.data;
+                        console.log(res.data);
+                        // $.each(data,function (i,v){
+                        //     var options = $(
+                        //         "<option data-parent-id='"+v.parent_id+"' value="+v.id+">"+v.name+"</option>"
+                        //     );
+                        //     $select.append(options);
+                        // });
+                    }
+                });
+
+                // <span data-flag="0" class="select-box">
+                //         <select id="selectType" class="select" size="1" name="demo1">
+                //         <option value="" selected>请选择分类</option>
+                //     </select>
+                //     </span>
+
+            }
+        }
+        typeManage.init();
+
+
+    });
+</script>
 </body>
 </html>

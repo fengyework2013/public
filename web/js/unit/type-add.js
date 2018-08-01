@@ -5,7 +5,7 @@ $(function () {
         submit: $("#submitBtn"),
         init: function () {
             this.getParentId();
-            $("#parent_id").text(this.parentInfo.name || "没有父类相关信息,现在添加的是定级分类.");
+            $("#parent_id").text(this.parentInfo.name || "没有父类相关信息,现在添加的是顶级分类.");
             this.clickEvent();
             this.submitEvent();
         },

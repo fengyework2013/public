@@ -1,13 +1,13 @@
 /*
-    1 tableUrl: 请求表格的数据url / 也是分页的url  ,
-    2 tableEle : 表格id或class
-    3 tbody: id 或 class
-    4 editTitle: 编辑时的 title
-    5 openUrl: 编辑的文件地址
-    6 full: true/false 编辑页面全屏
-    7 delUrl : 删除的提交接口
-    8 needPageNum : 分页时每页多少数据
-    9 pagingBar:  分页的标签 id*/
+ 1 tableUrl: 请求表格的数据url / 也是分页的url  ,
+ 2 tableEle : 表格id或class
+ 3 tbody: id 或 class
+ 4 editTitle: 编辑时的 title
+ 5 openUrl: 编辑的文件地址
+ 6 full: true/false 编辑页面全屏
+ 7 delUrl : 删除的提交接口
+ 8 needPageNum : 分页时每页多少数据
+ 9 pagingBar:  分页的标签 id*/
 var layerLoad = "";
 
 function CreateTable(options) {
@@ -167,28 +167,28 @@ function CreateTable(options) {
 
                     // 参考
                     /*
-                    T.paging(
-                        {
-                            pageSum: res.data.last_page, // 总页数
-                        },
-                        function (obj) {
-                            var data = {
-                                page: obj.curr,//页码
-                                keyword: $("#keywords").val(),// 关键词
-                                itemNum: 10,//一页显示的条数
-                            }
-                            T.ajaxFive(config.userIp, data, "post", function (res) {
-                                if (parseInt(res.data.total)) {
-                                    page = parseInt(res.data.current_page);
-                                    createTable(tableEle, res.data);// 创建表格
-                                }
-                                else if (parseInt(res.data.total) == 0) {
-                                    $(tableEle).find("tbody").html("").after($("<div>没有相关数据!</div>"));
-                                }
-                            });
-                        }
-                    ); //分页
-                    */
+                     T.paging(
+                     {
+                     pageSum: res.data.last_page, // 总页数
+                     },
+                     function (obj) {
+                     var data = {
+                     page: obj.curr,//页码
+                     keyword: $("#keywords").val(),// 关键词
+                     itemNum: 10,//一页显示的条数
+                     }
+                     T.ajaxFive(config.userIp, data, "post", function (res) {
+                     if (parseInt(res.data.total)) {
+                     page = parseInt(res.data.current_page);
+                     createTable(tableEle, res.data);// 创建表格
+                     }
+                     else if (parseInt(res.data.total) == 0) {
+                     $(tableEle).find("tbody").html("").after($("<div>没有相关数据!</div>"));
+                     }
+                     });
+                     }
+                     ); //分页
+                     */
 
                 }
             }
@@ -227,12 +227,12 @@ function CreateTable(options) {
 
 // 新增表单
 /*
-btnSelect: 按钮选择器
-fileSrc: 引入的文件地址
-addUrl: 请求的表单模型
-data: {id: _this.fid}
-submitUrl: 表单提交的url
-*/
+ btnSelect: 按钮选择器
+ fileSrc: 引入的文件地址
+ addUrl: 请求的表单模型
+ data: {id: _this.fid}
+ submitUrl: 表单提交的url
+ */
 function AddData(opt) {
     var _this = this;
     _this.opt = opt;
@@ -266,6 +266,31 @@ CreateTable.prototype = {
             timeout: 12000,
             success: function (res) {
                 successFn(res);
+            }
+        });
+    },
+    ajaxNormal: function (murl, mdata, method, successFn) {
+        var _this = this;
+        $.ajax({
+            type: method,
+            url: murl,
+            dataType: "json",
+            data: mdata,
+            async: true,
+            timeout: 12000,
+            error: function (data) {
+                layer.close(layerLoad);
+                layer.alert("请求失败，请检查服务器端！", {icon: 5});
+                console.error(data);
+            },
+            success: function (data) {
+                layer.close(layerLoad);
+                if (data.code != 0) {
+                    layerLoad = layer.alert(data.message);
+                }
+                else {
+                    successFn(data);
+                }
             }
         });
     },
@@ -451,29 +476,48 @@ CreateTable.prototype = {
         }
         return data;
     },
-    addData: function (opt) {
-        var _this = this;
-        _this.opt = opt;
-        $(opt.btnSelect).on("click", function () {
+    /*  ele: 被点击的对象
+         title: 标题
+         width: 宽
+         height:高
+         html: 打开的文件地址,或者 ['http://sentsin.com', 'no'] 不滚动
+         index: 是否全屏, 如果是,则不用传 width 和 height
+     */
+    // 关闭时,不刷新
+    addType2: function (opt) {
+        $(opt.ele).on("click", function () {
             var index = layer.open({
-                title: "新增表单",
+                title: opt.title || "新增",
                 type: 2,
-                area: ["100%", "100%"],
-                content: [_this.opt.fileSrc, 'no'],
+                area: [opt.width || "100%", opt.height || "100%"],
+                content: [opt.html, 'no'],
             });
-            layer.full(index);
+            opt.index && layer.full(index);
         });
-        // add 页面使用,data是一个对象,取值须注意
-        // CreateTable.prototype.saveUserData("addFormData", {addUrl: opt.addUrl, data: opt.data, submitUrl: opt.submitUrl});
+    },
+    // 关闭时刷新页面
+    addType2Reload: function (opt) {
+        $(opt.ele).on("click", function () {
+            var index = layer.open({
+                title: opt.title || "新增",
+                type: 2,
+                area: [opt.width || "100%", opt.height || "100%"],
+                content: opt.html,
+                end: function () {
+                    window.location.reload();
+                }
+            });
+            opt.index && layer.full(index);
+        });
     },
 
     // 普通数据分页
     /*
-        pageSum //总页数
-        pagingBar,//控制分页容器，
-        callback, //请求成功的回调, 一般是传一个渲染函数进来
-        可选:
-        groups//连续显示分页数
+     pageSum //总页数
+     pagingBar,//控制分页容器，
+     callback, //请求成功的回调, 一般是传一个渲染函数进来
+     可选:
+     groups//连续显示分页数
      */
     // dataPaging: function (options, callback) {
     //     laypage({
